@@ -22,10 +22,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     [SerializeField]
     protected List<string> prefabNames = new List<string>();
-
     
-	GameObject projectilePrefab;
-
 	protected void Start()
 	{
 		this.temp_currHp = this.stat_hp;
@@ -49,21 +46,21 @@ public abstract class Characters_Global : MonoBehaviour
 		this.rigidbody.velocity = new Vector2 (this.dirX * this.stat_speed, this.dirY * this.stat_speed);
 	}
 
-	public virtual void GetDamaged(GameObject attacker, int damage)
+	public virtual void GetDamaged(GameObject attacker, float damage)
 	{
 		this.animator.SetTrigger("Flash");
-		this.temp_currHp -= damage;
+		this.temp_currHp -= (int)damage;
 		CheckIfAlive();
-		this.Prov_TakeDamage(attacker, damage);
+		//this.Prov_TakeDamage(attacker, damage);
 	}
 
-	protected void CheckIfAlive()
+	protected virtual void CheckIfAlive()
 	{
 		if(this.temp_currHp <= 0)
 			Destroy(this.gameObject);
 	}
 
-	protected void ShootProjectile(int projIndex)
+	protected virtual void ShootProjectile(int projIndex)
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, this.dirX, this.dirY);

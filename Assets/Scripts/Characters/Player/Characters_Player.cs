@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Characters_Player : Characters_Global 
 {
 	[SerializeField]
 	protected float invincibleTime;
 	protected bool invincible;
+    [SerializeField]
+    List<float> cooldownList = new List<float>();
+    List<float> currCooldown = new List<float>();
 
-	#region GETS & SETS
+    #region GETS & SETS
 
-	public bool Invincible
+    public bool Invincible
 	{
 		get{return this.invincible;}
 		set{this.invincible = value;}
@@ -21,18 +25,28 @@ public class Characters_Player : Characters_Global
 	{
 		base.Start();
 		Prov_Agent ();
+        SetCooldowns();
 	}
-		
+	
+    void SetCooldowns()
+    {
+        for (int i = 0; i < this.cooldownList.Count; i++)
+            this.currCooldown.Add(0);
+    }
+
 	void Update () 
 	{
 		Prov_Actions ();
 		Movement();
-		if (Input.GetKeyDown (KeyCode.Space))
+		if (Input.GetKeyDown (KeyCode.J) && this.currCooldown[0] == 0)
 			ShootProjectile(0);
-		//this.extractProvenance.provenance.Save ("info");
-	}
+        if (Input.GetKeyDown(KeyCode.K) && this.currCooldown[1] == 0)
+            ShootProjectile(1);
+        CooldownRun();
+        //this.extractProvenance.provenance.Save ("info");
+    }
 
-	public override void GetDamaged(GameObject attacker, int damage)
+	public override void GetDamaged(GameObject attacker, float damage)
 	{
 		base.GetDamaged(attacker, damage);
 		this.animator.SetInteger("Invincibility", 1);
@@ -40,13 +54,28 @@ public class Characters_Player : Characters_Global
 		Invoke("StopInvincibility", this.invincibleTime);
 	}
 
+    void CooldownRun()
+    {
+        for (int i = 0; i < this.currCooldown.Count; i++)
+            if (this.currCooldown[i] > 0)
+                this.currCooldown[i] -= Time.deltaTime;
+            else
+                this.currCooldown[i] = 0;
+    }
+
 	void StopInvincibility()
 	{	
 		this.animator.SetInteger("Invincibility", -1);
 		this.invincible = false;
 	}
 
-	void Movement()
+    protected override void ShootProjectile(int projIndex)
+    {
+        base.ShootProjectile(projIndex);
+        this.currCooldown[projIndex] = this.cooldownList[projIndex];
+    }
+
+    void Movement()
 	{
 		this.dirX = (int)Input.GetAxisRaw ("Horizontal");
 		this.dirY = (int)Input.GetAxisRaw ("Vertical");

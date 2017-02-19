@@ -4,7 +4,8 @@ using UnityEngine;
 using System.Threading;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour {
+public class ScoreManager : MonoBehaviour
+{
 
     private GameObject textTime;
 

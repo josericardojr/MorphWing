@@ -4,6 +4,7 @@ using System.Collections;
 public class Characters_Enemies : Characters_Global
 {
 	protected Characters_Player player;
+    protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
 	[SerializeField]
 	protected int contactDamage;
@@ -22,6 +23,7 @@ public class Characters_Enemies : Characters_Global
 	{
 		base.Start();
 		Prov_Agent ();
+        this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
 		this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
 	}
 
@@ -34,7 +36,14 @@ public class Characters_Enemies : Characters_Global
 		}
 	}
 
-	public string Prov_Attack(float damageAmount)
+    protected override void CheckIfAlive()
+    {
+        if (this.temp_currHp <= 0)
+            this.spawnManager.EnemyDecrease();
+            base.CheckIfAlive();
+    }
+
+    public string Prov_Attack(float damageAmount)
 	{
 		Prov_GetAttributes ();
 		this.extractProvenance.NewActivityVertex("Attacking", this.gameObject);
