@@ -51,7 +51,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.animator.SetTrigger("Flash");
 		this.temp_currHp -= (int)damage;
 		CheckIfAlive();
-		//this.Prov_TakeDamage(attacker, damage);
+		this.Prov_TakeDamage(attacker, damage);
 	}
 
 	protected virtual void CheckIfAlive()
@@ -60,11 +60,11 @@ public abstract class Characters_Global : MonoBehaviour
 			Destroy(this.gameObject);
 	}
 
-	protected virtual void ShootProjectile(int projIndex)
+	protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
-		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, this.dirX, this.dirY);
-	}
+		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY);
+    }
 
 	#region Provenance
 

@@ -14,5 +14,6 @@ public class Projectiles_HeavyBullet : Projectiles_Global {
     void Update()
     {
         CallMovement();
+        DestroyOffScreen();
     }
 }

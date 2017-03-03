@@ -6,8 +6,10 @@ public class Characters_Enemies : Characters_Global
 	protected Characters_Player player;
     protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
+    protected bool canDestroyOffScreen;
 	[SerializeField]
 	protected int contactDamage;
+    protected float maxOffsetX, maxOffsetY;
 
 	#region GETS & SETS
 
@@ -17,17 +19,30 @@ public class Characters_Enemies : Characters_Global
 		set{this.initDir = value;}
 	}
 
-	#endregion
+    public float MaxOffsetX
+    {
+        get { return this.maxOffsetX; }
+        set { this.maxOffsetX = value; }
+    }
 
-	new protected void Start()
+    public float MaxOffsetY
+    {
+        get { return this.maxOffsetY; }
+        set { this.maxOffsetY = value; }
+    }
+
+    #endregion
+
+    new protected void Start()
 	{
 		base.Start();
 		Prov_Agent ();
         this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
 		this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
+        Invoke("CanDestroyOutOfScreen", 0.4f);
 	}
 
-	void OnTriggerEnter2D(Collider2D c)
+	void OnTriggerStay2D(Collider2D c)
 	{
 		if (c.CompareTag ("Player"))
 		{
@@ -39,8 +54,7 @@ public class Characters_Enemies : Characters_Global
     protected override void CheckIfAlive()
     {
         if (this.temp_currHp <= 0)
-            this.spawnManager.EnemyDecrease();
-            base.CheckIfAlive();
+            this.Destroy();
     }
 
     public string Prov_Attack(float damageAmount)
@@ -51,5 +65,28 @@ public class Characters_Enemies : Characters_Global
 		this.extractProvenance.GenerateInfluenceCE("PlayerDamage", this.GetInstanceID().ToString(), "Health (Player)", (-damageAmount).ToString(), 1, Time.time + 5);
 		return this.GetInstanceID().ToString();
 	}
+
+    protected void Destroy()
+    {
+        this.spawnManager.EnemyDecrease();
+        base.CheckIfAlive();
+    }
+
+    void CanDestroyOutOfScreen ()
+    {
+        this.canDestroyOffScreen = true;
+    }
+
+    protected void DestroyOffScreen()
+    {
+        if (this.transform.position.y > this.maxOffsetY ||
+           this.transform.position.y < -this.maxOffsetY ||
+           this.transform.position.x > this.maxOffsetX ||
+           this.transform.position.x < -this.maxOffsetX)
+        { 
+            Destroy();
+            Destroy(this.gameObject);
+        }
+    }
 
 }

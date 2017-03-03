@@ -12,5 +12,6 @@ public class Projectiles_RegularBullet : Projectiles_Global
 	void Update()
 	{
 		CallMovement();
-	}
+        DestroyOffScreen();
+    }
 }

@@ -14,6 +14,7 @@ public class Projectiles_SpreadShot : Projectiles_Global
 	
 	void Update ()
     {
-        CallMovement();	
-	}
+        CallMovement();
+        DestroyOffScreen();
+    }
 }

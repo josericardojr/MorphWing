@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Projectiles_Global : MonoBehaviour
 {
+    Managers_Spawn managers_spawn;
 	new protected Rigidbody2D rigidbody;
 	GameObject shooter;
-    protected float receivedX, receivedY;
+    protected float receivedX, receivedY, maxOffsetX, maxOffsetY;
     [SerializeField]
     List<GameObject> prefabList = new List<GameObject>();
 	[SerializeField]
@@ -17,6 +18,9 @@ public class Projectiles_Global : MonoBehaviour
     protected void Start()
 	{
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
+        this.managers_spawn = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
+        this.maxOffsetX = this.managers_spawn.MaxOffsetX;
+        this.maxOffsetY = this.managers_spawn.MaxOffsetY;
 	}
 
 	public void StatsReceiver(GameObject shooterObj, float damageValue, float dirXValue, float dirYValue)
@@ -48,4 +52,17 @@ public class Projectiles_Global : MonoBehaviour
         GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
         projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, directionX, directionY);
     }
+
+    protected void DestroyOffScreen()
+    {
+        if ((this.transform.position.y > this.maxOffsetY ||
+           this.transform.position.y < -this.maxOffsetY ||
+           this.transform.position.x > this.maxOffsetX ||
+           this.transform.position.x < -this.maxOffsetX) 
+           && this.maxOffsetY != 0 && this.maxOffsetX != 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }

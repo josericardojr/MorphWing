@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Managers_Spawn : MonoBehaviour 
 {
+    bool deactivaded;
 	Vector3 selectedPos;
 	[SerializeField]
 	List<Vector3> positionsList = new List<Vector3>();
@@ -14,18 +16,53 @@ public class Managers_Spawn : MonoBehaviour
 
 	private int noSpawned;
 
-	void Start()
+    #region GETS & SETS
+
+    public bool Deactivated
+    {
+        get { return this.deactivaded; }
+        set { this.deactivaded = value; }
+    }
+
+    public float MaxOffsetX
+    {
+        get { return this.maxSpawnOffsetX; }
+        set { this.maxSpawnOffsetX = value; }
+    }
+
+    public float MaxOffsetY
+    {
+        get { return this.maxSpawnOffsetY; }
+        set { this.maxSpawnOffsetY = value; }
+    }
+
+    #endregion
+
+    void Start()
 	{
 		SpawnEnemies();
 	}
 
+    void Update()
+    {
+        if (this.deactivaded)
+            Retry();
+    }
+
+    void Retry()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+            SceneManager.LoadScene(0);
+    }
+
 	public void SpawnEnemies()
 	{
-		for(int i = 0; i < 4; i++)
-		{
-			this.noSpawned++;
-			SpawnRandomEnemy();
-		}
+        if(!this.deactivaded)
+		    for(int i = 0; i < 4; i++)
+		    {
+			    this.noSpawned++;
+			    SpawnRandomEnemy();
+		    }
 	}
 
 	public void EnemyDecrease()
@@ -43,7 +80,9 @@ public class Managers_Spawn : MonoBehaviour
 		int enemyGot = Random.Range(0, this.enemyObjects.Count);
 		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], selectedPos, Quaternion.identity);
 		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(-selectedPos.x, -selectedPos.y);
-	}
+        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
+        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
+    }
 
 	void SetOffsets()
 	{

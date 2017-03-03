@@ -14,21 +14,14 @@ public class ScoreManager : MonoBehaviour
     Thread threadTime;
     private static volatile bool running;
 
-	void Start ()
+    void Start ()
     {
         this.timeCurrent = -1;
-
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
-
         this.threadTime = new Thread(Temporizador);
         this.threadTime.Start();
         running = true;
 
-	}
-	
-	void Update ()
-    {
-        this.textTime.GetComponent<Text>().text = this.timeCurrent.ToString();
 	}
 
     public void Temporizador()
@@ -40,9 +33,18 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-
+    void Update()
+    {
+        this.textTime.GetComponent<Text>().text = this.timeCurrent.ToString();
+    }
+    
     public void SaveTime()
     {
         PlayerPrefs.SetInt(PlayerPrefsKey.keyScore, this.timeCurrent);
+    }
+
+    public void StopTimer()
+    {
+        running = false;
     }
 }
