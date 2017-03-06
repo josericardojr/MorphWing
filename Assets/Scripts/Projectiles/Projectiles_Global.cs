@@ -50,7 +50,7 @@ public class Projectiles_Global : MonoBehaviour
     protected void ShootProjectile(int projIndex, float directionX, float directionY)
     {
         GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, directionX, directionY);
+        projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.shooter, 3, directionX, directionY);
     }
 
     protected void DestroyOffScreen()

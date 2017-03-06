@@ -11,7 +11,7 @@ public abstract class Characters_Global : MonoBehaviour
 	new protected Rigidbody2D rigidbody;
 
 	[SerializeField]
-	private float stat_speed;
+	protected float stat_speed;
 
 	[SerializeField]
 	protected int stat_hp; 
@@ -92,13 +92,23 @@ public abstract class Characters_Global : MonoBehaviour
 	}
 
 	public void Prov_TakeDamage(GameObject enemy, float damageAmount)
-	{
-		Characters_Enemies characters_enemies = enemy.GetComponent<Characters_Enemies>(); 
+    {
+        print(enemy);
+        Characters_Global characters_enemies = enemy.GetComponent<Characters_Global>();
 		string infID = characters_enemies.Prov_Attack(damageAmount);
 		this.Prov_TakeDamage(infID);
 	}
 
-	public void Prov_TakeDamage(string infID)
+    public string Prov_Attack(float damageAmount)
+    {
+        Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("Attacking", this.gameObject);
+        this.extractProvenance.HasInfluence("Enemy");
+        this.extractProvenance.GenerateInfluenceCE("PlayerDamage", this.GetInstanceID().ToString(), "Health (Player)", (-damageAmount).ToString(), 1, Time.time + 5);
+        return this.GetInstanceID().ToString();
+    }
+
+    public void Prov_TakeDamage(string infID)
 	{
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Being Hit");

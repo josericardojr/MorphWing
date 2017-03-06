@@ -51,20 +51,22 @@ public class Characters_Enemies : Characters_Global
 		}
 	}
 
+    protected void SetDirection()
+    {
+        if (this.dirX != this.initDir.x ||
+           this.dirY != this.initDir.y)
+        {
+            this.dirX = (int)this.initDir.x;
+            this.dirY = (int)this.initDir.y;
+        }
+    }
+
     protected override void CheckIfAlive()
     {
         if (this.temp_currHp <= 0)
             this.Destroy();
     }
 
-    public string Prov_Attack(float damageAmount)
-	{
-		Prov_GetAttributes ();
-		this.extractProvenance.NewActivityVertex("Attacking", this.gameObject);
-		this.extractProvenance.HasInfluence("Enemy");
-		this.extractProvenance.GenerateInfluenceCE("PlayerDamage", this.GetInstanceID().ToString(), "Health (Player)", (-damageAmount).ToString(), 1, Time.time + 5);
-		return this.GetInstanceID().ToString();
-	}
 
     protected void Destroy()
     {
