@@ -21,7 +21,7 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>9456</value>
+          <value>9822</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
@@ -40,16 +40,16 @@
     <vertex>
       <ID>vertex_1</ID>
       <type>Agent</type>
-      <label>Round</label>
+      <label>Straight</label>
       <date>0</date>
       <attributes>
         <attribute>
           <name>HP</name>
-          <value>5</value>
+          <value>6</value>
         </attribute>
         <attribute>
           <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
+          <value>Enemy_Straight(Clone)</value>
         </attribute>
         <attribute>
           <name>ObjectTag</name>
@@ -57,15 +57,15 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>-32806</value>
+          <value>-15666</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-3.249901</value>
+          <value>6</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
-          <value>4</value>
+          <value>-3.187519</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Z</name>
@@ -93,1703 +93,11 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>-32822</value>
+          <value>-15682</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>3.715589</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>4</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_3</ID>
-      <type>Agent</type>
-      <label>Straight</label>
-      <date>0</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Straight(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32838</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-4.050474</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>4</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_4</ID>
-      <type>Agent</type>
-      <label>Round</label>
-      <date>0</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32854</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.8603773</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_5</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>3.82</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32822</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.292878</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.103052</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_6</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>3.82</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>4.559997</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>0.3</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_7</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>4.4</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32822</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.292878</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.103052</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_8</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>4.4</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.819998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>0.48</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_9</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>5.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.279999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.78</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_10</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>5.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32822</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.292878</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.103052</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_11</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>5.7</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.759998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.9</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_12</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>5.7</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32822</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.292878</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.103052</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_13</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>10.04</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.36</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.36</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_14</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>10.04</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32806</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.7907091</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.726593</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_15</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>10.5</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>0.05999999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.36</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_16</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>10.5</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32806</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.7907091</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.726593</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_17</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>13.64</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-2.879998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_18</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>13.64</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32854</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.154579</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.8603773</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_19</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-1.979999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_20</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-32854</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.154579</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.8603773</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_21</ID>
-      <type>Agent</type>
-      <label>Round</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34292</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.388786</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_22</ID>
-      <type>Agent</type>
-      <label>Round</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34308</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.744803</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_23</ID>
-      <type>Agent</type>
-      <label>Chaser</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34324</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-5.102312</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>4</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_24</ID>
-      <type>Agent</type>
-      <label>Round</label>
-      <date>14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34340</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.594186</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_25</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>14.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-1.14</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_26</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>14.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34340</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-4.943369</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.241976</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_27</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>15.7</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>2.879998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.2</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_28</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>15.7</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34308</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.256241</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_29</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>16.06</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>3.479998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.2</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_30</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>16.06</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34308</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.256241</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_31</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>19.46</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.3</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_32</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>19.46</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34324</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.7343205</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.3520053</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_33</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>19.84</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>0.84</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_34</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>19.84</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34324</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.4303208</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.6560051</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_35</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>19.86</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>0.9</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_36</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>19.86</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34324</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.4143208</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-0.6720051</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_37</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>20.98</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>1.799999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.339999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_38</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>20.98</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34324</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>0.4816793</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.568006</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_39</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>23.88</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-2.699998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>0.36</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_40</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>23.88</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34340</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.617062</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_41</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>25.62</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34292</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.411662</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_42</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>25.62</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.1799999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.08</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_43</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>26.9</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-2.519999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.639998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_44</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>26.9</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34292</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.411662</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_45</ID>
-      <type>Activity</type>
-      <label>Attacking</label>
-      <date>27.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-2.279999</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-2.639998</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_46</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>27.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>5</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Round(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-34292</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-3.068626</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>-1.411662</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_47</ID>
-      <type>Agent</type>
-      <label>Chaser</label>
-      <date>27.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-35688</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.1455536</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>4</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_48</ID>
-      <type>Agent</type>
-      <label>Straight</label>
-      <date>27.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Straight(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-35704</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>3.982192</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>4</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_49</ID>
-      <type>Agent</type>
-      <label>Straight</label>
-      <date>27.28</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>6</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Straight(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-35720</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>1.438706</value>
+          <value>2.084159</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
@@ -1802,10 +110,10 @@
       </attributes>
     </vertex>
     <vertex>
-      <ID>vertex_50</ID>
+      <ID>vertex_3</ID>
       <type>Agent</type>
       <label>Irregular</label>
-      <date>27.28</date>
+      <date>0</date>
       <attributes>
         <attribute>
           <name>HP</name>
@@ -1821,15 +129,15 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>-35736</value>
+          <value>-15698</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-4.661144</value>
+          <value>-3.511308</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
-          <value>-4</value>
+          <value>4</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Z</name>
@@ -1838,10 +146,82 @@
       </attributes>
     </vertex>
     <vertex>
-      <ID>vertex_51</ID>
+      <ID>vertex_4</ID>
+      <type>Agent</type>
+      <label>Irregular</label>
+      <date>0</date>
+      <attributes>
+        <attribute>
+          <name>HP</name>
+          <value>4</value>
+        </attribute>
+        <attribute>
+          <name>ObjectName</name>
+          <value>Enemy_Irregular(Clone)</value>
+        </attribute>
+        <attribute>
+          <name>ObjectTag</name>
+          <value>Enemy</value>
+        </attribute>
+        <attribute>
+          <name>ObjectID</name>
+          <value>-15714</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_X</name>
+          <value>-0.144145</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Y</name>
+          <value>4</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Z</name>
+          <value>1</value>
+        </attribute>
+      </attributes>
+    </vertex>
+    <vertex>
+      <ID>vertex_5</ID>
       <type>Activity</type>
       <label>Attacking</label>
-      <date>29.14</date>
+      <date>1.62</date>
+      <attributes>
+        <attribute>
+          <name>HP</name>
+          <value>4</value>
+        </attribute>
+        <attribute>
+          <name>ObjectName</name>
+          <value>Enemy_Irregular(Clone)</value>
+        </attribute>
+        <attribute>
+          <name>ObjectTag</name>
+          <value>Enemy</value>
+        </attribute>
+        <attribute>
+          <name>ObjectID</name>
+          <value>-15714</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_X</name>
+          <value>-0.144145</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Y</name>
+          <value>2.240002</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Z</name>
+          <value>1</value>
+        </attribute>
+      </attributes>
+    </vertex>
+    <vertex>
+      <ID>vertex_6</ID>
+      <type>Activity</type>
+      <label>Being Hit</label>
+      <date>1.62</date>
       <attributes>
         <attribute>
           <name>HP</name>
@@ -1857,11 +237,11 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>9456</value>
+          <value>9822</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-1.02</value>
+          <value>-0.3</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
@@ -1874,90 +254,18 @@
       </attributes>
     </vertex>
     <vertex>
-      <ID>vertex_52</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>29.14</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Enemy</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>-35688</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-0.4175536</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>2.511997</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_53</ID>
+      <ID>vertex_7</ID>
       <type>Activity</type>
       <label>Attacking</label>
-      <date>29.26</date>
+      <date>1.74</date>
       <attributes>
         <attribute>
           <name>HP</name>
-          <value>10</value>
+          <value>4</value>
         </attribute>
         <attribute>
           <name>ObjectName</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectTag</name>
-          <value>Player</value>
-        </attribute>
-        <attribute>
-          <name>ObjectID</name>
-          <value>9456</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_X</name>
-          <value>-1.38</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Y</name>
-          <value>1.44</value>
-        </attribute>
-        <attribute>
-          <name>ObjectPosition_Z</name>
-          <value>1</value>
-        </attribute>
-      </attributes>
-    </vertex>
-    <vertex>
-      <ID>vertex_54</ID>
-      <type>Activity</type>
-      <label>Being Hit</label>
-      <date>29.26</date>
-      <attributes>
-        <attribute>
-          <name>HP</name>
-          <value>10</value>
-        </attribute>
-        <attribute>
-          <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
+          <value>Enemy_Irregular(Clone)</value>
         </attribute>
         <attribute>
           <name>ObjectTag</name>
@@ -1965,15 +273,15 @@
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>-35688</value>
+          <value>-15714</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-0.5135536</value>
+          <value>-0.144145</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
-          <value>2.415997</value>
+          <value>2.240002</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Z</name>
@@ -1982,34 +290,70 @@
       </attributes>
     </vertex>
     <vertex>
-      <ID>vertex_55</ID>
+      <ID>vertex_8</ID>
+      <type>Activity</type>
+      <label>Being Hit</label>
+      <date>1.74</date>
+      <attributes>
+        <attribute>
+          <name>HP</name>
+          <value>10</value>
+        </attribute>
+        <attribute>
+          <name>ObjectName</name>
+          <value>Player</value>
+        </attribute>
+        <attribute>
+          <name>ObjectTag</name>
+          <value>Player</value>
+        </attribute>
+        <attribute>
+          <name>ObjectID</name>
+          <value>9822</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_X</name>
+          <value>-0.3</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Y</name>
+          <value>1.739999</value>
+        </attribute>
+        <attribute>
+          <name>ObjectPosition_Z</name>
+          <value>1</value>
+        </attribute>
+      </attributes>
+    </vertex>
+    <vertex>
+      <ID>vertex_9</ID>
       <type>Activity</type>
       <label>Attacking</label>
-      <date>29.28</date>
+      <date>1.74</date>
       <attributes>
         <attribute>
           <name>HP</name>
-          <value>10</value>
+          <value>4</value>
         </attribute>
         <attribute>
           <name>ObjectName</name>
-          <value>Player</value>
+          <value>Enemy_Irregular(Clone)</value>
         </attribute>
         <attribute>
           <name>ObjectTag</name>
-          <value>Player</value>
+          <value>Enemy</value>
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>9456</value>
+          <value>-15714</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-1.44</value>
+          <value>-0.144145</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
-          <value>1.44</value>
+          <value>2.240002</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Z</name>
@@ -2018,10 +362,10 @@
       </attributes>
     </vertex>
     <vertex>
-      <ID>vertex_56</ID>
+      <ID>vertex_10</ID>
       <type>Activity</type>
       <label>Being Hit</label>
-      <date>29.28</date>
+      <date>1.74</date>
       <attributes>
         <attribute>
           <name>HP</name>
@@ -2029,23 +373,23 @@
         </attribute>
         <attribute>
           <name>ObjectName</name>
-          <value>Enemy_Chaser(Clone)</value>
+          <value>Player</value>
         </attribute>
         <attribute>
           <name>ObjectTag</name>
-          <value>Enemy</value>
+          <value>Player</value>
         </attribute>
         <attribute>
           <name>ObjectID</name>
-          <value>-35688</value>
+          <value>9822</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_X</name>
-          <value>-0.5295536</value>
+          <value>-0.3</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Y</name>
-          <value>2.399997</value>
+          <value>1.739999</value>
         </attribute>
         <attribute>
           <name>ObjectPosition_Z</name>
@@ -2061,7 +405,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_5</sourceID>
-      <targetID>vertex_2</targetID>
+      <targetID>vertex_4</targetID>
     </edge>
     <edge>
       <ID>edge_1</ID>
@@ -2075,7 +419,7 @@
       <ID>edge_2</ID>
       <type>WasInfluencedBy</type>
       <label>Health (Player)</label>
-      <value>-3</value>
+      <value>-1</value>
       <sourceID>vertex_6</sourceID>
       <targetID>vertex_5</targetID>
     </edge>
@@ -2093,7 +437,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_7</sourceID>
-      <targetID>vertex_2</targetID>
+      <targetID>vertex_4</targetID>
     </edge>
     <edge>
       <ID>edge_5</ID>
@@ -2125,7 +469,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_9</sourceID>
-      <targetID>vertex_8</targetID>
+      <targetID>vertex_7</targetID>
     </edge>
     <edge>
       <ID>edge_9</ID>
@@ -2133,7 +477,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_9</sourceID>
-      <targetID>vertex_0</targetID>
+      <targetID>vertex_4</targetID>
     </edge>
     <edge>
       <ID>edge_10</ID>
@@ -2141,7 +485,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_10</sourceID>
-      <targetID>vertex_7</targetID>
+      <targetID>vertex_8</targetID>
     </edge>
     <edge>
       <ID>edge_11</ID>
@@ -2149,7 +493,7 @@
       <label>Neutral</label>
       <value />
       <sourceID>vertex_10</sourceID>
-      <targetID>vertex_2</targetID>
+      <targetID>vertex_0</targetID>
     </edge>
     <edge>
       <ID>edge_12</ID>
@@ -2158,710 +502,6 @@
       <value>-3</value>
       <sourceID>vertex_10</sourceID>
       <targetID>vertex_9</targetID>
-    </edge>
-    <edge>
-      <ID>edge_13</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_11</sourceID>
-      <targetID>vertex_9</targetID>
-    </edge>
-    <edge>
-      <ID>edge_14</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_11</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_15</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_12</sourceID>
-      <targetID>vertex_10</targetID>
-    </edge>
-    <edge>
-      <ID>edge_16</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_12</sourceID>
-      <targetID>vertex_2</targetID>
-    </edge>
-    <edge>
-      <ID>edge_17</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_12</sourceID>
-      <targetID>vertex_11</targetID>
-    </edge>
-    <edge>
-      <ID>edge_18</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_13</sourceID>
-      <targetID>vertex_11</targetID>
-    </edge>
-    <edge>
-      <ID>edge_19</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_13</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_20</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_14</sourceID>
-      <targetID>vertex_1</targetID>
-    </edge>
-    <edge>
-      <ID>edge_21</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_14</sourceID>
-      <targetID>vertex_13</targetID>
-    </edge>
-    <edge>
-      <ID>edge_22</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_15</sourceID>
-      <targetID>vertex_13</targetID>
-    </edge>
-    <edge>
-      <ID>edge_23</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_15</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_24</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_16</sourceID>
-      <targetID>vertex_14</targetID>
-    </edge>
-    <edge>
-      <ID>edge_25</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_16</sourceID>
-      <targetID>vertex_1</targetID>
-    </edge>
-    <edge>
-      <ID>edge_26</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_16</sourceID>
-      <targetID>vertex_15</targetID>
-    </edge>
-    <edge>
-      <ID>edge_27</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_17</sourceID>
-      <targetID>vertex_15</targetID>
-    </edge>
-    <edge>
-      <ID>edge_28</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_17</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_29</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_18</sourceID>
-      <targetID>vertex_4</targetID>
-    </edge>
-    <edge>
-      <ID>edge_30</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_18</sourceID>
-      <targetID>vertex_17</targetID>
-    </edge>
-    <edge>
-      <ID>edge_31</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_19</sourceID>
-      <targetID>vertex_17</targetID>
-    </edge>
-    <edge>
-      <ID>edge_32</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_19</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_33</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_20</sourceID>
-      <targetID>vertex_18</targetID>
-    </edge>
-    <edge>
-      <ID>edge_34</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_20</sourceID>
-      <targetID>vertex_4</targetID>
-    </edge>
-    <edge>
-      <ID>edge_35</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_20</sourceID>
-      <targetID>vertex_19</targetID>
-    </edge>
-    <edge>
-      <ID>edge_36</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_25</sourceID>
-      <targetID>vertex_19</targetID>
-    </edge>
-    <edge>
-      <ID>edge_37</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_25</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_38</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_26</sourceID>
-      <targetID>vertex_24</targetID>
-    </edge>
-    <edge>
-      <ID>edge_39</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_26</sourceID>
-      <targetID>vertex_25</targetID>
-    </edge>
-    <edge>
-      <ID>edge_40</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_27</sourceID>
-      <targetID>vertex_25</targetID>
-    </edge>
-    <edge>
-      <ID>edge_41</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_27</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_42</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_28</sourceID>
-      <targetID>vertex_22</targetID>
-    </edge>
-    <edge>
-      <ID>edge_43</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_28</sourceID>
-      <targetID>vertex_27</targetID>
-    </edge>
-    <edge>
-      <ID>edge_44</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_29</sourceID>
-      <targetID>vertex_27</targetID>
-    </edge>
-    <edge>
-      <ID>edge_45</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_29</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_46</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_30</sourceID>
-      <targetID>vertex_28</targetID>
-    </edge>
-    <edge>
-      <ID>edge_47</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_30</sourceID>
-      <targetID>vertex_22</targetID>
-    </edge>
-    <edge>
-      <ID>edge_48</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_30</sourceID>
-      <targetID>vertex_29</targetID>
-    </edge>
-    <edge>
-      <ID>edge_49</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_31</sourceID>
-      <targetID>vertex_29</targetID>
-    </edge>
-    <edge>
-      <ID>edge_50</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_31</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_51</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_32</sourceID>
-      <targetID>vertex_23</targetID>
-    </edge>
-    <edge>
-      <ID>edge_52</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_32</sourceID>
-      <targetID>vertex_31</targetID>
-    </edge>
-    <edge>
-      <ID>edge_53</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_33</sourceID>
-      <targetID>vertex_31</targetID>
-    </edge>
-    <edge>
-      <ID>edge_54</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_33</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_55</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_34</sourceID>
-      <targetID>vertex_32</targetID>
-    </edge>
-    <edge>
-      <ID>edge_56</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_34</sourceID>
-      <targetID>vertex_23</targetID>
-    </edge>
-    <edge>
-      <ID>edge_57</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_34</sourceID>
-      <targetID>vertex_33</targetID>
-    </edge>
-    <edge>
-      <ID>edge_58</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_35</sourceID>
-      <targetID>vertex_33</targetID>
-    </edge>
-    <edge>
-      <ID>edge_59</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_35</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_60</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_36</sourceID>
-      <targetID>vertex_34</targetID>
-    </edge>
-    <edge>
-      <ID>edge_61</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_36</sourceID>
-      <targetID>vertex_23</targetID>
-    </edge>
-    <edge>
-      <ID>edge_62</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_36</sourceID>
-      <targetID>vertex_35</targetID>
-    </edge>
-    <edge>
-      <ID>edge_63</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_37</sourceID>
-      <targetID>vertex_35</targetID>
-    </edge>
-    <edge>
-      <ID>edge_64</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_37</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_65</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_38</sourceID>
-      <targetID>vertex_36</targetID>
-    </edge>
-    <edge>
-      <ID>edge_66</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_38</sourceID>
-      <targetID>vertex_23</targetID>
-    </edge>
-    <edge>
-      <ID>edge_67</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_38</sourceID>
-      <targetID>vertex_37</targetID>
-    </edge>
-    <edge>
-      <ID>edge_68</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_39</sourceID>
-      <targetID>vertex_37</targetID>
-    </edge>
-    <edge>
-      <ID>edge_69</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_39</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_70</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_40</sourceID>
-      <targetID>vertex_26</targetID>
-    </edge>
-    <edge>
-      <ID>edge_71</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_40</sourceID>
-      <targetID>vertex_24</targetID>
-    </edge>
-    <edge>
-      <ID>edge_72</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_40</sourceID>
-      <targetID>vertex_39</targetID>
-    </edge>
-    <edge>
-      <ID>edge_73</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_41</sourceID>
-      <targetID>vertex_21</targetID>
-    </edge>
-    <edge>
-      <ID>edge_74</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_42</sourceID>
-      <targetID>vertex_39</targetID>
-    </edge>
-    <edge>
-      <ID>edge_75</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_42</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_76</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_42</sourceID>
-      <targetID>vertex_41</targetID>
-    </edge>
-    <edge>
-      <ID>edge_77</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_43</sourceID>
-      <targetID>vertex_42</targetID>
-    </edge>
-    <edge>
-      <ID>edge_78</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_43</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_79</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_44</sourceID>
-      <targetID>vertex_41</targetID>
-    </edge>
-    <edge>
-      <ID>edge_80</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_44</sourceID>
-      <targetID>vertex_21</targetID>
-    </edge>
-    <edge>
-      <ID>edge_81</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_44</sourceID>
-      <targetID>vertex_43</targetID>
-    </edge>
-    <edge>
-      <ID>edge_82</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_45</sourceID>
-      <targetID>vertex_43</targetID>
-    </edge>
-    <edge>
-      <ID>edge_83</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_45</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_84</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_46</sourceID>
-      <targetID>vertex_44</targetID>
-    </edge>
-    <edge>
-      <ID>edge_85</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_46</sourceID>
-      <targetID>vertex_21</targetID>
-    </edge>
-    <edge>
-      <ID>edge_86</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_46</sourceID>
-      <targetID>vertex_45</targetID>
-    </edge>
-    <edge>
-      <ID>edge_87</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_51</sourceID>
-      <targetID>vertex_45</targetID>
-    </edge>
-    <edge>
-      <ID>edge_88</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_51</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_89</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_52</sourceID>
-      <targetID>vertex_47</targetID>
-    </edge>
-    <edge>
-      <ID>edge_90</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_52</sourceID>
-      <targetID>vertex_51</targetID>
-    </edge>
-    <edge>
-      <ID>edge_91</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_53</sourceID>
-      <targetID>vertex_51</targetID>
-    </edge>
-    <edge>
-      <ID>edge_92</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_53</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_93</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_54</sourceID>
-      <targetID>vertex_52</targetID>
-    </edge>
-    <edge>
-      <ID>edge_94</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_54</sourceID>
-      <targetID>vertex_47</targetID>
-    </edge>
-    <edge>
-      <ID>edge_95</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_54</sourceID>
-      <targetID>vertex_53</targetID>
-    </edge>
-    <edge>
-      <ID>edge_96</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_55</sourceID>
-      <targetID>vertex_53</targetID>
-    </edge>
-    <edge>
-      <ID>edge_97</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_55</sourceID>
-      <targetID>vertex_0</targetID>
-    </edge>
-    <edge>
-      <ID>edge_98</ID>
-      <type>WasInformedBy</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_56</sourceID>
-      <targetID>vertex_54</targetID>
-    </edge>
-    <edge>
-      <ID>edge_99</ID>
-      <type>WasAssociatedWith</type>
-      <label>Neutral</label>
-      <value />
-      <sourceID>vertex_56</sourceID>
-      <targetID>vertex_47</targetID>
-    </edge>
-    <edge>
-      <ID>edge_100</ID>
-      <type>WasInfluencedBy</type>
-      <label>Health (Player)</label>
-      <value>-3</value>
-      <sourceID>vertex_56</sourceID>
-      <targetID>vertex_55</targetID>
     </edge>
   </edges>
 </provenancedata>
