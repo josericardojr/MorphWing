@@ -19,7 +19,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	[SerializeField]
 	protected string provIndentifier;
-    protected string lastHitBy;
+    protected string lastHitBy = "";
 
     [SerializeField]
     protected List<string> prefabNames = new List<string>();
@@ -80,14 +80,9 @@ public abstract class Characters_Global : MonoBehaviour
 	{
 		this.extractProvenance.AddAttribute ("HP", this.stat_hp.ToString());
         this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
+        this.extractProvenance.AddAttribute("Last", this.lastHitBy);
     }
 
-	protected void Prov_Walk()
-	{
-		Prov_GetAttributes();
-		this.extractProvenance.NewActivityVertex("Walking");
-		this.extractProvenance.HasInfluence(this.provIndentifier);
-	}
 
 	public void Prov_TakeDamage(float instanceID, float damageAmount)
     {

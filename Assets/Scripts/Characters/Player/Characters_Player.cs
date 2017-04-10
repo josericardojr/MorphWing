@@ -56,7 +56,6 @@ public class Characters_Player : Characters_Global
 
 	public override void GetDamaged(float instanceID, string objLabel, float damage)
     {
-        Prov_Walk();
         base.GetDamaged(instanceID, objLabel, damage);
 		this.animator.SetInteger("Invincibility", 1);
 		this.invincible = true;
