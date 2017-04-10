@@ -11,6 +11,8 @@ public class Managers_Spawn : MonoBehaviour
 	List<Vector3> positionsList = new List<Vector3>();
 	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
+    [SerializeField]
+    GameObject itemPrefab;
 	[SerializeField]
 	private float maxSpawnOffsetX = 0, maxSpawnOffsetY = 0;
 
@@ -68,8 +70,13 @@ public class Managers_Spawn : MonoBehaviour
 	public void EnemyDecrease()
 	{
 		this.noSpawned--;
-		if(this.noSpawned <= 0)
-			SpawnEnemies();
+		if(this.noSpawned < 4)
+        {
+            SpawnRandomEnemy();
+            this.noSpawned++;
+            if (Random.Range(0, 6) == 0) 
+                SpawnRandomItem();
+        }
 	}
 
 	void SpawnRandomEnemy()
@@ -82,6 +89,12 @@ public class Managers_Spawn : MonoBehaviour
 		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(-selectedPos.x, -selectedPos.y);
         spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
         spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
+    }
+
+    void SpawnRandomItem()
+    {
+        // Define Position
+        GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(Random.Range((float)-this.maxSpawnOffsetX, (float)this.maxSpawnOffsetX), Random.Range((float)-this.maxSpawnOffsetY, (float)this.maxSpawnOffsetY), 1), Quaternion.identity);
     }
 
 	void SetOffsets()

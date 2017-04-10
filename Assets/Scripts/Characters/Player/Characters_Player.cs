@@ -15,7 +15,7 @@ public class Characters_Player : Characters_Global
     Text hud_retryText;
 	[SerializeField]
 	protected float invincibleTime;
-	protected bool invincible;
+	protected bool invincible, slowdown;
     [SerializeField]
     List<float> cooldownList = new List<float>();
     List<float> currCooldown = new List<float>();
@@ -45,18 +45,19 @@ public class Characters_Player : Characters_Global
 
 	void Update () 
 	{
-		Prov_Actions ();
 		Movement();
-		if (Input.GetKeyDown (KeyCode.J) && this.currCooldown[0] == 0)
+		if (Input.GetKey (KeyCode.J) && this.currCooldown[0] == 0)
 			ShootProjectile(0, 0, 1);
-        if (Input.GetKeyDown(KeyCode.K) && this.currCooldown[1] == 0)
-            ShootProjectile(1, 0, 1);
+        if (Input.GetKey (KeyCode.K) && this.currCooldown[1] == 0)
+            ShootProjectile(1, this.dirX, this.dirY);
         CooldownRun();
+        ShotSlowdown();
     }
 
-	public override void GetDamaged(GameObject attacker, float damage)
-	{
-		base.GetDamaged(attacker, damage);
+	public override void GetDamaged(float instanceID, string objLabel, float damage)
+    {
+        Prov_Walk();
+        base.GetDamaged(instanceID, objLabel, damage);
 		this.animator.SetInteger("Invincibility", 1);
 		this.invincible = true;
         UpdateUI();
@@ -106,6 +107,23 @@ public class Characters_Player : Characters_Global
             this.extractProvenance.provenance.Save("info");
         }
         base.CheckIfAlive();
+    }
+
+    void ShotSlowdown()
+    {
+        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.K))
+            this.stat_speed = 1.5f;
+        else if (!Input.GetKey(KeyCode.J) && !Input.GetKey(KeyCode.K))
+            this.stat_speed = 3;
+    }
+
+    public void Heal()
+    {
+        this.temp_currHp += 2;
+        if (this.temp_currHp > this.stat_hp)
+            this.temp_currHp = this.stat_hp;
+        Prov_Heal();
+        UpdateUI();
     }
 
 }

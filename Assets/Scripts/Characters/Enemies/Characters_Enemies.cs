@@ -38,7 +38,8 @@ public class Characters_Enemies : Characters_Global
 		base.Start();
 		Prov_Agent ();
         this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
-		this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
+        if(GameObject.FindGameObjectWithTag("Player") != null)
+		    this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
         Invoke("CanDestroyOutOfScreen", 0.4f);
 	}
 
@@ -47,7 +48,7 @@ public class Characters_Enemies : Characters_Global
 		if (c.CompareTag ("Player"))
 		{
 			if(!c.GetComponent<Characters_Player>().Invincible)
-				c.GetComponent<Characters_Global> ().GetDamaged(this.gameObject, this.contactDamage);
+				c.GetComponent<Characters_Global> ().GetDamaged(this.GetInstanceID(), this.provIndentifier, this.contactDamage);
 		}
 	}
 

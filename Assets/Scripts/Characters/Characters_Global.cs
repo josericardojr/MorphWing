@@ -19,6 +19,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	[SerializeField]
 	protected string provIndentifier;
+    protected string lastHitBy;
 
     [SerializeField]
     protected List<string> prefabNames = new List<string>();
@@ -46,12 +47,13 @@ public abstract class Characters_Global : MonoBehaviour
 		this.rigidbody.velocity = new Vector2 (this.dirX * this.stat_speed, this.dirY * this.stat_speed);
 	}
 
-	public virtual void GetDamaged(GameObject attacker, float damage)
-	{
-		this.animator.SetTrigger("Flash");
+	public virtual void GetDamaged(float instanceID, string objLabel, float damage)
+    {
+        this.lastHitBy = objLabel;
+        this.Prov_TakeDamage(instanceID, damage);
+        this.animator.SetTrigger("Flash");
 		this.temp_currHp -= (int)damage;
 		CheckIfAlive();
-		this.Prov_TakeDamage(attacker, damage);
 	}
 
 	protected virtual void CheckIfAlive()
@@ -63,7 +65,7 @@ public abstract class Characters_Global : MonoBehaviour
 	protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
-		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY);
+		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, this.GetInstanceID(), this.provIndentifier);
     }
 
 	#region Provenance
@@ -77,28 +79,31 @@ public abstract class Characters_Global : MonoBehaviour
 	protected void Prov_GetAttributes()
 	{
 		this.extractProvenance.AddAttribute ("HP", this.stat_hp.ToString());
-	}
+        this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
+    }
 
-	protected void Prov_Actions()
-	{
-		//Prov_Walk ();
-	}
-
-	void Prov_Walk()
+	protected void Prov_Walk()
 	{
 		Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Walking");
 		this.extractProvenance.HasInfluence(this.provIndentifier);
 	}
 
-	public void Prov_TakeDamage(GameObject enemy, float damageAmount)
+	public void Prov_TakeDamage(float instanceID, float damageAmount)
     {
-        print(enemy);
-        Characters_Global characters_enemies = enemy.GetComponent<Characters_Global>();
-		string infID = characters_enemies.Prov_Attack(damageAmount);
+        Prov_GetAttributes();
+        string infID = instanceID.ToString();
 		this.Prov_TakeDamage(infID);
 	}
 
+    protected void Prov_Heal()
+    {
+        Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("Heal");
+        this.extractProvenance.HasInfluence(this.provIndentifier);
+    }
+
+    /*
     public string Prov_Attack(float damageAmount)
     {
         Prov_GetAttributes();
@@ -106,15 +111,16 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.HasInfluence("Enemy");
         this.extractProvenance.GenerateInfluenceCE("PlayerDamage", this.GetInstanceID().ToString(), "Health (Player)", (-damageAmount).ToString(), 1, Time.time + 5);
         return this.GetInstanceID().ToString();
-    }
+    }*/
 
     public void Prov_TakeDamage(string infID)
 	{
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Being Hit");
-		// Check Influence
-		this.extractProvenance.HasInfluence_ID(infID);
-	}
+        // Check Influence
+        this.extractProvenance.HasInfluence(this.lastHitBy);
+        this.extractProvenance.HasInfluence_ID(infID);
+    }
 
 	public void Prov_TakeDamage()
 	{

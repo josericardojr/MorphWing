@@ -7,8 +7,9 @@ public class Projectiles_HeavyBullet : Projectiles_Global {
     new void Start()
     {
         base.Start();
-        this.receivedX = 0;
-        this.receivedY = 1;
+        if (this.receivedY == 0 && this.receivedX == 0)
+            this.receivedY = 1;
+        
     }
 
     void Update()
