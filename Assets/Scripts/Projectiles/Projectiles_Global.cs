@@ -30,7 +30,7 @@ public class Projectiles_Global : MonoBehaviour
 		this.tag = shooterObj.tag.Split('_')[0] + "_Shot";
         this.shooterLabel = objLabel;
 		this.shooter = shooterObj;
-		this.damage = damageValue;
+		//this.damage = damageValue;
 		this.receivedX = dirXValue;
 		this.receivedY = dirYValue;
         this.shooterInstanceID = instanceID;
@@ -70,5 +70,13 @@ public class Projectiles_Global : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    #region GETS & SETS
+    public float Damage
+    {
+        get { return this.damage; }
+        set { this.damage = value; }
+    }
+    #endregion
 
 }

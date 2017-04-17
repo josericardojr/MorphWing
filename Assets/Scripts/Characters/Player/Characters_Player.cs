@@ -20,6 +20,9 @@ public class Characters_Player : Characters_Global
     List<float> cooldownList = new List<float>();
     List<float> currCooldown = new List<float>();
 
+    [HideInInspector]
+    public bool invertControl;
+
     #region GETS & SETS
 
     public bool Invincible
@@ -51,7 +54,7 @@ public class Characters_Player : Characters_Global
         if (Input.GetKey (KeyCode.K) && this.currCooldown[1] == 0)
             ShootProjectile(1, this.dirX, this.dirY);
         CooldownRun();
-        ShotSlowdown();
+        //ShotSlowdown();
     }
 
 	public override void GetDamaged(float instanceID, string objLabel, float damage)
@@ -86,8 +89,16 @@ public class Characters_Player : Characters_Global
 
     void Movement()
 	{
-		this.dirX = (int)Input.GetAxisRaw ("Horizontal");
-		this.dirY = (int)Input.GetAxisRaw ("Vertical");
+        if (!this.invertControl)
+        {
+            this.dirX = (int)Input.GetAxisRaw("Horizontal");
+            this.dirY = (int)Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            this.dirX = -(int)Input.GetAxisRaw("Horizontal");
+            this.dirY = -(int)Input.GetAxisRaw("Vertical");
+        }
 		MovementCall();
 	}
 

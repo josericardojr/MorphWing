@@ -68,9 +68,29 @@ public abstract class Characters_Global : MonoBehaviour
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, this.GetInstanceID(), this.provIndentifier);
     }
 
-	#region Provenance
+    #region GETS e SETS
+    public float GetSpeed()
+    {
+        return this.stat_speed;
+    }
 
-	protected void Prov_Agent()
+    public void SetSpeed(float value)
+    {
+       this.stat_speed = value;
+    }
+
+    public List<GameObject> PrefabList
+    {
+        get { return this.prefabList; }
+        set { this.prefabList = value; }
+    }
+
+
+    #endregion
+
+    #region Provenance
+
+    protected void Prov_Agent()
 	{
 		this.Prov_GetAttributes ();
 		this.extractProvenance.NewAgentVertex (this.provIndentifier);
