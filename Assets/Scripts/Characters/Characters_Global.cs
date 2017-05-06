@@ -145,6 +145,14 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.HasInfluence(this.provIndentifier + "Damage");
 	}
 
-	#endregion
+    public void Prov_PowerUp()
+    {
+        Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("PowerUp");
+        this.extractProvenance.HasInfluence(this.provIndentifier);
+        this.extractProvenance.provenance.Save("info");
+    }
+
+    #endregion
 
 }
