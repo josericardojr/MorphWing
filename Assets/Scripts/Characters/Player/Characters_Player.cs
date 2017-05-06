@@ -54,7 +54,7 @@ public class Characters_Player : Characters_Global
         if (Input.GetKey (KeyCode.K) && this.currCooldown[1] == 0)
             ShootProjectile(1, this.dirX, this.dirY);
         CooldownRun();
-        //ShotSlowdown();
+        ShotSlowdown();
     }
 
 	public override void GetDamaged(float instanceID, string objLabel, float damage)
@@ -117,6 +117,16 @@ public class Characters_Player : Characters_Global
             this.extractProvenance.provenance.Save("info");
         }
         base.CheckIfAlive();
+    }
+
+	protected override void Prov_GetAttributes()
+    {
+    	base.Prov_GetAttributes();
+    	if(this.currCooldown[1] != null)
+			this.extractProvenance.AddAttribute ("WeaponCD", this.currCooldown[1].ToString());
+		else
+			this.extractProvenance.AddAttribute ("WeaponCD", "0");
+
     }
 
     void ShotSlowdown()

@@ -96,9 +96,9 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.NewAgentVertex (this.provIndentifier);
 	}
 
-	protected void Prov_GetAttributes()
+	protected virtual void Prov_GetAttributes()
 	{
-		this.extractProvenance.AddAttribute ("HP", this.stat_hp.ToString());
+		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
         this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
         this.extractProvenance.AddAttribute("Last", this.lastHitBy);
     }
