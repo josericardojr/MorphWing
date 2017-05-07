@@ -99,10 +99,22 @@ public abstract class Characters_Global : MonoBehaviour
 	protected virtual void Prov_GetAttributes()
 	{
 		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
-        this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
+		this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
         this.extractProvenance.AddAttribute("Last", this.lastHitBy);
+		this.extractProvenance.AddAttribute("Enemies", "S: " + GetEnemyNo("Straight") + "C: " + GetEnemyNo("Chaser") +
+														"I: " + GetEnemyNo("Irregular") + "R: " + GetEnemyNo("Round"));
     }
 
+    int GetEnemyNo(string enemyProvID)
+    {
+    	int enemyNo = 0;
+    	foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+    	{
+    		if(enemy.GetComponent<Characters_Global>().provIndentifier.Equals(enemyProvID))
+    			enemyNo++;
+    	}
+    	return enemyNo;
+    }
 
 	public void Prov_TakeDamage(float instanceID, float damageAmount)
     {
