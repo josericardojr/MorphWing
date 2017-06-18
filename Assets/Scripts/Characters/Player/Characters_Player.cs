@@ -35,15 +35,18 @@ public class Characters_Player : Characters_Global
 
 	new void Start () 
 	{
+        SetCooldowns();
 		base.Start();
 		Prov_Agent ();
-        SetCooldowns();
 	}
 	
     void SetCooldowns()
     {
         for (int i = 0; i < this.cooldownList.Count; i++)
+        {
             this.currCooldown.Add(0);
+            print("");
+        }
     }
 
 	void Update () 
@@ -65,6 +68,15 @@ public class Characters_Player : Characters_Global
         UpdateUI();
         Invoke("StopInvincibility", this.invincibleTime);
 	}
+
+	public void InvicibleTouch(float instanceID, string objLabel)
+    {
+        Prov_GetAttributes();
+		this.extractProvenance.NewActivityVertex("Blink Dodge");
+        // Check Influence
+        this.extractProvenance.HasInfluence(objLabel);
+		this.extractProvenance.HasInfluence_ID(infID);
+    }
 
     void CooldownRun()
     {

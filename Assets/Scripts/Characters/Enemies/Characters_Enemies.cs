@@ -49,6 +49,8 @@ public class Characters_Enemies : Characters_Global
 		{
 			if(!c.GetComponent<Characters_Player>().Invincible)
 				c.GetComponent<Characters_Global> ().GetDamaged(this.GetInstanceID(), this.provIndentifier, this.contactDamage);
+			else
+				c.GetComponent<Characters_Player>().InvicibleTouch(this.GetInstanceID(), this.provIndentifier);
 		}
 	}
 

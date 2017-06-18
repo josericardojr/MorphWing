@@ -101,8 +101,8 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
 		this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
         this.extractProvenance.AddAttribute("Last", this.lastHitBy);
-		this.extractProvenance.AddAttribute("Enemies", "S: " + GetEnemyNo("Straight") + "C: " + GetEnemyNo("Chaser") +
-														"I: " + GetEnemyNo("Irregular") + "R: " + GetEnemyNo("Round"));
+		this.extractProvenance.AddAttribute("Enemies", "S: " + GetEnemyNo("Straight") + " C: " + GetEnemyNo("Chaser") +
+														" I: " + GetEnemyNo("Irregular") + " R: " + GetEnemyNo("Round"));
     }
 
     int GetEnemyNo(string enemyProvID)
@@ -121,7 +121,8 @@ public abstract class Characters_Global : MonoBehaviour
         Prov_GetAttributes();
         string infID = instanceID.ToString();
 		this.Prov_TakeDamage(infID);
-	}
+        this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5);
+    }
 
     protected void Prov_Heal()
     {
@@ -146,7 +147,8 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.NewActivityVertex("Being Hit");
         // Check Influence
         this.extractProvenance.HasInfluence(this.lastHitBy);
-        this.extractProvenance.HasInfluence_ID(infID);
+		this.extractProvenance.HasInfluence_ID(infID);
+	
     }
 
 	public void Prov_TakeDamage()
