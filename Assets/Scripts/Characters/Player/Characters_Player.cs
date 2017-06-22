@@ -75,7 +75,6 @@ public class Characters_Player : Characters_Global
 		this.extractProvenance.NewActivityVertex("Blink Dodge");
         // Check Influence
         this.extractProvenance.HasInfluence(objLabel);
-		this.extractProvenance.HasInfluence_ID(infID);
     }
 
     void CooldownRun()
