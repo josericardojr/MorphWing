@@ -131,6 +131,13 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.HasInfluence(this.provIndentifier);
     }
 
+	protected void Prov_HP()
+	{
+		Prov_GetAttributes();
+		this.extractProvenance.NewActivityVertex("HP(" + this.provIndentifier + ")");
+		this.extractProvenance.HasInfluence(this.provIndentifier);
+	}
+
     /*
     public string Prov_Attack(float damageAmount)
     {

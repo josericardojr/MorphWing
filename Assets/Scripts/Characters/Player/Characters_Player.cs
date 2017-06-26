@@ -65,6 +65,7 @@ public class Characters_Player : Characters_Global
         base.GetDamaged(instanceID, objLabel, damage);
 		this.animator.SetInteger("Invincibility", 1);
 		this.invincible = true;
+		Prov_HP ();
         UpdateUI();
         Invoke("StopInvincibility", this.invincibleTime);
 	}

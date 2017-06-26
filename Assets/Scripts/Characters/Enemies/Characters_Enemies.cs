@@ -49,7 +49,14 @@ public class Characters_Enemies : Characters_Global
 		{
 			if(!c.GetComponent<Characters_Player>().Invincible)
 				c.GetComponent<Characters_Global> ().GetDamaged(this.GetInstanceID(), this.provIndentifier, this.contactDamage);
-			else
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D c)
+	{
+		if (c.CompareTag ("Player"))
+		{
+			if(c.GetComponent<Characters_Player>().Invincible)
 				c.GetComponent<Characters_Player>().InvicibleTouch(this.GetInstanceID(), this.provIndentifier);
 		}
 	}
