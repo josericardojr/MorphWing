@@ -4,107 +4,131 @@ using UnityEngine;
 
 public class SpawnItemManager : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject prefab;
+	protected ExtractProvenance extractProvenance;
 
-    [SerializeField]
-    private float cooldownSpawn;
+	[SerializeField]
+	private GameObject prefab;
 
-    private float timeSpawn;
+	[SerializeField]
+	private float cooldownSpawn;
 
-    Object_Efeitos.Effects auxEffect;
+	private float timeSpawn;
 
-    [SerializeField]
-    private Color colorDamageUp, colorDamageDown, colorSpeedUp, colorSpeedDown, colorInvert;
+	Object_Efeitos.Effects auxEffect;
 
-    void Start ()
-    {
-        this.transform.position = Camera.main.transform.position;
+	[SerializeField]
+	private Color colorDamageUp, colorDamageDown, colorSpeedUp, colorSpeedDown, colorInvert;
+
+	void Start ()
+	{
+		this.transform.position = Camera.main.transform.position;
+		this.extractProvenance = this.GetComponent<ExtractProvenance>();
+		Prov_Agent();
 	}
-	
+
 	void Update ()
-    {
-        this.timeSpawn += Time.deltaTime;
-        if (this.timeSpawn >= this.cooldownSpawn)
-        {
-            Spawnar();
-            this.timeSpawn = 0;
-        }
+	{
+		this.timeSpawn += Time.deltaTime;
+		if (this.timeSpawn >= this.cooldownSpawn)
+		{
+			Spawnar();
+			this.timeSpawn = 0;
+		}
 	}
 
-    private void Spawnar()
-    {
-       GameObject g = Instantiate(this.prefab, RandomScreenPosition(), Quaternion.identity);
-        g.gameObject.tag = "Item";
+	private void Spawnar()
+	{
+		GameObject g = Instantiate(this.prefab, RandomScreenPosition(), Quaternion.identity);
+		g.gameObject.tag = "Item";
 
-        if (!g.GetComponent<Object_Efeitos>())
-            g.AddComponent<Object_Efeitos>();
+		if (!g.GetComponent<Object_Efeitos>())
+			g.AddComponent<Object_Efeitos>();
 
-        g.GetComponent<Object_Efeitos>().SetEfeitoAtual(RandomEffect(g));
-    }
+		g.GetComponent<Object_Efeitos>().SetEfeitoAtual(RandomEffect(g));
+	}
 
-    private Vector3 RandomScreenPosition()
-    {
-        float x = Random.Range((float)(-(Screen.width / 100)), (float)Screen.width / 100);
-        float y = Random.Range((float)-(Screen.height / 100), (float)Screen.height / 100);
-        return new Vector3(x, y, 1);
-    }
+	private Vector3 RandomScreenPosition()
+	{
+		float x = Random.Range((float)(-(Screen.width / 100)), (float)Screen.width / 100);
+		float y = Random.Range((float)-(Screen.height / 100), (float)Screen.height / 100);
+		return new Vector3(x, y, 1);
+	}
 
-    private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
-    {
-        short aux = (short)Random.Range(0, 5);
-        switch (aux)
-        {
-            case 0:
-                auxEffect = Object_Efeitos.Effects.DAMAGE_UP;
-                gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageUp;
-                break;
-            case 1:
-                auxEffect = Object_Efeitos.Effects.DAMAGE_DOWN;
-                gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageDown;
-                break;
-            case 2:
-                auxEffect = Object_Efeitos.Effects.SPEED_UP;
-                gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedUp;
-                break;
-            case 3:
-                auxEffect = Object_Efeitos.Effects.SPEED_DOWN;
-                gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedDown;
-                break;
-            case 4:
-                auxEffect = Object_Efeitos.Effects.INVERT_CONTROL;
-                gameObjAtual.GetComponent<SpriteRenderer>().color = colorInvert;
-                break;
-        }
+	private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
+	{
+		short aux = (short)Random.Range(0, 5);
+		switch (aux)
+		{
+		case 0:
+			auxEffect = Object_Efeitos.Effects.DAMAGE_UP;
+			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageUp;
+			break;
+		case 1:
+			auxEffect = Object_Efeitos.Effects.DAMAGE_DOWN;
+			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageDown;
+			break;
+		case 2:
+			auxEffect = Object_Efeitos.Effects.SPEED_UP;
+			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedUp;
+			break;
+		case 3:
+			auxEffect = Object_Efeitos.Effects.SPEED_DOWN;
+			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedDown;
+			break;
+		case 4:
+			auxEffect = Object_Efeitos.Effects.INVERT_CONTROL;
+			gameObjAtual.GetComponent<SpriteRenderer>().color = colorInvert;
+			break;
+		}
+		Prov_SpawnItem();
+		Prov_Item(auxEffect.ToString(), gameObjAtual.GetComponent<Collider2D>().GetInstanceID().ToString());
+		return auxEffect;
+	}
 
-        return auxEffect;
-    }
+	protected void Prov_Agent()
+	{
+		this.extractProvenance.NewAgentVertex("Item Spawner");
+	}
 
-    #region GETS e SETS
-    public Color ColorDamageUp
-    {
-        get{ return this.colorDamageUp; }
-        set{ this.colorDamageUp = value; }
-    }
-    public Color ColorDamageDown
-    {
-        get { return this.colorDamageDown; }
-        set { this.colorDamageDown = value; }
-    }
-    public Color ColorSpeedUp
-    {
-        get { return this.colorSpeedUp; }
-        set { this.colorSpeedUp = value; }
-    }
-    public Color ColorSpeedDown
-    {
-        get { return this.colorSpeedDown; }
-        set { this.colorSpeedDown = value; }
-    }
-    public Color ColorInvertControler
-    {
-        get { return this.colorInvert; }
-        set { this.colorInvert = value; }
-    }
-    #endregion
+	protected void Prov_SpawnItem()
+	{
+		this.extractProvenance.NewActivityVertex("Item Spawned");
+	}
+
+	protected void Prov_Item(string effect, string ID)
+	{
+		this.extractProvenance.AddAttribute("Effect", effect);
+		this.extractProvenance.NewEntityVertex(effect);
+		this.extractProvenance.GenerateInfluenceC(effect, ID, effect, "", 1);
+	}
+
+	#region GETS e SETS
+
+	public Color ColorDamageUp
+	{
+		get{ return this.colorDamageUp; }
+		set{ this.colorDamageUp = value; }
+	}
+	public Color ColorDamageDown
+	{
+		get { return this.colorDamageDown; }
+		set { this.colorDamageDown = value; }
+	}
+	public Color ColorSpeedUp
+	{
+		get { return this.colorSpeedUp; }
+		set { this.colorSpeedUp = value; }
+	}
+	public Color ColorSpeedDown
+	{
+		get { return this.colorSpeedDown; }
+		set { this.colorSpeedDown = value; }
+	}
+	public Color ColorInvertControler
+	{
+		get { return this.colorInvert; }
+		set { this.colorInvert = value; }
+	}
+
+	#endregion
 }

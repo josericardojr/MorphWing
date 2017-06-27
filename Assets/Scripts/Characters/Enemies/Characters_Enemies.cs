@@ -4,12 +4,12 @@ using System.Collections;
 public class Characters_Enemies : Characters_Global
 {
 	protected Characters_Player player;
-    protected Managers_Spawn spawnManager;
+	protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
-    protected bool canDestroyOffScreen;
+	protected bool canDestroyOffScreen;
 	[SerializeField]
 	protected int contactDamage;
-    protected float maxOffsetX, maxOffsetY;
+	protected float maxOffsetX, maxOffsetY;
 
 	#region GETS & SETS
 
@@ -19,28 +19,28 @@ public class Characters_Enemies : Characters_Global
 		set{this.initDir = value;}
 	}
 
-    public float MaxOffsetX
-    {
-        get { return this.maxOffsetX; }
-        set { this.maxOffsetX = value; }
-    }
+	public float MaxOffsetX
+	{
+		get { return this.maxOffsetX; }
+		set { this.maxOffsetX = value; }
+	}
 
-    public float MaxOffsetY
-    {
-        get { return this.maxOffsetY; }
-        set { this.maxOffsetY = value; }
-    }
+	public float MaxOffsetY
+	{
+		get { return this.maxOffsetY; }
+		set { this.maxOffsetY = value; }
+	}
 
-    #endregion
+	#endregion
 
-    new protected void Start()
+	new protected void Start()
 	{
 		base.Start();
 		Prov_Agent ();
-        this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
-        if(GameObject.FindGameObjectWithTag("Player") != null)
-		    this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
-        Invoke("CanDestroyOutOfScreen", 0.4f);
+		this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
+		if(GameObject.FindGameObjectWithTag("Player") != null)
+			this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
+		Invoke("CanDestroyOutOfScreen", 0.4f);
 	}
 
 	void OnTriggerStay2D(Collider2D c)
@@ -56,49 +56,51 @@ public class Characters_Enemies : Characters_Global
 	{
 		if (c.CompareTag ("Player"))
 		{
-			if(c.GetComponent<Characters_Player>().Invincible)
+			if (c.GetComponent<Characters_Player> ().Invincible)
+			{
+				Prov_EnemyAttack(0);
 				c.GetComponent<Characters_Player>().InvicibleTouch(this.GetInstanceID(), this.provIndentifier);
+			}
 		}
 	}
 
-    protected void SetDirection()
-    {
-        if (this.dirX != this.initDir.x ||
-           this.dirY != this.initDir.y)
-        {
-            this.dirX = (int)this.initDir.x;
-            this.dirY = (int)this.initDir.y;
-        }
-    }
+	protected void SetDirection()
+	{
+		if (this.dirX != this.initDir.x ||
+			this.dirY != this.initDir.y)
+		{
+			this.dirX = (int)this.initDir.x;
+			this.dirY = (int)this.initDir.y;
+		}
+	}
 
-    protected override void CheckIfAlive()
-    {
-        if (this.temp_currHp <= 0)
-            this.Destroy();
-    }
+	protected override void CheckIfAlive()
+	{
+		if (this.temp_currHp <= 0)
+			this.Destroy();
+	}
 
+	protected void Destroy()
+	{
+		this.spawnManager.EnemyDecrease();
+		base.CheckIfAlive();
+	}
 
-    protected void Destroy()
-    {
-        this.spawnManager.EnemyDecrease();
-        base.CheckIfAlive();
-    }
+	void CanDestroyOutOfScreen ()
+	{
+		this.canDestroyOffScreen = true;
+	}
 
-    void CanDestroyOutOfScreen ()
-    {
-        this.canDestroyOffScreen = true;
-    }
-
-    protected void DestroyOffScreen()
-    {
-        if (this.transform.position.y > this.maxOffsetY ||
-           this.transform.position.y < -this.maxOffsetY ||
-           this.transform.position.x > this.maxOffsetX ||
-           this.transform.position.x < -this.maxOffsetX)
-        { 
-            Destroy();
-            Destroy(this.gameObject);
-        }
-    }
+	protected void DestroyOffScreen()
+	{
+		if (this.transform.position.y > this.maxOffsetY ||
+			this.transform.position.y < -this.maxOffsetY ||
+			this.transform.position.x > this.maxOffsetX ||
+			this.transform.position.x < -this.maxOffsetX)
+		{ 
+			Destroy();
+			Destroy(this.gameObject);
+		}
+	}
 
 }

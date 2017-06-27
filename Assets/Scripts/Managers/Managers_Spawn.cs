@@ -5,78 +5,80 @@ using UnityEngine.SceneManagement;
 
 public class Managers_Spawn : MonoBehaviour 
 {
-    bool deactivaded;
+	protected ExtractProvenance extractProvenance;
+	bool deactivaded;
 	Vector3 selectedPos;
 	[SerializeField]
 	List<Vector3> positionsList = new List<Vector3>();
 	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
-    [SerializeField]
-    GameObject itemPrefab;
+	[SerializeField]
+	GameObject itemPrefab;
 	[SerializeField]
 	private float maxSpawnOffsetX = 0, maxSpawnOffsetY = 0;
 
 	private int noSpawned;
 
-    #region GETS & SETS
+	#region GETS & SETS
 
-    public bool Deactivated
-    {
-        get { return this.deactivaded; }
-        set { this.deactivaded = value; }
-    }
-
-    public float MaxOffsetX
-    {
-        get { return this.maxSpawnOffsetX; }
-        set { this.maxSpawnOffsetX = value; }
-    }
-
-    public float MaxOffsetY
-    {
-        get { return this.maxSpawnOffsetY; }
-        set { this.maxSpawnOffsetY = value; }
-    }
-
-    #endregion
-
-    void Start()
+	public bool Deactivated
 	{
+		get { return this.deactivaded; }
+		set { this.deactivaded = value; }
+	}
+
+	public float MaxOffsetX
+	{
+		get { return this.maxSpawnOffsetX; }
+		set { this.maxSpawnOffsetX = value; }
+	}
+
+	public float MaxOffsetY
+	{
+		get { return this.maxSpawnOffsetY; }
+		set { this.maxSpawnOffsetY = value; }
+	}
+
+	#endregion
+
+	void Start()
+	{
+		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		SpawnEnemies();
 	}
 
-    void Update()
-    {
-        if (this.deactivaded)
-            Retry();
-    }
+	void Update()
+	{
+		if (this.deactivaded)
+			Retry();
+	}
 
-    void Retry()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-            SceneManager.LoadScene(0);
-    }
+	void Retry()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+			SceneManager.LoadScene(0);
+	}
 
 	public void SpawnEnemies()
 	{
-        if(!this.deactivaded)
-		    for(int i = 0; i < 4; i++)
-		    {
-			    this.noSpawned++;
-			    SpawnRandomEnemy();
-		    }
+		if(!this.deactivaded)
+			for(int i = 0; i < 4; i++)
+			{
+				this.noSpawned++;
+				SpawnRandomEnemy();
+			}
 	}
 
 	public void EnemyDecrease()
 	{
 		this.noSpawned--;
 		if(this.noSpawned < 4)
-        {
-            SpawnRandomEnemy();
-            this.noSpawned++;
-            if (Random.Range(0, 6) == 0) 
-                SpawnRandomItem();
-        }
+		{
+			SpawnRandomEnemy();
+			this.noSpawned++;
+			if (Random.Range(0, 2) == 0) 
+				SpawnRandomItem();
+		}
 	}
 
 	void SpawnRandomEnemy()
@@ -87,15 +89,16 @@ public class Managers_Spawn : MonoBehaviour
 		int enemyGot = Random.Range(0, this.enemyObjects.Count);
 		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], selectedPos, Quaternion.identity);
 		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(-selectedPos.x, -selectedPos.y);
-        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
-        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
-    }
+		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
+		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
+	}
 
-    void SpawnRandomItem()
-    {
-        // Define Position
-        GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(Random.Range((float)-this.maxSpawnOffsetX, (float)this.maxSpawnOffsetX), Random.Range((float)-this.maxSpawnOffsetY, (float)this.maxSpawnOffsetY), 1), Quaternion.identity);
-    }
+	void SpawnRandomItem()
+	{
+		// Define Position
+		GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(Random.Range((float)-this.maxSpawnOffsetX, (float)this.maxSpawnOffsetX), Random.Range((float)-this.maxSpawnOffsetY, (float)this.maxSpawnOffsetY), 1), Quaternion.identity);
+		Prov_Spawn_Health_Item(spawnedItem.GetComponent<Collider2D>().GetInstanceID().ToString());
+	}
 
 	void SetOffsets()
 	{
@@ -107,5 +110,14 @@ public class Managers_Spawn : MonoBehaviour
 		spawnOffsets.RemoveAt(offsetGot);
 		this.selectedPos = new Vector3(this.selectedPos.x, this.selectedPos.y * spawnOffsets[0], this.selectedPos.z);
 		this.selectedPos = new Vector3(this.selectedPos.x, Mathf.Clamp(this.selectedPos.y, -this.maxSpawnOffsetY, this.maxSpawnOffsetY), this.selectedPos.z);
+	}
+
+	protected void Prov_Spawn_Health_Item(string id)
+	{
+		this.extractProvenance.NewActivityVertex("Item Spawned");
+		this.extractProvenance.AddAttribute("Heal", 2.ToString());
+		this.extractProvenance.AddAttribute("infID", id);
+		this.extractProvenance.NewEntityVertex("Health Item");
+		this.extractProvenance.GenerateInfluenceC("Heal", id, "Health (Player)", "2", 1);
 	}
 }
