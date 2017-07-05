@@ -11,7 +11,8 @@ public class Object_Efeitos : MonoBehaviour {
         DAMAGE_DOWN,
         SPEED_UP,
         SPEED_DOWN,
-        INVERT_CONTROL
+        INVERT_CONTROL,
+		HEALTH
 
     }
     [SerializeField]

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Managers_Spawn : MonoBehaviour 
 {
+	public ItemController itemController;
 	protected ExtractProvenance extractProvenance;
 	bool deactivaded;
 	Vector3 selectedPos;
@@ -97,6 +98,9 @@ public class Managers_Spawn : MonoBehaviour
 	{
 		// Define Position
 		GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(Random.Range((float)-this.maxSpawnOffsetX, (float)this.maxSpawnOffsetX), Random.Range((float)-this.maxSpawnOffsetY, (float)this.maxSpawnOffsetY), 1), Quaternion.identity);
+		spawnedItem.GetComponent<Item> ().effect = Object_Efeitos.Effects.HEALTH;
+		spawnedItem.GetComponent<Item> ().itemController = this.itemController;
+		itemController.Increase (Object_Efeitos.Effects.HEALTH.ToString ());
 		Prov_Spawn_Health_Item(spawnedItem.GetComponent<Collider2D>().GetInstanceID().ToString());
 	}
 
@@ -114,6 +118,17 @@ public class Managers_Spawn : MonoBehaviour
 
 	protected void Prov_Spawn_Health_Item(string id)
 	{
+		int DU = itemController.GetCout(Object_Efeitos.Effects.DAMAGE_UP.ToString());
+		int DD = itemController.GetCout(Object_Efeitos.Effects.DAMAGE_DOWN.ToString());
+		int SU = itemController.GetCout(Object_Efeitos.Effects.SPEED_UP.ToString());
+		int SD = itemController.GetCout(Object_Efeitos.Effects.SPEED_DOWN.ToString());
+		int IC = itemController.GetCout(Object_Efeitos.Effects.INVERT_CONTROL.ToString());
+		int HT = itemController.GetCout(Object_Efeitos.Effects.HEALTH.ToString());
+
+		this.extractProvenance.AddAttribute ("Total_Items", "DU: " + DU + " DD: " + DD +
+			" SU: " + SU + " SD: " + SD + " IC: " + IC + " HT: " + HT);
+
+
 		this.extractProvenance.NewActivityVertex("Item Spawned");
 		this.extractProvenance.AddAttribute("Heal", 2.ToString());
 		this.extractProvenance.AddAttribute("infID", id);

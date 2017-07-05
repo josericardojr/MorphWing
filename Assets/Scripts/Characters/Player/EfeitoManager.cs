@@ -135,6 +135,9 @@ public class EfeitoManager : MonoBehaviour {
 				RetirarEfeito(this.auxEfeito);
 
 			this.auxEfeito = coll.gameObject.GetComponent<Object_Efeitos>().GetEfeitoAtual();
+			Item i = coll.GetComponent<Item> ();
+			i.enabled = false;
+			i.itemController.Decrease (i.effect.ToString());
 
 			this.GetComponent<Characters_Global>().Prov_PowerUp(auxEfeito.ToString(), coll.GetInstanceID().ToString());
 

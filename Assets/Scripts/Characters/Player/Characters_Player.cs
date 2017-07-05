@@ -57,10 +57,13 @@ public class Characters_Player : Characters_Global
 
 	void Update () 
 	{
-		Movement();
-		if (Input.GetKey (KeyCode.J) && this.currCooldown[0] == 0)
+		if (!Input.GetButton ("Fix"))
+			Movement ();
+		else
+			this.rigidbody.velocity = new Vector2 (0, 0);
+		if (Input.GetButton("Fire1") && this.currCooldown[0] == 0)
 			ShootProjectile(0, 0, 1);
-		if (Input.GetKey (KeyCode.K) && this.currCooldown[1] == 0)
+		if (Input.GetButton("Fire2") && this.currCooldown[1] == 0)
 			ShootProjectile(1, this.dirX, this.dirY);
 		CooldownRun();
 		ShotSlowdown();
@@ -134,7 +137,7 @@ public class Characters_Player : Characters_Global
 			this.hud_retryText.enabled = true;
 			this.managers_spawn.Deactivated = true;
 			this.managers_score.StopTimer();
-			this.extractProvenance.provenance.Save("info");
+			this.extractProvenance.provenance.Save("info_" + Time.realtimeSinceStartup.ToString());
 		}
 		base.CheckIfAlive();
 	}

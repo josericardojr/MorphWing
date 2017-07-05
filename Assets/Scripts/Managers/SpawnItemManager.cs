@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SpawnItemManager : MonoBehaviour {
 
+	public ItemController itemController;
+
 	protected ExtractProvenance extractProvenance;
+
 
 	[SerializeField]
 	private GameObject prefab;
@@ -24,6 +27,12 @@ public class SpawnItemManager : MonoBehaviour {
 		this.transform.position = Camera.main.transform.position;
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		Prov_Agent();
+
+
+		// Register the types of power ups
+		foreach (Object_Efeitos.Effects eff in System.Enum.GetValues(typeof(Object_Efeitos.Effects))) {
+			itemController.RegisterType(eff.ToString());
+		}
 	}
 
 	void Update ()
@@ -80,6 +89,10 @@ public class SpawnItemManager : MonoBehaviour {
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorInvert;
 			break;
 		}
+		Debug.Log (auxEffect);
+		gameObjAtual.GetComponent<Item> ().itemController = this.itemController;
+		itemController.Increase (auxEffect.ToString ());
+
 		Prov_SpawnItem();
 		Prov_Item(auxEffect.ToString(), gameObjAtual.GetComponent<Collider2D>().GetInstanceID().ToString());
 		return auxEffect;
@@ -92,6 +105,15 @@ public class SpawnItemManager : MonoBehaviour {
 
 	protected void Prov_SpawnItem()
 	{
+		int DU = itemController.GetCout(Object_Efeitos.Effects.DAMAGE_UP.ToString());
+		int DD = itemController.GetCout(Object_Efeitos.Effects.DAMAGE_DOWN.ToString());
+		int SU = itemController.GetCout(Object_Efeitos.Effects.SPEED_UP.ToString());
+		int SD = itemController.GetCout(Object_Efeitos.Effects.SPEED_DOWN.ToString());
+		int IC = itemController.GetCout(Object_Efeitos.Effects.INVERT_CONTROL.ToString());
+		int HT = itemController.GetCout(Object_Efeitos.Effects.HEALTH.ToString());
+
+		this.extractProvenance.AddAttribute ("Total_Items", "DU: " + DU + " DD: " + DD +
+			" SU: " + SU + " SD: " + SD + " IC: " + IC + " HT: " + HT);
 		this.extractProvenance.NewActivityVertex("Item Spawned");
 	}
 

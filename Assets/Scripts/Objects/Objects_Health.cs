@@ -10,6 +10,8 @@ public class Objects_Health : MonoBehaviour
 		if(c.transform.tag.Equals("Player"))
 		{
 			c.GetComponent<Characters_Player>().Heal(this.GetComponent<Collider2D>().GetInstanceID().ToString());
+			Item i = this.GetComponent<Item> ();
+			i.itemController.Decrease(i.effect.ToString());
 			Destroy(this.gameObject);
 		}
 	}
