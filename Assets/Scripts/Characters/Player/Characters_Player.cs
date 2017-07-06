@@ -57,10 +57,7 @@ public class Characters_Player : Characters_Global
 
 	void Update () 
 	{
-		if (!Input.GetButton ("Fix"))
-			Movement ();
-		else
-			this.rigidbody.velocity = new Vector2 (0, 0);
+		Movement ();
 		if (Input.GetButton("Fire1") && this.currCooldown[0] == 0)
 			ShootProjectile(0, 0, 1);
 		if (Input.GetButton("Fire2") && this.currCooldown[1] == 0)
@@ -122,7 +119,10 @@ public class Characters_Player : Characters_Global
 			this.dirX = -(int)Input.GetAxisRaw("Horizontal");
 			this.dirY = -(int)Input.GetAxisRaw("Vertical");
 		}
-		MovementCall();
+		if (!Input.GetButton ("Fix"))
+			MovementCall();
+		else
+			this.rigidbody.velocity = new Vector2 (0, 0);
 	}
 
 	void UpdateUI()

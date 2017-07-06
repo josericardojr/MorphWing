@@ -49,8 +49,8 @@ public class Projectiles_Global : MonoBehaviour
 	{
 		if(this.tag == "Player")
 			print(receivedX + " " + receivedY);
-		this.rigidbody.velocity = new Vector2(this.speed * this.receivedX * 60 * Time.deltaTime, 
-			this.speed * this.receivedY * 60 * Time.deltaTime);
+		this.rigidbody.velocity = new Vector2(this.speed * this.receivedX, 
+			this.speed * this.receivedY);
 	}
 
 	protected void ShootProjectile(int projIndex, float directionX, float directionY)
