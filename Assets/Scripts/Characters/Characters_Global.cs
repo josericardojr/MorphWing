@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Characters_Global : MonoBehaviour
 {
 	List<GameObject> prefabList = new List<GameObject>();
-
+	ScoreManager scoreManager;
 	protected ExtractProvenance extractProvenance;
 	protected Animator animator;
 	new protected Rigidbody2D rigidbody;
@@ -30,6 +30,7 @@ public abstract class Characters_Global : MonoBehaviour
 		GameObject provenanceObj = GameObject.FindGameObjectWithTag("Provenance");
 		this.animator = this.GetComponent<Animator>();
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
+		this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		this.extractProvenance.influenceContainer = provenanceObj.GetComponent<InfluenceController>();
 		this.extractProvenance.provenance = provenanceObj.GetComponent<ProvenanceController>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
@@ -110,6 +111,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected virtual void Prov_GetAttributes()
 	{
+		this.extractProvenance.AddAttribute("LocalTime", this.scoreManager.TimeCurrent.ToString());
 		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
 		this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
 		this.extractProvenance.AddAttribute("Last", this.lastHitBy);

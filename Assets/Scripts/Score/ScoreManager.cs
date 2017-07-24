@@ -6,10 +6,14 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-
     private GameObject textTime;
 
     private int timeCurrent;
+
+    public int TimeCurrent
+    {
+    	get{ return this.timeCurrent; }
+    }
 
     Thread threadTime;
     private static volatile bool running;
