@@ -27,6 +27,8 @@ public class SpawnItemManager : MonoBehaviour {
 
 	[SerializeField]
 	private Color colorDamageUp, colorDamageDown, colorSpeedUp, colorSpeedDown, colorInvert;
+	[SerializeField]
+	private Sprite spriteDamageUp, spriteDamageDown, spriteSpeedUp, spriteSpeedDown, spriteColorInvert;
 
 	void Start ()
 	{
@@ -75,22 +77,27 @@ public class SpawnItemManager : MonoBehaviour {
 		case 0:
 			auxEffect = Object_Efeitos.Effects.DAMAGE_UP;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageUp;
+			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteDamageUp;
 			break;
 		case 1:
 			auxEffect = Object_Efeitos.Effects.DAMAGE_DOWN;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageDown;
+			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteDamageDown;
 			break;
 		case 2:
 			auxEffect = Object_Efeitos.Effects.SPEED_UP;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedUp;
+			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteSpeedUp;
 			break;
 		case 3:
 			auxEffect = Object_Efeitos.Effects.SPEED_DOWN;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedDown;
+			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteSpeedDown;
 			break;
 		case 4:
 			auxEffect = Object_Efeitos.Effects.INVERT_CONTROL;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorInvert;
+			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteColorInvert;
 			break;
 		}
 		Debug.Log (auxEffect);
