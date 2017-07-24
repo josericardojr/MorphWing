@@ -10,9 +10,13 @@ public class Managers_Spawn : MonoBehaviour
 	bool deactivaded;
 	Vector3 selectedPos;
 	[SerializeField]
-	List<Vector3> positionsList = new List<Vector3>();
-	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
+	[SerializeField]
+	List<Transform> straightPositions, boomerangPositions, roundPositions, chaserPositions, healthPositions;
+	[SerializeField]
+	List<int> waveCreation;
+	List<int> currPositions = new List<int>();
+	int currWave = 0, currHealth = 0;
 	[SerializeField]
 	GameObject itemPrefab;
 	[SerializeField]
@@ -75,21 +79,58 @@ public class Managers_Spawn : MonoBehaviour
 		this.noSpawned--;
 		if(this.noSpawned < 4)
 		{
+			if(this.currWave == this.waveCreation.Count)
+				SpawnRandomItem();
 			SpawnRandomEnemy();
 			this.noSpawned++;
-			if (Random.Range(0, 2) == 0) 
-				SpawnRandomItem();
 		}
 	}
 
 	void SpawnRandomEnemy()
 	{
-		// Define Position
-		this.selectedPos = this.positionsList[Random.Range(0, this.positionsList.Count)];
+		if(this.currPositions.Count == 0)
+			for(int i = 0; i < 4; i++)
+				this.currPositions.Add(0);
 		SetOffsets();
-		int enemyGot = Random.Range(0, this.enemyObjects.Count);
-		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], selectedPos, Quaternion.identity);
-		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(-selectedPos.x, -selectedPos.y);
+		if(this.currWave == this.waveCreation.Count)
+			this.currWave = 0;
+		int enemyGot = this.waveCreation[this.currWave];
+		Vector2 spawnPos = new Vector2(0,0);
+		Transform spawnPoint = null;
+		switch(enemyGot)
+		{
+			case 0:
+				if(this.currPositions[0] == this.straightPositions.Count)
+					this.currPositions[0] = 0;
+				spawnPos = this.straightPositions[this.currPositions[0]].transform.position;
+				spawnPoint = this.straightPositions[this.currPositions[0]];
+				this.currPositions[0] += 1;
+			break;
+			case 1:
+				if(this.currPositions[1] == this.chaserPositions.Count)
+					this.currPositions[1] = 0;
+				spawnPos = this.chaserPositions[this.currPositions[1]].transform.position;
+				spawnPoint = this.chaserPositions[this.currPositions[1]];
+				this.currPositions[1] += 1;
+			break;
+			case 2:
+				if(this.currPositions[2] == this.boomerangPositions.Count)
+					this.currPositions[2] = 0;
+				spawnPos = this.boomerangPositions[this.currPositions[2]].transform.position;
+				spawnPoint = this.boomerangPositions[this.currPositions[2]];
+				this.currPositions[2] += 1;
+			break;
+			case 3:
+				if(this.currPositions[3] == this.roundPositions.Count)
+					this.currPositions[3] = 0;
+				spawnPos = this.roundPositions[this.currPositions[3]].transform.position;
+				spawnPoint = this.roundPositions[this.currPositions[3]];
+				this.currPositions[3] += 1;
+			break;
+		}
+		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
+		this.currWave++;
+		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.x, spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.y);
 		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
 		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
 	}
@@ -97,11 +138,14 @@ public class Managers_Spawn : MonoBehaviour
 	void SpawnRandomItem()
 	{
 		// Define Position
-		GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(Random.Range((float)-this.maxSpawnOffsetX, (float)this.maxSpawnOffsetX), Random.Range((float)-this.maxSpawnOffsetY, (float)this.maxSpawnOffsetY), 1), Quaternion.identity);
+		if(this.currHealth == this.healthPositions.Count)
+			this.currHealth = 0;
+		GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(this.healthPositions[this.currHealth].position.x, this.healthPositions[this.currHealth].position.y, 1), Quaternion.identity);
 		spawnedItem.GetComponent<Item> ().effect = Object_Efeitos.Effects.HEALTH;
 		spawnedItem.GetComponent<Item> ().itemController = this.itemController;
 		itemController.Increase (Object_Efeitos.Effects.HEALTH.ToString ());
 		Prov_Spawn_Health_Item(spawnedItem.GetComponent<Collider2D>().GetInstanceID().ToString());
+		this.currHealth++;
 	}
 
 	void SetOffsets()

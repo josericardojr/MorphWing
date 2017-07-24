@@ -8,6 +8,12 @@ public class SpawnItemManager : MonoBehaviour {
 
 	protected ExtractProvenance extractProvenance;
 
+	[SerializeField]
+	List<int> effectOrder;
+	[SerializeField]
+	List<Transform> positionOrder;
+
+	int currPowerUp;
 
 	[SerializeField]
 	private GameObject prefab;
@@ -47,25 +53,23 @@ public class SpawnItemManager : MonoBehaviour {
 
 	private void Spawnar()
 	{
-		GameObject g = Instantiate(this.prefab, RandomScreenPosition(), Quaternion.identity);
+		if(this.currPowerUp == this.effectOrder.Count)
+			this.currPowerUp = 0;
+		GameObject g = Instantiate(this.prefab, this.positionOrder[this.currPowerUp].position, Quaternion.identity);
+		g.transform.Translate(0,0,1);
 		g.gameObject.tag = "Item";
 
 		if (!g.GetComponent<Object_Efeitos>())
 			g.AddComponent<Object_Efeitos>();
 
 		g.GetComponent<Object_Efeitos>().SetEfeitoAtual(RandomEffect(g));
+		this.currPowerUp++;
 	}
 
-	private Vector3 RandomScreenPosition()
-	{
-		float x = Random.Range((float)(-(Screen.width / 100)), (float)Screen.width / 100);
-		float y = Random.Range((float)-(Screen.height / 100), (float)Screen.height / 100);
-		return new Vector3(x, y, 1);
-	}
 
 	private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
 	{
-		short aux = (short)Random.Range(0, 5);
+		int aux = this.effectOrder[this.currPowerUp];
 		switch (aux)
 		{
 		case 0:

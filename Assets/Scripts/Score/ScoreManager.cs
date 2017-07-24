@@ -8,9 +8,9 @@ public class ScoreManager : MonoBehaviour
 {
     private GameObject textTime;
 
-    private int timeCurrent;
+    private float timeCurrent;
 
-    public int TimeCurrent
+    public float TimeCurrent
     {
     	get{ return this.timeCurrent; }
     }
@@ -20,31 +20,20 @@ public class ScoreManager : MonoBehaviour
 
     void Start ()
     {
-        this.timeCurrent = -1;
+        this.timeCurrent = 0;
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
-        this.threadTime = new Thread(Temporizador);
-        this.threadTime.Start();
         running = true;
-
 	}
 
-    public void Temporizador()
-    {
-        while(running)
-        {
-            this.timeCurrent++;
-            System.Threading.Thread.Sleep(1000);
-        }
-    }
-
     void Update()
-    {
-        this.textTime.GetComponent<Text>().text = this.timeCurrent.ToString();
+	{
+        this.timeCurrent += Time.deltaTime;
+        this.textTime.GetComponent<Text>().text = ((int)this.timeCurrent).ToString();
     }
     
     public void SaveTime()
     {
-        PlayerPrefs.SetInt(PlayerPrefsKey.keyScore, this.timeCurrent);
+        PlayerPrefs.SetFloat(PlayerPrefsKey.keyScore, this.timeCurrent);
     }
 
     public void StopTimer()

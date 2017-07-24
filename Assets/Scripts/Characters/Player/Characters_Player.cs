@@ -51,7 +51,6 @@ public class Characters_Player : Characters_Global
 		for (int i = 0; i < this.cooldownList.Count; i++)
 		{
 			this.currCooldown.Add(0);
-			print("");
 		}
 	}
 

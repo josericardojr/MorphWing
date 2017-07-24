@@ -9,10 +9,17 @@ public class Item : MonoBehaviour {
 	public ItemController itemController;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
+		Invoke("SetCatchable", 1);
 	}
-	
+
+	void SetCatchable()
+	{
+		this.GetComponent<SpriteRenderer>().color = new Color(this.GetComponent<SpriteRenderer>().color.r, this.GetComponent<SpriteRenderer>().color.g, this.GetComponent<SpriteRenderer>().color.b, 255);
+		this.GetComponent<BoxCollider2D>().enabled = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		lifeTime -= Time.deltaTime;
