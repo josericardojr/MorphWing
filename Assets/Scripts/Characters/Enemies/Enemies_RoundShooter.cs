@@ -41,6 +41,7 @@ public class Enemies_RoundShooter : Characters_Enemies
         {
             yield return new WaitForSeconds(0.5f);
             ShootProjectile(0, (int)this.shootDirOrder[i].x, (int)this.shootDirOrder[i].y);
+            this.Prov_UsingAttack(this.GetInstanceID().ToString());
         }
         StartCoroutine(Shoot());
     }

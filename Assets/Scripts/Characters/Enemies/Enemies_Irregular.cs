@@ -32,6 +32,7 @@ public class Enemies_Irregular : Characters_Enemies
         ShootProjectile(0, -1, 0);
         ShootProjectile(0, 0, -1);
         Invoke("GoBack", Random.Range(0.7f, 1.2f));
+        this.Prov_UsingAttack(this.GetInstanceID().ToString());
     }
 
     void GoBack()

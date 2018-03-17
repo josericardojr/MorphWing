@@ -54,13 +54,16 @@ public abstract class Characters_Global : MonoBehaviour
 		this.Prov_TakeDamage(instanceID, damage);
 		this.animator.SetTrigger("Flash");
 		this.temp_currHp -= (int)damage;
-		CheckIfAlive();
+		CheckIfAlive(instanceID);
 	}
 
-	protected virtual void CheckIfAlive()
+    protected virtual void CheckIfAlive(float instanceID)
 	{
-		if(this.temp_currHp <= 0)
-			Destroy(this.gameObject);
+        if (this.temp_currHp <= 0)
+        {
+            Destroy(this.gameObject);
+            this.Prov_GetDestroyed(instanceID);
+        }
 	}
 
 	protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
@@ -138,6 +141,14 @@ public abstract class Characters_Global : MonoBehaviour
 		//this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
 	}
 
+    public void Prov_GetDestroyed(float instanceID)
+    {
+        //Prov_GetAttributes();
+        string infID = instanceID.ToString();
+        this.Prov_GetDestroyed(infID);
+        //this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
+    }
+
 	protected void Prov_Heal(string infID)
 	{
 		Prov_GetAttributes();
@@ -145,6 +156,14 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.NewActivityVertex("Heal");
 		this.extractProvenance.HasInfluence_ID(infID);
 	}
+
+    protected void Prov_UsingAttack(string infID)
+    {
+        Prov_GetAttributes();
+        this.extractProvenance.AddAttribute("infID", infID);
+        this.extractProvenance.NewActivityVertex("Attacking(" + this.objType + ")");
+        this.extractProvenance.HasInfluence_ID(infID);
+    }
 
 	/*
     public string Prov_Attack(float damageAmount)
@@ -169,6 +188,16 @@ public abstract class Characters_Global : MonoBehaviour
 				"Invulnerability", "", Time.time + 1);
 
 	}
+
+    public void Prov_GetDestroyed(string infID)
+    {
+        this.Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
+        // Check Influence
+        //this.extractProvenance.HasInfluence(this.lastHitBy);
+        this.extractProvenance.HasInfluence_ID(infID);
+    }
+
 	/*
 	public void Prov_TakeDamage()
 	{

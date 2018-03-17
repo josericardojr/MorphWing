@@ -7,6 +7,7 @@ public class Enemies_Chaser : Characters_Enemies
 	new void Start()
 	{
 		base.Start();
+        this.Prov_UsingAttack(this.GetInstanceID().ToString());
 	}
 
 	void Update()

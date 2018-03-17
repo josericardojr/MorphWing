@@ -74,16 +74,11 @@ public class Characters_Enemies : Characters_Global
 		}
 	}
 
-	protected override void CheckIfAlive()
-	{
-		if (this.temp_currHp <= 0)
-			this.Destroy();
-	}
-
-	protected void Destroy()
-	{
-		this.spawnManager.EnemyDecrease();
-		base.CheckIfAlive();
+    protected override void CheckIfAlive(float instanceID)
+    {
+        if(this.temp_currHp <= 0)
+            this.spawnManager.EnemyDecrease();
+        base.CheckIfAlive(instanceID);
 	}
 
 	void CanDestroyOutOfScreen ()
@@ -97,8 +92,8 @@ public class Characters_Enemies : Characters_Global
 			this.transform.position.y < -this.maxOffsetY ||
 			this.transform.position.x > this.maxOffsetX ||
 			this.transform.position.x < -this.maxOffsetX)
-		{ 
-			Destroy();
+        {
+            this.spawnManager.EnemyDecrease();
 			Destroy(this.gameObject);
 		}
 	}
