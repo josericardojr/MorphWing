@@ -21,7 +21,8 @@ public class Item : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		lifeTime -= Time.deltaTime;
 
 		if (lifeTime <= 0) {

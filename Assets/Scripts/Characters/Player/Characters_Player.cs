@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Characters_Player : Characters_Global 
 {
+    [SerializeField]
+    GameObject cooldownIndicator;
 	[SerializeField]
 	ScoreManager managers_score;
 	[SerializeField]
@@ -44,6 +46,7 @@ public class Characters_Player : Characters_Global
 		SetCooldowns();
 		base.Start();
 		Prov_Agent ();
+        this.GetComponent<TrailRenderer>().enabled = false;
 	}
 
 	void SetCooldowns()
@@ -88,10 +91,14 @@ public class Characters_Player : Characters_Global
 	void CooldownRun()
 	{
 		for (int i = 0; i < this.currCooldown.Count; i++)
-			if (this.currCooldown[i] > 0)
-				this.currCooldown[i] -= Time.deltaTime;
-			else
-				this.currCooldown[i] = 0;
+            if (this.currCooldown[i] > 0)
+                this.currCooldown[i] -= Time.deltaTime;
+            else
+            {
+                this.currCooldown[i] = 0;
+                if (i == 1)
+                    this.cooldownIndicator.SetActive(true);
+            }
 	}
 
 	void StopInvincibility()
@@ -104,6 +111,8 @@ public class Characters_Player : Characters_Global
 	{
 		base.ShootProjectile(projIndex, passDirX, passDirY);
 		this.currCooldown[projIndex] = this.cooldownList[projIndex];
+        if (projIndex == 1)
+            this.cooldownIndicator.SetActive(false);
 	}
 
 	void Movement()
@@ -153,7 +162,7 @@ public class Characters_Player : Characters_Global
 
 	void ShotSlowdown()
 	{
-		if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.K))
+		if (Input.GetKey(KeyCode.J))
 			this.stat_speed = 1.5f;
 		else if (!Input.GetKey(KeyCode.J) && !Input.GetKey(KeyCode.K))
 			this.stat_speed = 3;

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     private GameObject textTime;
+    [SerializeField]
+    Text gameOverTimerText;
 
-    private float timeCurrent;
+    private float timeCurrent, gameOverTime = 5;
 
     public float TimeCurrent
     {
@@ -29,6 +32,15 @@ public class ScoreManager : MonoBehaviour
 	{
         this.timeCurrent += Time.deltaTime;
         this.textTime.GetComponent<Text>().text = ((int)this.timeCurrent).ToString();
+        if(!running)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+                SceneManager.LoadScene(0);
+            this.gameOverTime -= Time.deltaTime / 1.8f;
+            if(this.gameOverTime <= 0)
+                SceneManager.LoadScene(0);
+            this.gameOverTimerText.text = ((int)gameOverTime + 1).ToString();
+        }
     }
     
     public void SaveTime()
@@ -39,5 +51,6 @@ public class ScoreManager : MonoBehaviour
     public void StopTimer()
     {
         running = false;
+        this.gameOverTimerText.enabled = true;
     }
 }

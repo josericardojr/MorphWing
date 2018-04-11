@@ -12,6 +12,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	[SerializeField]
 	protected float stat_speed;
+    public float speedMultiplier = 1;
 
 	[SerializeField]
 	protected int stat_hp; 
@@ -45,7 +46,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected void MovementCall()
 	{
-		this.rigidbody.velocity = new Vector2 (this.dirX * this.stat_speed, this.dirY * this.stat_speed);
+        this.rigidbody.velocity = new Vector2(this.dirX * this.stat_speed * speedMultiplier, this.dirY * this.stat_speed * speedMultiplier);
 	}
 
 	public virtual void GetDamaged(float instanceID, string objLabel, float damage)
@@ -73,19 +74,16 @@ public abstract class Characters_Global : MonoBehaviour
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, projectile.GetComponent<Collider2D>().GetInstanceID(), this.provIndentifier);
 		if (this.provIndentifier.Equals("Player"))
 			Prov_PlayerShoot(projectile.GetComponent<Projectiles_Global>().Damage, projectile.GetComponent<Collider2D>().GetInstanceID().ToString());
-		else
-			Prov_EnemyShoot(projectile.GetComponent<Projectiles_Global>().Damage, projectile.GetComponent<Collider2D>().GetInstanceID().ToString());
+		//else
+			//Prov_EnemyShoot(projectile.GetComponent<Projectiles_Global>().Damage, projectile.GetComponent<Collider2D>().GetInstanceID().ToString());
 	}
 
 	#region GETS e SETS
-	public float GetSpeed()
-	{
-		return this.stat_speed;
-	}
 
-	public void SetSpeed(float value)
+	public float Stat_Speed
 	{
-		this.stat_speed = value;
+        get{return this.stat_speed;}
+        set{this.stat_speed = value;}
 	}
 
 	public List<GameObject> PrefabList
@@ -161,7 +159,7 @@ public abstract class Characters_Global : MonoBehaviour
     {
         Prov_GetAttributes();
         this.extractProvenance.AddAttribute("infID", infID);
-        this.extractProvenance.NewActivityVertex("Attacking(" + this.objType + ")");
+        this.extractProvenance.NewActivityVertex("Attacking (" + this.objType + ")");
         this.extractProvenance.HasInfluence_ID(infID);
     }
 

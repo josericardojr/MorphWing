@@ -13,8 +13,8 @@ public class Object_Efeitos : MonoBehaviour {
         SPEED_DOWN,
         INVERT_CONTROL,
 		HEALTH
-
     }
+
     [SerializeField]
     private Effects efeitoAtual;
 

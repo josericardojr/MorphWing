@@ -77,30 +77,34 @@ public class SpawnItemManager : MonoBehaviour {
 		case 0:
 			auxEffect = Object_Efeitos.Effects.DAMAGE_UP;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageUp;
+			gameObjAtual.GetComponent<Animator>().SetTrigger("Good");
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteDamageUp;
 			break;
 		case 1:
 			auxEffect = Object_Efeitos.Effects.DAMAGE_DOWN;
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorDamageDown;
+			gameObjAtual.GetComponent<Animator>().SetTrigger("Bad");
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteDamageDown;
 			break;
 		case 2:
 			auxEffect = Object_Efeitos.Effects.SPEED_UP;
+			gameObjAtual.GetComponent<Animator>().SetTrigger("Good");
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedUp;
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteSpeedUp;
 			break;
 		case 3:
 			auxEffect = Object_Efeitos.Effects.SPEED_DOWN;
+			gameObjAtual.GetComponent<Animator>().SetTrigger("Bad");
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorSpeedDown;
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteSpeedDown;
 			break;
 		case 4:
 			auxEffect = Object_Efeitos.Effects.INVERT_CONTROL;
+			gameObjAtual.GetComponent<Animator>().SetTrigger("Bad");
 			gameObjAtual.GetComponent<SpriteRenderer>().color = colorInvert;
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteColorInvert;
 			break;
 		}
-		Debug.Log (auxEffect);
 		gameObjAtual.GetComponent<Item> ().itemController = this.itemController;
 		itemController.Increase (auxEffect.ToString ());
 

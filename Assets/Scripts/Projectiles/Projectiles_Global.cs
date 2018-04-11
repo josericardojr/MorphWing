@@ -8,6 +8,8 @@ public class Projectiles_Global : MonoBehaviour
 	new protected Rigidbody2D rigidbody;
 	GameObject shooter;
 	protected float receivedX, receivedY, maxOffsetX, maxOffsetY, shooterInstanceID;
+    [SerializeField]
+    bool upEffect = false;
 	[SerializeField]
 	List<GameObject> prefabList = new List<GameObject>();
 	[SerializeField]
@@ -19,6 +21,8 @@ public class Projectiles_Global : MonoBehaviour
 
 	protected void Start()
 	{
+        if (this.upEffect)
+            this.GetComponent<Animator>().SetTrigger("Crazy");
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		this.managers_spawn = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
 		this.maxOffsetX = this.managers_spawn.MaxOffsetX;
@@ -57,6 +61,8 @@ public class Projectiles_Global : MonoBehaviour
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.shooter, 3, directionX, directionY, projectile.GetComponent<Collider2D>().GetInstanceID(), this.shooterLabel);
+        if (this.upEffect)
+            projectile.GetComponent<Projectiles_Global>().upEffect = true;
 	}
 
 	protected void DestroyOffScreen()
@@ -72,11 +78,19 @@ public class Projectiles_Global : MonoBehaviour
 	}
 
 	#region GETS & SETS
-	public float Damage
+
+    public float Damage
+    {
+        get { return this.damage; }
+        set { this.damage = value; }
+    }
+
+	public bool UpEffect
 	{
-		get { return this.damage; }
-		set { this.damage = value; }
+        get { return this.upEffect; }
+        set { this.upEffect = value; }
 	}
+
 	#endregion
 
 }

@@ -11,8 +11,11 @@ public class EfeitoManager : MonoBehaviour {
 
 	private float timeEfeito;
 
+    [SerializeField]
+    Material speedUpMat, powerUpMat;
+
 	//Multiplicadores dos efeitos
-	[Range(1,10)]
+	[Range(0.5f,10)]
 	[SerializeField]
 	private float multiDamageUp, multiDamageDown, multiSpeedUp, multiSpeedDown;
 
@@ -43,40 +46,44 @@ public class EfeitoManager : MonoBehaviour {
 	{
 		switch (efeito)
 		{
-		case Object_Efeitos.Effects.DAMAGE_UP:
+        case Object_Efeitos.Effects.DAMAGE_UP:
+                this.GetComponent<Animator>().SetBool("PowerBuff", true);
+                this.GetComponent<TrailRenderer>().material = this.powerUpMat;
+                this.GetComponent<TrailRenderer>().enabled = true;
 			GameObject[] listaPrefab;
 			listaPrefab = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-			for (int i = 0; i < listaPrefab.Length; i++)
-				listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
-					listaPrefab[i].GetComponent<Projectiles_Global>().Damage * multiDamageUp;
+            for (int i = 0; i < listaPrefab.Length; i++)
+            {
+                listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
+                    listaPrefab[i].GetComponent<Projectiles_Global>().Damage * multiDamageUp;
+                listaPrefab[i].GetComponent<Projectiles_Global>().UpEffect = true;
+            }
 
-			Colorir(GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>().ColorDamageUp);
 			break;
 		case Object_Efeitos.Effects.DAMAGE_DOWN:
 			GameObject[] listaPrefab2;
+            this.GetComponent<Animator>().SetBool("PowerDown", true);
 			listaPrefab2 = this.GetComponent<Characters_Player>().PrefabList.ToArray();
 			for (int i = 0; i < listaPrefab2.Length; i++)
 				listaPrefab2[i].GetComponent<Projectiles_Global>().Damage =
 					listaPrefab2[i].GetComponent<Projectiles_Global>().Damage / multiDamageDown;
 
-			Colorir(GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>().ColorDamageDown);
 			break;
-		case Object_Efeitos.Effects.SPEED_UP:
-			this.GetComponent<Characters_Player>().SetSpeed(
-				this.GetComponent<Characters_Player>().GetSpeed() * this.multiSpeedUp);
+        case Object_Efeitos.Effects.SPEED_UP:
+            this.GetComponent<Characters_Player>().speedMultiplier = this.multiSpeedUp;
+            this.GetComponent<TrailRenderer>().material = this.speedUpMat;
+            this.GetComponent<Animator>().SetBool("SpeedBuff", true);
+            this.GetComponent<TrailRenderer>().enabled = true;
 
-			Colorir(GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>().ColorSpeedUp);
 			break;
-		case Object_Efeitos.Effects.SPEED_DOWN:
-			this.GetComponent<Characters_Player>().SetSpeed(
-				this.GetComponent<Characters_Player>().GetSpeed() / this.multiSpeedDown);
-
-			Colorir(GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>().ColorSpeedDown);
+        case Object_Efeitos.Effects.SPEED_DOWN:
+            this.GetComponent<Animator>().SetBool("SpeedDown", true);
+            this.GetComponent<Characters_Player>().speedMultiplier = this.multiSpeedDown;
 			break;
 		case Object_Efeitos.Effects.INVERT_CONTROL:
 			this.GetComponent<Characters_Player>().invertControl = true;
+            this.GetComponent<Animator>().SetBool("SpeedDown", true);
 
-			Colorir(GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>().ColorInvertControler);
 			break;
 		}
 		this.comEfeito = true;
@@ -89,42 +96,44 @@ public class EfeitoManager : MonoBehaviour {
 		{
 		case Object_Efeitos.Effects.DAMAGE_UP:
 
+            this.GetComponent<Animator>().SetBool("PowerBuff", false);
+            this.GetComponent<TrailRenderer>().enabled = false;
 			GameObject[] listaPrefab;
 			listaPrefab = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-			for (int i = 0; i < listaPrefab.Length; i++)
-				listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
-					listaPrefab[i].GetComponent<Projectiles_Global>().Damage / multiDamageUp;
+            for (int i = 0; i < listaPrefab.Length; i++)
+            {
+                listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
+                    listaPrefab[i].GetComponent<Projectiles_Global>().Damage / multiDamageUp;
+                listaPrefab[i].GetComponent<Projectiles_Global>().UpEffect = false;
+            }
 			break;
 
 		case Object_Efeitos.Effects.DAMAGE_DOWN:
 			GameObject[] listaPrefab2;
+            this.GetComponent<Animator>().SetBool("PowerDown", false);
 			listaPrefab2 = this.GetComponent<Characters_Player>().PrefabList.ToArray();
 			for (int i = 0; i < listaPrefab2.Length; i++)
 				listaPrefab2[i].GetComponent<Projectiles_Global>().Damage =
 					listaPrefab2[i].GetComponent<Projectiles_Global>().Damage * multiDamageDown;
 			break;
 
-		case Object_Efeitos.Effects.SPEED_UP:
-			this.GetComponent<Characters_Player>().SetSpeed(
-				this.GetComponent<Characters_Player>().GetSpeed() / this.multiSpeedUp);
+        case Object_Efeitos.Effects.SPEED_UP:
+            this.GetComponent<Characters_Player>().speedMultiplier = 1;
+            this.GetComponent<Animator>().SetBool("SpeedBuff", false);
+            this.GetComponent<TrailRenderer>().enabled = false;
 			break;
 
-		case Object_Efeitos.Effects.SPEED_DOWN:
-			this.GetComponent<Characters_Player>().SetSpeed(
-				this.GetComponent<Characters_Player>().GetSpeed() * this.multiSpeedDown);
+        case Object_Efeitos.Effects.SPEED_DOWN:
+            this.GetComponent<Animator>().SetBool("SpeedDown", false);
+            this.GetComponent<Characters_Player>().speedMultiplier = 1;
 			break;
 
 		case Object_Efeitos.Effects.INVERT_CONTROL:
 			this.GetComponent<Characters_Player>().invertControl = false;
+            this.GetComponent<Animator>().SetBool("SpeedDown", false);
 			break;
 		}
-		Colorir(Color.white);
 		this.comEfeito = false;
-	}
-
-	private void Colorir(Color color)
-	{
-		this.gameObject.GetComponent<SpriteRenderer>().material.color = color;
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
