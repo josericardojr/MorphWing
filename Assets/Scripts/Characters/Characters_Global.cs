@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Characters_Global : MonoBehaviour
 {
 	List<GameObject> prefabList = new List<GameObject>();
-	ScoreManager scoreManager;
+	protected ScoreManager scoreManager;
 	protected ExtractProvenance extractProvenance;
 	protected Animator animator;
 	new protected Rigidbody2D rigidbody;
@@ -24,6 +24,12 @@ public abstract class Characters_Global : MonoBehaviour
 
 	[SerializeField]
 	protected List<string> prefabNames = new List<string>();
+
+    public int Temp_CurrHp
+    {
+        get { return this.temp_currHp; }
+        set { this.temp_currHp = value; }
+    }
 
 	protected void Start()
 	{
@@ -58,7 +64,7 @@ public abstract class Characters_Global : MonoBehaviour
 		CheckIfAlive(instanceID);
 	}
 
-    protected virtual void CheckIfAlive(float instanceID)
+    public virtual void CheckIfAlive(float instanceID)
 	{
         if (this.temp_currHp <= 0)
         {
@@ -112,7 +118,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected virtual void Prov_GetAttributes()
 	{
-		this.extractProvenance.AddAttribute("LocalTime", this.scoreManager.TimeCurrent.ToString());
+		this.extractProvenance.AddAttribute("LocalTime", this.scoreManager.ElapsedTime.ToString());
 		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
 		this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
 		this.extractProvenance.AddAttribute("Last", this.lastHitBy);

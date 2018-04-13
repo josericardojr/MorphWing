@@ -138,7 +138,7 @@ public class Characters_Player : Characters_Global
 		this.hud_healthFill.fillAmount = (float)this.temp_currHp / (float)this.stat_hp;
 	}
 
-    protected override void CheckIfAlive(float instanceID)
+    public override void CheckIfAlive(float instanceID)
 	{
 		if (this.temp_currHp <= 0)
 		{

@@ -7,30 +7,50 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField]
+    Characters_Player player;
+
     private GameObject textTime;
     [SerializeField]
-    Text gameOverTimerText;
+    Text gameOverTimerText, scoreText;
 
-    private float timeCurrent, gameOverTime = 5;
+    [SerializeField]
+    float timeCurrent;
+    float gameOverTime = 5, elapsedTime;
+    
+    int score;
 
     public float TimeCurrent
     {
     	get{ return this.timeCurrent; }
+    	set{ this.timeCurrent = value; }
     }
 
-    Thread threadTime;
+    public float ElapsedTime
+    {
+        get { return this.elapsedTime; }
+    }
+
     private static volatile bool running;
 
     void Start ()
     {
-        this.timeCurrent = 0;
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
 	}
 
     void Update()
 	{
-        this.timeCurrent += Time.deltaTime;
+        if(this.timeCurrent > 0)
+            this.timeCurrent -= Time.deltaTime;
+        if (this.timeCurrent < 0)
+        {
+            this.timeCurrent = 0;
+            this.player.Temp_CurrHp = 0;
+            this.player.CheckIfAlive(player.GetInstanceID());
+        }
+        if(running)
+            this.elapsedTime += Time.deltaTime;
         this.textTime.GetComponent<Text>().text = ((int)this.timeCurrent).ToString();
         if(!running)
         {
@@ -46,6 +66,12 @@ public class ScoreManager : MonoBehaviour
     public void SaveTime()
     {
         PlayerPrefs.SetFloat(PlayerPrefsKey.keyScore, this.timeCurrent);
+    }
+
+    public void AddScore(int amount)
+    {
+        this.score += amount;
+        this.scoreText.text = score.ToString();
     }
 
     public void StopTimer()

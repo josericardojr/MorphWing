@@ -8,11 +8,13 @@ public class Managers_Spawn : MonoBehaviour
 	public ItemController itemController;
 	protected ExtractProvenance extractProvenance;
 	bool deactivaded;
+    [SerializeField]
+    bool random;
 	Vector3 selectedPos;
 	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
 	[SerializeField]
-	List<Transform> straightPositions, boomerangPositions, roundPositions, chaserPositions, healthPositions;
+	List<Transform> straightPositions, boomerangPositions, roundPositions, chaserPositions, healthPositions, allPositions;
 	[SerializeField]
 	List<int> waveCreation;
 	List<int> currPositions = new List<int>();
@@ -70,7 +72,7 @@ public class Managers_Spawn : MonoBehaviour
 			for(int i = 0; i < 4; i++)
 			{
 				this.noSpawned++;
-				SpawnRandomEnemy();
+				SpawnNextEnemy();
 			}
 	}
 
@@ -81,12 +83,13 @@ public class Managers_Spawn : MonoBehaviour
 		{
 			if(this.currWave == this.waveCreation.Count)
 				SpawnRandomItem();
-			SpawnRandomEnemy();
+			SpawnNextEnemy();
 			this.noSpawned++;
 		}
 	}
 
-	void SpawnRandomEnemy()
+
+	void SpawnNextEnemy()
 	{
 		if(this.currPositions.Count == 0)
 			for(int i = 0; i < 4; i++)
@@ -95,39 +98,49 @@ public class Managers_Spawn : MonoBehaviour
 		if(this.currWave == this.waveCreation.Count)
 			this.currWave = 0;
 		int enemyGot = this.waveCreation[this.currWave];
+        if (this.random)
+            enemyGot = Random.Range(0, 4);
 		Vector2 spawnPos = new Vector2(0,0);
 		Transform spawnPoint = null;
-		switch(enemyGot)
-		{
-			case 0:
-				if(this.currPositions[0] == this.straightPositions.Count)
-					this.currPositions[0] = 0;
-				spawnPos = this.straightPositions[this.currPositions[0]].transform.position;
-				spawnPoint = this.straightPositions[this.currPositions[0]];
-				this.currPositions[0] += 1;
-			break;
-			case 1:
-				if(this.currPositions[1] == this.chaserPositions.Count)
-					this.currPositions[1] = 0;
-				spawnPos = this.chaserPositions[this.currPositions[1]].transform.position;
-				spawnPoint = this.chaserPositions[this.currPositions[1]];
-				this.currPositions[1] += 1;
-			break;
-			case 2:
-				if(this.currPositions[2] == this.boomerangPositions.Count)
-					this.currPositions[2] = 0;
-				spawnPos = this.boomerangPositions[this.currPositions[2]].transform.position;
-				spawnPoint = this.boomerangPositions[this.currPositions[2]];
-				this.currPositions[2] += 1;
-			break;
-			case 3:
-				if(this.currPositions[3] == this.roundPositions.Count)
-					this.currPositions[3] = 0;
-				spawnPos = this.roundPositions[this.currPositions[3]].transform.position;
-				spawnPoint = this.roundPositions[this.currPositions[3]];
-				this.currPositions[3] += 1;
-			break;
-		}
+        if (!this.random)
+        {
+            switch (enemyGot)
+            {
+                case 0:
+                    if (this.currPositions[0] == this.straightPositions.Count)
+                        this.currPositions[0] = 0;
+                    spawnPos = this.straightPositions[this.currPositions[0]].transform.position;
+                    spawnPoint = this.straightPositions[this.currPositions[0]];
+                    this.currPositions[0] += 1;
+                    break;
+                case 1:
+                    if (this.currPositions[1] == this.chaserPositions.Count)
+                        this.currPositions[1] = 0;
+                    spawnPos = this.chaserPositions[this.currPositions[1]].transform.position;
+                    spawnPoint = this.chaserPositions[this.currPositions[1]];
+                    this.currPositions[1] += 1;
+                    break;
+                case 2:
+                    if (this.currPositions[2] == this.boomerangPositions.Count)
+                        this.currPositions[2] = 0;
+                    spawnPos = this.boomerangPositions[this.currPositions[2]].transform.position;
+                    spawnPoint = this.boomerangPositions[this.currPositions[2]];
+                    this.currPositions[2] += 1;
+                    break;
+                case 3:
+                    if (this.currPositions[3] == this.roundPositions.Count)
+                        this.currPositions[3] = 0;
+                    spawnPos = this.roundPositions[this.currPositions[3]].transform.position;
+                    spawnPoint = this.roundPositions[this.currPositions[3]];
+                    this.currPositions[3] += 1;
+                    break;
+            }
+        }
+        else
+        {
+            spawnPoint = this.allPositions[Random.Range(0, 14)];
+            spawnPos = spawnPoint.transform.position;
+        }
 		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
 		this.currWave++;
 		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.x, spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.y);
@@ -140,7 +153,11 @@ public class Managers_Spawn : MonoBehaviour
 		// Define Position
 		if(this.currHealth == this.healthPositions.Count)
 			this.currHealth = 0;
-		GameObject spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(this.healthPositions[this.currHealth].position.x, this.healthPositions[this.currHealth].position.y, 1), Quaternion.identity);
+        GameObject spawnedItem;
+        if(!this.random)
+            spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(this.healthPositions[this.currHealth].position.x, this.healthPositions[this.currHealth].position.y, 1), Quaternion.identity);
+        else
+            spawnedItem = (GameObject)GameObject.Instantiate(this.itemPrefab, new Vector3(this.healthPositions[Random.Range(0, 4)].position.x, this.healthPositions[Random.Range(0, 4)].position.y, 1), Quaternion.identity);
 		spawnedItem.GetComponent<Item> ().effect = Object_Efeitos.Effects.HEALTH;
 		spawnedItem.GetComponent<Item> ().itemController = this.itemController;
 		itemController.Increase (Object_Efeitos.Effects.HEALTH.ToString ());

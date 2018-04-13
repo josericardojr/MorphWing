@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Characters_Enemies : Characters_Global
 {
+    [SerializeField]
+    GameObject popUpPrefab;
 	protected Characters_Player player;
 	protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
 	protected bool canDestroyOffScreen;
 	[SerializeField]
-	protected int contactDamage;
+	protected int contactDamage, scoreReward, timeReward;
 	protected float maxOffsetX, maxOffsetY;
 
 	#region GETS & SETS
@@ -37,7 +40,8 @@ public class Characters_Enemies : Characters_Global
 	{
 		base.Start();
 		Prov_Agent ();
-		this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
+        this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
+        this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		if(GameObject.FindGameObjectWithTag("Player") != null)
 			this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
 		Invoke("CanDestroyOutOfScreen", 0.4f);
@@ -74,10 +78,15 @@ public class Characters_Enemies : Characters_Global
 		}
 	}
 
-    protected override void CheckIfAlive(float instanceID)
+    public override void CheckIfAlive(float instanceID)
     {
-        if(this.temp_currHp <= 0)
+        if (this.temp_currHp <= 0)
+        {
             this.spawnManager.EnemyDecrease();
+            this.scoreManager.AddScore(this.scoreReward);
+            this.scoreManager.TimeCurrent += this.timeReward;
+            GameObject.Instantiate(this.popUpPrefab, Camera.main.WorldToScreenPoint(this.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform).transform.GetChild(1).GetComponent<Text>().text = "+" + this.timeReward.ToString();
+        }
         base.CheckIfAlive(instanceID);
 	}
 

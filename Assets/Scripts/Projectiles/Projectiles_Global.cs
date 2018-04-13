@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectiles_Global : MonoBehaviour
 {
+    ScoreManager scoreManager;
 	Managers_Spawn managers_spawn;
 	new protected Rigidbody2D rigidbody;
 	GameObject shooter;
@@ -17,10 +18,14 @@ public class Projectiles_Global : MonoBehaviour
 	[SerializeField]
 	float speed;
 
+    [SerializeField]
+    int hitScore;
+
 	string shooterLabel;
 
 	protected void Start()
-	{
+    {
+        this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         if (this.upEffect)
             this.GetComponent<Animator>().SetTrigger("Crazy");
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
@@ -46,6 +51,8 @@ public class Projectiles_Global : MonoBehaviour
 			c.CompareTag("Player") && this.CompareTag("Enemy_Shot"))
 		{
 			c.GetComponent<Characters_Global>().GetDamaged(this.GetComponent<Collider2D>().GetInstanceID(), this.shooterLabel, this.damage);
+            if (this.CompareTag("Player_Shot"))
+                this.scoreManager.AddScore(this.hitScore);
 		}
 	}
 

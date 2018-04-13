@@ -8,10 +8,15 @@ public class SpawnItemManager : MonoBehaviour {
 
 	protected ExtractProvenance extractProvenance;
 
+    [SerializeField]
+    bool random;
+
 	[SerializeField]
 	List<int> effectOrder;
 	[SerializeField]
 	List<Transform> positionOrder;
+    [SerializeField]
+    List<Transform> allPositions;
 
 	int currPowerUp;
 
@@ -57,7 +62,12 @@ public class SpawnItemManager : MonoBehaviour {
 	{
 		if(this.currPowerUp == this.effectOrder.Count)
 			this.currPowerUp = 0;
-		GameObject g = Instantiate(this.prefab, this.positionOrder[this.currPowerUp].position, Quaternion.identity);
+        GameObject g;
+        if(!this.random)
+            g = Instantiate(this.prefab, this.positionOrder[this.currPowerUp].position, Quaternion.identity);
+        else
+            g = Instantiate(this.prefab, this.allPositions[Random.Range (0, 5)].position, Quaternion.identity);
+
 		g.transform.Translate(0,0,1);
 		g.gameObject.tag = "Item";
 
@@ -71,7 +81,11 @@ public class SpawnItemManager : MonoBehaviour {
 
 	private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
 	{
-		int aux = this.effectOrder[this.currPowerUp];
+        int aux;
+        if (!this.random)
+            aux = this.effectOrder[this.currPowerUp];
+        else
+            aux = Random.Range(0, 5);
 		switch (aux)
 		{
 		case 0:
