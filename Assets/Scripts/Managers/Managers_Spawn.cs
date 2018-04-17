@@ -142,6 +142,7 @@ public class Managers_Spawn : MonoBehaviour
             spawnPos = spawnPoint.transform.position;
         }
 		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
+        spawnedEnemy.name = spawnedEnemy.name.Remove(spawnedEnemy.name.Length - 7);
 		this.currWave++;
 		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.x, spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.y);
 		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;

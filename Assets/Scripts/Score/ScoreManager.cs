@@ -76,6 +76,7 @@ public class ScoreManager : MonoBehaviour
 
     public void StopTimer()
     {
+        this.score += 110 * (int)elapsedTime;
         running = false;
         this.gameOverTimerText.enabled = true;
     }
