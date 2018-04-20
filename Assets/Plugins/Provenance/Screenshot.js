@@ -11,7 +11,7 @@ private var topLeft : Vector3;
 
 function Awake() {
 	Debug.Log("SCREENSHOT");
-	Application.CaptureScreenshot(screenshotName + ".png", size);
+	ScreenCapture.CaptureScreenshot(screenshotName + ".png", size);
 	GetScreenShotPositions();
 	WriteCoordinates();
 }

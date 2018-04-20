@@ -10,7 +10,7 @@ public class AcessPython : MonoBehaviour
     void Start()
     {
         print("ue");
-        print(GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\Felipe Machado\AppData\Local\Programs\Python\Python36-32\python.exe"));        
+        print(GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\nasci\AppData\Local\Programs\Python\Python36-32\python.exe"));        
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class AcessPython : MonoBehaviour
         //print(fullFilename);
         //print(pathPythonEXE);
         fullFilename += " " + args;
-        print(fullFilename);
+        //print(fullFilename);
         Process p = new Process();
         p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
         {
