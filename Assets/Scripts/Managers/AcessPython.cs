@@ -7,10 +7,32 @@ using UnityEngine;
 
 public class AcessPython : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         print("ue");
-        print(GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\nasci\AppData\Local\Programs\Python\Python36-32\python.exe"));        
+        string msg = "Start: ";
+        try
+        {
+            msg = "Result:\n " + (GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\nasci\AppData\Local\Programs\Python\Python36-32\python.exe"));
+
+        }
+        catch (Exception e)
+        {
+            msg += e.Message;
+            throw;
+        }
+
+        UnityEngine.UI.Text text = GameObject.Find("teste").GetComponent<UnityEngine.UI.Text>();
+
+        if (text != null)
+        {
+            text.text = msg;
+        }
+        else
+        {
+            text.text = "text == null";
+            print(msg);
+        }
     }
 
     /// <summary>
