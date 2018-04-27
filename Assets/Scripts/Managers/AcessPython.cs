@@ -9,11 +9,10 @@ public class AcessPython : MonoBehaviour
 {
     void Awake()
     {
-        print("ue");
         string msg = "Start: ";
         try
         {
-            msg = "Result:\n " + (GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\nasci\AppData\Local\Programs\Python\Python36-32\python.exe"));
+            msg = "Result:\n " + (GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\Felipe Machado\AppData\Local\Programs\Python\Python36-32\python.exe"));
 
         }
         catch (Exception e)
@@ -24,6 +23,7 @@ public class AcessPython : MonoBehaviour
 
         UnityEngine.UI.Text text = GameObject.Find("teste").GetComponent<UnityEngine.UI.Text>();
 
+        print(msg);
         if (text != null)
         {
             text.text = msg;
