@@ -15,16 +15,13 @@ public class TreatmentError : MonoBehaviour {
     private Canvas canvas;
 
     [SerializeField]
-    private Text text;
+    private InputField input;
 
     void Start()
     {
-        text.text = "";
         acess = GetComponent<AcessPython>();
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
-
-        PlayerPrefs.SetString(AcessPython.KEYPATHPYTHON, GetPythonPath());
 
         string msg = TestePath();
         print(msg); 
@@ -32,7 +29,7 @@ public class TreatmentError : MonoBehaviour {
         if (!msg.Contains("OK"))
         {
             canvas.enabled = true;
-            text.text = msg;
+            input.text = msg;
         }
     }
 
@@ -65,5 +62,11 @@ public class TreatmentError : MonoBehaviour {
         //print("___________________");
         print("Final: " + pathPython);
         return pathPython;
+    }
+
+    public void UpdatePath()
+    {
+        PlayerPrefs.SetString(AcessPython.KEYPATHPYTHON, input.text);
+        Start();
     }
 }
