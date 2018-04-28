@@ -41,8 +41,4 @@ public class AcessPython : MonoBehaviour
             return e.Message;
         }
     }
-
-    public string GetInstruction(string fullFilename, string args, string pathPythonEXE, UnityEngine.UI.Text Text) {
-            return GetInstruction(fullFilename, args, pathPythonEXE);
-    }
 }
