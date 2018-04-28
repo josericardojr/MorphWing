@@ -1,8 +1,5 @@
-try:
-	import sys
-	print("start python")
-	for s in sys.argv:
-		print('UNITY: arguments {0};'.format(s))
-	print("end python")
-except:
-	print("test")
+import sys
+if sys.argv[1] == "Test":
+	print("OK")
+else:
+	print("Não foi certo {0}".format(sys.argv[0]))

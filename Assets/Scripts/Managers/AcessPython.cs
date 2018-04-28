@@ -7,33 +7,7 @@ using UnityEngine;
 
 public class AcessPython : MonoBehaviour
 {
-    void Awake()
-    {
-        string msg = "Start: ";
-        try
-        {
-            msg = "Result:\n " + (GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "HelloWorld1 HelloWorld2 HelloWorld3", @"C:\Users\Felipe Machado\AppData\Local\Programs\Python\Python36-32\python.exe"));
-
-        }
-        catch (Exception e)
-        {
-            msg += e.Message;
-            throw;
-        }
-
-        UnityEngine.UI.Text text = GameObject.Find("teste").GetComponent<UnityEngine.UI.Text>();
-
-        print(msg);
-        if (text != null)
-        {
-            text.text = msg;
-        }
-        else
-        {
-            text.text = "text == null";
-            print(msg);
-        }
-    }
+    public static string KEYPATHPYTHON = "KEYPATHPYTHON";
 
     /// <summary>
     /// Retorna uma string com todos os prints do arquivo .py
@@ -44,24 +18,31 @@ public class AcessPython : MonoBehaviour
     /// <returns></returns>
     public string GetInstruction(string fullFilename, string args, string pathPythonEXE)
     {
-
-        //Directory.GetCurrentDirectory() + @"\print.py HelloWorld 2 3";
-        //@"C:\Program Files\Python36\python.exe"
-        //print(fullFilename);
-        //print(pathPythonEXE);
-        fullFilename += " " + args;
-        //print(fullFilename);
-        Process p = new Process();
-        p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
+        try
         {
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-        p.Start();
+            fullFilename += " " + args;
+         
+            Process p = new Process();
+            p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            p.Start();
 
-        string output = p.StandardOutput.ReadToEnd();
-        p.WaitForExit();
-        return (output);
+
+            string output = p.StandardOutput.ReadToEnd();
+            p.WaitForExit();
+            return (output);
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+    }
+
+    public string GetInstruction(string fullFilename, string args, string pathPythonEXE, UnityEngine.UI.Text Text) {
+            return GetInstruction(fullFilename, args, pathPythonEXE);
     }
 }
