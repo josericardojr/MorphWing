@@ -11,7 +11,7 @@ public class Characters_Enemies : Characters_Global
 	protected Vector2 initDir;
 	protected bool canDestroyOffScreen;
 	[SerializeField]
-	protected int contactDamage, scoreReward, timeReward;
+	protected int provIdNum, contactDamage, scoreReward, timeReward;
 	protected float maxOffsetX, maxOffsetY;
 
 	#region GETS & SETS

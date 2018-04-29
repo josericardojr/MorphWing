@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Characters_Global : MonoBehaviour
 {
+    protected BalanceApplier balanceApplier;
 	List<GameObject> prefabList = new List<GameObject>();
 	protected ScoreManager scoreManager;
 	protected ExtractProvenance extractProvenance;
@@ -33,6 +34,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected void Start()
 	{
+        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
 		this.temp_currHp = this.stat_hp;
 		GameObject provenanceObj = GameObject.FindGameObjectWithTag("Provenance");
 		this.animator = this.GetComponent<Animator>();

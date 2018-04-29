@@ -39,7 +39,7 @@ public class Enemies_RoundShooter : Characters_Enemies
     {
         for (int i = 0; i < this.shootDirOrder.Count; i++)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f / this.balanceApplier.difficultyMultipliers[this.provIdNum]);
             ShootProjectile(0, (int)this.shootDirOrder[i].x, (int)this.shootDirOrder[i].y);
             this.Prov_UsingAttack(this.GetInstanceID().ToString());
         }

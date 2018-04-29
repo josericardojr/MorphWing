@@ -8,6 +8,7 @@ public class Enemies_Straight : Characters_Enemies
     {
         base.Start();
         this.Prov_UsingAttack(this.GetInstanceID().ToString());
+        this.stat_speed *= this.balanceApplier.difficultyMultipliers[this.provIdNum];
     }
 
     void Update()
