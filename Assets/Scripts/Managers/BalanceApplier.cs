@@ -8,7 +8,7 @@ public class BalanceApplier : MonoBehaviour
     bool increase;
     float increaseMultiplier, decreaseMultiplier;
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < 4; i++)
             difficultyMultipliers.Add(1);
