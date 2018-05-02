@@ -12,6 +12,9 @@ for i in range(len(args)):
 
 
 if file != '':
+	print('open {0}'.format(file))
 	xml = LoadedXML(file)
 	xml.example()
+else:
+	print('erro')
 	

@@ -22,8 +22,21 @@ public class AcessPython : MonoBehaviour
     {
         try
         {
+            if (!File.Exists(fullFilename))
+            {
+                print(".py dont exists: " + fullFilename);
+            }
+
             fullFilename += " " + args;
-         
+           
+            if (!File.Exists(pathPythonEXE))
+            {
+                print("Python.exe dont exists: " + pathPythonEXE);
+            }
+
+            print("fullFilename: " + fullFilename);
+            //print("pathPythonEXE: " + pathPythonEXE);
+
             Process p = new Process();
             p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
             {
@@ -46,9 +59,10 @@ public class AcessPython : MonoBehaviour
 
     public void GetChanges(string xmlName)
     {
-        file = xmlName;
+        file = xmlName + ".xml";
+        string directory = Directory.GetCurrentDirectory() + @"\Assests\";
 
-        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + xmlName, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + directory + " " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
 
         print("Result: " + instruction);
     }
