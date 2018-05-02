@@ -38,7 +38,7 @@ public class TreatmentError : MonoBehaviour {
         return (acess.GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
     }
 
-    string GetPythonPath()
+    private string GetPythonPath()
     {
         string pathPython = @"C:\Users\nasci\AppData\Local\Programs\Python\Python36\python.exe";
         IDictionary environmentVariables = Environment.GetEnvironmentVariables();
@@ -52,9 +52,9 @@ public class TreatmentError : MonoBehaviour {
                 //& !pythonPathFromEnv.Contains("Python2")
                 if (File.Exists(pythonPathFromEnv) )
                 {
-                    //print("Change: ");
+                    print("Change: ");
                     pathPython = pythonPathFromEnv;
-                    //print("Path: " + pathPython);
+                    print("Path: " + pathPython);
                 }
             }
         }
@@ -68,5 +68,10 @@ public class TreatmentError : MonoBehaviour {
     {
         PlayerPrefs.SetString(AcessPython.KEYPATHPYTHON, input.text);
         Start();
+    }
+
+    public void AutomaticPath()
+    {
+        input.text = GetPythonPath();
     }
 }
