@@ -145,14 +145,28 @@ public class Characters_Player : Characters_Global
 			this.hud_retryText.enabled = true;
 			this.managers_spawn.Deactivated = true;
 			this.managers_score.StopTimer();
-            string date = GetNameProv();
 
-            this.extractProvenance.provenance.Save("info_" + date);
-		}
+            string nameProv = "info_" + GetDate();
+
+            try
+            {
+                this.extractProvenance.provenance.Save(nameProv);
+
+                AcessPython ac = FindObjectOfType<AcessPython>();
+
+                if (ac != null)
+                {
+                    ac.GetChanges(nameProv);
+                }
+            }
+            catch 
+            {
+            }
+        }
 		base.CheckIfAlive(instanceID);
 	}
 
-    public string GetNameProv()
+    public string GetDate()
     {
         System.DateTime time = System.DateTime.Now;
         return (time.Day + "." + time.Month + "." + time.Year + ";" + time.Hour + "." + time.Minute);

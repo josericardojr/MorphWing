@@ -9,6 +9,8 @@ public class AcessPython : MonoBehaviour
 {
     public static string KEYPATHPYTHON = "KEYPATHPYTHON";
 
+    private string file, instruction, filePy = @"\Python\Prov.py";
+
     /// <summary>
     /// Retorna uma string com todos os prints do arquivo .py
     /// </summary>
@@ -40,5 +42,14 @@ public class AcessPython : MonoBehaviour
         {
             return e.Message;
         }
+    }
+
+    public void GetChanges(string xmlName)
+    {
+        file = xmlName;
+
+        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + xmlName, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+
+        print("Result: " + instruction);
     }
 }
