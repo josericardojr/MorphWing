@@ -14,7 +14,7 @@ for i in range(len(args)):
 if file != '':
 	try:
 		xml = LoadedXML(file)
-		#xml.example()
+		
 	except ValueError:
 		print("Unexpected error:", sys.exc_info()[0])
 else:

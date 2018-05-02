@@ -20,8 +20,9 @@ class LoadedXML:
         for e in edges:
             edge.append(Edge(e.find('ID'), e.find('type'), e.find('label'), e.find('value'), e.find('sourceID'), e.find('targetID')))
 
-        self.vedge = edge		
+        self.vedge = edge
 		
+        print('loaded successful {0}'.format(path))
 
     def vertexs(self):
         return self.vvertex
