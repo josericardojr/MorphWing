@@ -161,11 +161,11 @@ public class AcessPython : MonoBehaviour
             {
                 if (split[j].Contains(KEYENEMY[i]))
                 {
-                    print("find: " + split[j]);
                     BalanceApplier balance = FindObjectOfType<BalanceApplier>();
                     if (balance)
                     {
-                        balance.ApplyDifficulty(i, split[j].Contains("true"));
+                        print(split[j] + " find: " + split[j].Contains("True"));
+                        balance.ApplyDifficulty(i, split[j].Contains("True"));
                     }
                 }
             }
