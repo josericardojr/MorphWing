@@ -5,7 +5,6 @@ using UnityEngine;
 public class BalanceApplier : MonoBehaviour 
 {
     public List<float> difficultyMultipliers = new List<float>();
-    bool increase;
     float increaseMultiplier, decreaseMultiplier;
 
     void Awake()
@@ -14,11 +13,11 @@ public class BalanceApplier : MonoBehaviour
             difficultyMultipliers.Add(1);
     }
 
-    public void ApplyDifficulty(int enemyID, bool change) 
+    public void ApplyDifficulty(int enemyID, bool increase) 
     {
-        if(this.increase)
-		    Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);
+        if(increase)
+            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);
         else
-            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2); 
+            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);
 	}
 }
