@@ -14,7 +14,7 @@ public class BalanceApplier : MonoBehaviour
             difficultyMultipliers.Add(1);
     }
 
-    void ApplyDifficulty(int enemyID, bool change) 
+    public void ApplyDifficulty(int enemyID, bool change) 
     {
         if(this.increase)
 		    Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);

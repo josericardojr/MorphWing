@@ -11,6 +11,8 @@ public class AcessPython : MonoBehaviour
 {
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
+    public static string[] KEYENEMY = { "KEYENEMY1" };
+
     [SerializeField]
     private Text text;
 
@@ -18,15 +20,26 @@ public class AcessPython : MonoBehaviour
 
     private bool run;
 
-    private void Start()
+    private void Awake()
     {
         run = false;
-        myText = "start";
+            myText = "start";
+        if (!run)
+        {
+            StartCoroutine(MakeChanges());
+        }
     }
 
     private void Update()
     {
-        text.enabled = Input.GetMouseButton(0);
+        if (!Input.GetMouseButton(0))
+        {
+            myText = "";
+        }
+        else
+        {
+            myText = instruction;
+        }
     }
 
     /// <summary>
@@ -92,6 +105,7 @@ public class AcessPython : MonoBehaviour
         file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
         run = true;
         instruction = ("Start MakeChanges: " + file);
+        string pyInstruction = "";
         do
         {
             if (!File.Exists(file))
@@ -100,9 +114,9 @@ public class AcessPython : MonoBehaviour
             }
             else
             {
-                instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
-
-                instruction = ("Result: " + instruction);
+                pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+                
+                instruction = ("Result: " + pyInstruction);
 
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
                 {
@@ -116,6 +130,25 @@ public class AcessPython : MonoBehaviour
             yield return new WaitForFixedUpdate();
         } while (run);
         instruction += ("Over MakeChanges");
+
+        string[] split;
+        for (int i = 0; i < KEYENEMY.Length; i++)
+        {
+            split = pyInstruction.Split(new char[] {';'});
+            for (int j = 0; j < split.Length; j++)
+            {
+                if (split[j].Contains(KEYENEMY[i]))
+                {
+                    print("find: " + split[j]);
+                    BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+                    if (balance)
+                    {
+                        balance.ApplyDifficulty(i, split[j].Contains("CHANGE"));
+                    }
+                }
+            }
+        }
+
         //print("File = " + file);
         //print("PlayerPrefs = " + PlayerPrefs.GetString(AcessPython.KEYFILEXML));
         //print("________");

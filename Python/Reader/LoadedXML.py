@@ -22,7 +22,7 @@ class LoadedXML:
 
         self.vedge = edge
 		
-        print('loaded successful {0}'.format(path))
+        print('loaded successful {0};{1}'.format(path, 'KEYENEMY1 CHANGE'))
 
     def vertexs(self):
         return self.vvertex
