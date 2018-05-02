@@ -62,8 +62,11 @@ public class Managers_Spawn : MonoBehaviour
 
 	void Retry()
 	{
-		if (Input.GetKeyDown(KeyCode.Return))
-			SceneManager.LoadScene(0);
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(0);
+            print("call python");
+        }
 	}
 
 	public void SpawnEnemies()
