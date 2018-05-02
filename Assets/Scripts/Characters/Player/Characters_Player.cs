@@ -145,12 +145,20 @@ public class Characters_Player : Characters_Global
 			this.hud_retryText.enabled = true;
 			this.managers_spawn.Deactivated = true;
 			this.managers_score.StopTimer();
-			this.extractProvenance.provenance.Save("info_" + Time.realtimeSinceStartup.ToString());
+            string date = GetNameProv();
+
+            this.extractProvenance.provenance.Save("info_" + date);
 		}
 		base.CheckIfAlive(instanceID);
 	}
 
-	protected override void Prov_GetAttributes()
+    public string GetNameProv()
+    {
+        System.DateTime time = System.DateTime.Now;
+        return (time.Day + "." + time.Month + "." + time.Year + ";" + time.Hour + "." + time.Minute);
+    }
+
+    protected override void Prov_GetAttributes()
 	{
 		base.Prov_GetAttributes();
 		if(this.currCooldown[1] != null)
