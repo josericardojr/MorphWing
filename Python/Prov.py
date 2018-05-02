@@ -26,9 +26,9 @@ for i in range(len(args)):
 if file != '':
 	try:
 		xml = LoadedXML(file)
-		
+		getXMLInfo(xml,args)
 	except ValueError:
 		print("Unexpected error:", sys.exc_info()[0])
 else:
-	print('erro')
+	print('without xml path')
 	
