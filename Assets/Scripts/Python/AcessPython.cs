@@ -114,8 +114,8 @@ public class AcessPython : MonoBehaviour
             }
             else
             {
-                pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
-                
+                pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file + "KEYENEMY1", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+                print(pyInstruction);
                 instruction = ("Result: " + pyInstruction);
 
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
@@ -143,7 +143,7 @@ public class AcessPython : MonoBehaviour
                     BalanceApplier balance = FindObjectOfType<BalanceApplier>();
                     if (balance)
                     {
-                        balance.ApplyDifficulty(i, split[j].Contains("CHANGE"));
+                        balance.ApplyDifficulty(i, split[j].Contains("true"));
                     }
                 }
             }
