@@ -33,8 +33,8 @@ def increaseDifficulty (factor):
     x = var()
     y = var()
     if(happenings[factor] > 0):
-        if(hits[factor] / happenings[factor] >= run(1, x, (diffRiseFactor, x, "enemy" + factor)) and
-           happenings[factor] >= run(1, y, (minRiseHappenings, y, "enemy" + factor))):
+        if(hits[factor] / happenings[factor] >= run(1, x, diffRiseFactor("enemy" + factor, x))[0] and
+           happenings[factor] >= run(1, y, minRiseHappenings("enemy" + factor, y))[0]):
             print("true_increase")
         else:
             print("false_increase")
@@ -43,8 +43,8 @@ def decreaseDifficulty (factor):
     x = var()
     y = var()
     if(happenings[factor] > 0):
-        if(hits[factor] / happenings[factor] <= run(1, x, (diffLowerFactor, x, "enemy" + factor)) and
-           happenings[factor] >= run(1, y, (minRiseHappenings, y, "enemy" + factor))):
+        if(hits[factor] / happenings[factor] <= run(1, x, diffLowerFactor("enemy" + factor, x))[0] and
+           happenings[factor] >= run(1, y, minRiseHappenings("enemy" + factor, y))[0]):
             print("true_decrease")
         else:
             print("false_decrease")

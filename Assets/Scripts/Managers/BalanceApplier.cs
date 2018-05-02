@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class BalanceApplier : MonoBehaviour 
 {
+    public static BalanceApplier instance;
     public List<float> difficultyMultipliers = new List<float>();
     float increaseMultiplier, decreaseMultiplier;
 
     void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
         for (int i = 0; i < 4; i++)
             difficultyMultipliers.Add(1);
     }
