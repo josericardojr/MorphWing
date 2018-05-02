@@ -7,9 +7,20 @@ using UnityEngine;
 
 public class AcessPython : MonoBehaviour
 {
-    public static string KEYPATHPYTHON = "KEYPATHPYTHON";
+    public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
     private string file, instruction, filePy = @"\Python\Prov.py";
+
+    private bool run;
+
+    private void Start()
+    {
+        run = false;
+        if (!run)
+        {
+            StartCoroutine(MakeChanges()); 
+        }
+    }
 
     /// <summary>
     /// Retorna uma string com todos os prints do arquivo .py
@@ -34,7 +45,7 @@ public class AcessPython : MonoBehaviour
                 print("Python.exe dont exists: " + pathPythonEXE);
             }
 
-            print("fullFilename: " + fullFilename);
+            //print("fullFilename: " + fullFilename);
             //print("pathPythonEXE: " + pathPythonEXE);
 
             Process p = new Process();
@@ -59,11 +70,51 @@ public class AcessPython : MonoBehaviour
 
     public void GetChanges(string xmlName)
     {
-        file = xmlName + ".xml";
-        string directory = Directory.GetCurrentDirectory() + @"\Assests\";
+        xmlName += ".xml";
+        file = @"" + Directory.GetCurrentDirectory() + @"\Assets\" + xmlName;
+        PlayerPrefs.SetString(AcessPython.KEYFILEXML, file);
 
-        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + directory + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
-
-        print("Result: " + instruction);
+        if (!run)
+        {
+            StartCoroutine(MakeChanges());
+        }
     }
+
+    private IEnumerator MakeChanges()
+    {
+        file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
+        run = true;
+        print("Start MakeChanges: " + file);
+        do
+        {
+            if (!File.Exists(file))
+            {
+                print("xml dont exists: " + file);
+            }
+            else
+            {
+                instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+
+                print("Result: " + instruction);
+
+                if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
+                {
+                    run = false;
+                }
+                else
+                {
+                    file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
+                }
+            }
+            yield return new WaitForFixedUpdate();
+        } while (run);
+        print("Over MakeChanges");
+        //print("File = " + file);
+        //print("PlayerPrefs = " + PlayerPrefs.GetString(AcessPython.KEYFILEXML));
+        //print("________");
+        run = false;
+    }
+
+    
+
 }

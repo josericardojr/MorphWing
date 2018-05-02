@@ -9,13 +9,11 @@ def fullpath(xmlname, xmlpath):
 
 def loadxml(xmlname, xmllocation):
     file_name = xmlname
-    full_file_name = os.path.abspath(os.path.join(xmllocation, file_name))
-    print('OPEN {0}'.format(full_file_name))
+    full_file_name = os.path.abspath(os.path.join(xmllocation, file_name))    
     return ElementTree.parse(full_file_name)
 
 
 def loadxml(path):
-    print('OPEN {0}'.format(path))
     return ElementTree.parse(path)
 
 
