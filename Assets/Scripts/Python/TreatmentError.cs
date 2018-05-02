@@ -17,11 +17,18 @@ public class TreatmentError : MonoBehaviour {
     [SerializeField]
     private InputField input;
 
+    string fileTest = @"\Python\Check.py";
+
     void Start()
     {
         acess = GetComponent<AcessPython>();
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
+
+        if (!File.Exists(Directory.GetCurrentDirectory() + fileTest))
+        {
+            print("File dont Exists: " + Directory.GetCurrentDirectory() + fileTest);
+        }
 
         string msg = TestePath();
         print(msg); 
@@ -35,12 +42,12 @@ public class TreatmentError : MonoBehaviour {
 
     private string TestePath()
     {
-        return (acess.GetInstruction(Directory.GetCurrentDirectory() + @"\print.py", "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
+        return (acess.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
     }
 
     private string GetPythonPath()
     {
-        string pathPython = @"C:\Users\nasci\AppData\Local\Programs\Python\Python36\python.exe";
+        string pathPython = "did not find";
         IDictionary environmentVariables = Environment.GetEnvironmentVariables();
         string pathVariable = environmentVariables["Path"] as string;
         if (pathVariable != null)
@@ -52,15 +59,15 @@ public class TreatmentError : MonoBehaviour {
                 //& !pythonPathFromEnv.Contains("Python2")
                 if (File.Exists(pythonPathFromEnv) )
                 {
-                    print("Change: ");
+                    //print("Change: ");
                     pathPython = pythonPathFromEnv;
-                    print("Path: " + pathPython);
+                    //print("Path: " + pathPython);
                 }
             }
         }
         // 
         //print("___________________");
-        print("Final: " + pathPython);
+        //print("Final: " + pathPython);
         return pathPython;
     }
 
