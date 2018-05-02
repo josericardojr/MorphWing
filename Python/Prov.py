@@ -1,5 +1,17 @@
 import sys
 from Reader.LoadedXML import *
+import subprocess
+
+def install(name):
+    subprocess.call(['pip', 'install', name])
+
+
+
+try:
+    from Processor import *
+except ImportError:
+    install('kanren')
+    from Processor import *
 
 file = '';
 args = sys.argv;
