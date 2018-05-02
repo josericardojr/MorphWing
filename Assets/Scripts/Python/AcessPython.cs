@@ -62,7 +62,7 @@ public class AcessPython : MonoBehaviour
         file = xmlName + ".xml";
         string directory = Directory.GetCurrentDirectory() + @"\Assests\";
 
-        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + directory + " " + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+        instruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + directory + file, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
 
         print("Result: " + instruction);
     }
