@@ -33,11 +33,11 @@ def increaseDifficulty (factor):
     x = var()
     y = var()
     if(happenings[factor] > 0):
-        if(hits[factor] / happenings[factor] >= run(1, x, (diffRiseFactor, x, "enemy" + factor)) and
+        if(hits[factor] / happenings[factor] >= run(1, x, (diffRiseFactor, x, "enemy{0}".format(factor))) and
            happenings[factor] >= run(1, y, (minRiseHappenings, y, "enemy" + factor))):
-            print("true_increase")
+            print("{0}true_increase;".format(factor))
         else:
-            print("false_increase")
+            print("{0}false_increase;".format(factor))
 
 def decreaseDifficulty (factor):
     x = var()
@@ -45,9 +45,9 @@ def decreaseDifficulty (factor):
     if(happenings[factor] > 0):
         if(hits[factor] / happenings[factor] <= run(1, x, (diffLowerFactor, x, "enemy" + factor)) and
            happenings[factor] >= run(1, y, (minRiseHappenings, y, "enemy" + factor))):
-            print("true_decrease")
+            print("{0}true_decrease;".format(factor))
         else:
-            print("false_decrease")
+            print("{0}false_decrease;".format(factor))
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
@@ -88,7 +88,7 @@ def getXMLInfo(xml, args):
 
     for i in range(len(args)):
         print(args[i])
-        if 'KEYENEMY1' not in somestring:
+        if 'KEYENEMY1' not in args[i]:
             increaseDifficulty(0)
             decreaseDifficulty(0)
     
