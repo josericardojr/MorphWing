@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     private GameObject textTime;
     [SerializeField]
     Text gameOverTimerText, scoreText;
+    GameObject balanceApplier;
 
     [SerializeField]
     float timeCurrent;
@@ -35,6 +36,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start ()
     {
+        balanceApplier = GameObject.Find("Provenance").gameObject;
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
 	}
@@ -54,8 +56,11 @@ public class ScoreManager : MonoBehaviour
         this.textTime.GetComponent<Text>().text = ((int)this.timeCurrent).ToString();
         if(!running)
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
                 SceneManager.LoadScene(0);
+                Destroy(this.balanceApplier);
+            }
             this.gameOverTime -= Time.deltaTime / 1.8f;
             if(this.gameOverTime <= 0)
                 SceneManager.LoadScene(0);
