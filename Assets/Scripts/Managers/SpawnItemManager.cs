@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnItemManager : MonoBehaviour {
 
 	public ItemController itemController;
-
+    BalanceApplier balanceApplier;
 	protected ExtractProvenance extractProvenance;
 
     [SerializeField]
@@ -36,11 +36,13 @@ public class SpawnItemManager : MonoBehaviour {
 	private Sprite spriteDamageUp, spriteDamageDown, spriteSpeedUp, spriteSpeedDown, spriteColorInvert;
 
 	void Start ()
-	{
+    {
+        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
 		this.transform.position = Camera.main.transform.position;
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		Prov_Agent();
-
+        this.cooldownSpawn *= this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] *
+            this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3];
 
 		// Register the types of power ups
 		foreach (Object_Efeitos.Effects eff in System.Enum.GetValues(typeof(Object_Efeitos.Effects))) {
@@ -85,7 +87,24 @@ public class SpawnItemManager : MonoBehaviour {
         if (!this.random)
             aux = this.effectOrder[this.currPowerUp];
         else
-            aux = Random.Range(0, 5);
+        {
+            List<int> powerUpPool = new List<int>();
+
+            // Damage Up
+            for (int j = 0; j < 25 * (2 - this.balanceApplier.difficultyMultipliers[0]) * (2 - this.balanceApplier.difficultyMultipliers[1]) * ((2 - this.balanceApplier.difficultyMultipliers[2]) * 3) * ((2 - this.balanceApplier.difficultyMultipliers[3]) * 2); j++)
+                powerUpPool.Add(0);
+            // Damage Down
+            for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
+                powerUpPool.Add(1);
+            // Speed Up
+            for (int j = 0; j < 25 * ((2 - this.balanceApplier.difficultyMultipliers[0]) * 2) * ((2 - this.balanceApplier.difficultyMultipliers[1]) * 3) * (2 - this.balanceApplier.difficultyMultipliers[2]) * (2 - this.balanceApplier.difficultyMultipliers[3]); j++)
+                powerUpPool.Add(2);
+            // Damage Down
+            for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
+                powerUpPool.Add(3);
+
+            aux = powerUpPool[Random.Range(0, powerUpPool.Count)];
+        }
 		switch (aux)
 		{
 		case 0:

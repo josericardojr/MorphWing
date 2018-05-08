@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class BalanceApplier : MonoBehaviour 
 {
+    [SerializeField]
+    bool dontApplyBalance;
     public static BalanceApplier instance;
     public List<float> difficultyMultipliers = new List<float>();
+    [SerializeField]
+    public List<float> difficultyMultipliersMaximum;
+    [SerializeField]
+    public List<float> difficultyMultipliersMinimum;
     float increaseMultiplier, decreaseMultiplier;
 
     void Awake()
@@ -22,6 +28,13 @@ public class BalanceApplier : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         for (int i = 0; i < 4; i++)
             difficultyMultipliers.Add(1);
+    }
+
+    void Start()
+    {
+        if(dontApplyBalance)
+            for (int i = 0; i < 4; i++)
+                this.difficultyMultipliers[i] = 1;
     }
 
     public void ApplyDifficulty(int enemyID, bool increase) 
