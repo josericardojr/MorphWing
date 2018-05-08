@@ -1,4 +1,4 @@
-from Reader.Loader import *
+﻿from Reader.Loader import *
 from Reader.Edge import *
 from Reader.Vertex import *
 
@@ -22,7 +22,7 @@ class LoadedXML:
 
         self.vedge = edge
 		
-        print('loaded successful {0};{1}'.format(path, 'KEYENEMY1 CHANGE'))
+        #print('loaded successful {0};{1}'.format(path, 'KEYENEMY1 CHANGE'))
 
     def vertexs(self):
         return self.vvertex
