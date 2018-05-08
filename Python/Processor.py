@@ -1,5 +1,7 @@
 from kanren import Relation, facts, var, run
 
+KEYENEMY = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
+
 diffLowerFactor = Relation()
 diffRiseFactor = Relation()
 minRiseHappenings = Relation()
@@ -37,18 +39,16 @@ def increaseDifficulty (factor):
     hapFactor = happenings[factor]
     hitFactor = hits[factor]
 
-    if len(runRiseHapp) > 0:
-        if len(runRiseFactor) > 0:
+    if len(runRiseHapp) > 0 and len(runRiseFactor) > 0:
+        rRiseHapp = runRiseHapp[0]
+        rRiseFactor = runRiseFactor[0]
 
-            rRiseHapp = runRiseHapp[0]
-            rRiseFactor = runRiseFactor[0]
-
-            if hapFactor > 0:
-                if hitFactor / hapFactor >= rRiseFactor and hapFactor >= rRiseHapp:
-                    print("{0}true_increase;".format(factor))
-                else:
-                    print("{0}false_increase;".format(factor))
-
+        if hapFactor > 0:
+            if hitFactor / hapFactor >= rRiseFactor and hapFactor >= rRiseHapp:
+                print("{0}true_increase;".format(KEYENEMY[factor]))
+            else:
+                print("{0}false_increase;".format(KEYENEMY[factor]))
+                
 
 def decreaseDifficulty (factor):
     x = var()
@@ -58,17 +58,17 @@ def decreaseDifficulty (factor):
     hapFactor = happenings[factor]
     hitFactor = hits[factor]
 
-    if len(runRiseHapp) > 0:
-        if len(runLowerFactor) > 0:
+    if len(runRiseHapp) > 0 and len(runLowerFactor) > 0:
+        rRiseHapp = runRiseHapp[0]
+        rLowerFactor = runLowerFactor[0]
 
-            rRiseHapp = runRiseHapp[0]
-            rLowerFactor = runLowerFactor[0]
+        if hapFactor > 0:
+            if hitFactor / hapFactor <= rLowerFactor and hapFactor >= rRiseHapp:
+                print("{0}true_decrease;".format(KEYENEMY[factor]))
+            else:
+                print("{0}false_decrease;".format(KEYENEMY[factor]))
 
-            if hapFactor > 0:
-                if hitFactor / hapFactor <= rLowerFactor and hapFactor >= rRiseHapp:
-                    print("{0}true_decrease".format(factor))
-                else:
-                    print("{0}false_decrease;".format(factor))
+
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
@@ -106,9 +106,9 @@ def getXMLInfo(xml, args):
         
     #print('_' * 10)
 
-
-    for i in range(len(args)):        
-        if 'KEYENEMY1' not in args[i]:
-            increaseDifficulty(0)
-            decreaseDifficulty(0)
-    
+    for i in range(len(args)):
+        for j in range(len(KEYENEMY)):
+            #print('Debug: {0} : {1};'.format(KEYENEMY[j], args[i]))
+            if KEYENEMY[j] in args[i]:
+                increaseDifficulty(j)
+                decreaseDifficulty(j)
