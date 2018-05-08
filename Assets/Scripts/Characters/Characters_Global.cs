@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Characters_Global : MonoBehaviour
 {
     protected BalanceApplier balanceApplier;
-	List<GameObject> prefabList = new List<GameObject>();
+	protected List<GameObject> prefabList = new List<GameObject>();
 	protected ScoreManager scoreManager;
 	protected ExtractProvenance extractProvenance;
 	protected Animator animator;

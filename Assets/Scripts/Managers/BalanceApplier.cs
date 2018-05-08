@@ -7,6 +7,7 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
+    [SerializeField]
     public List<float> difficultyMultipliers = new List<float>();
     [SerializeField]
     public List<float> difficultyMultipliersMaximum;
@@ -26,8 +27,6 @@ public class BalanceApplier : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-        for (int i = 0; i < 4; i++)
-            difficultyMultipliers.Add(1);
     }
 
     void Start()
@@ -40,8 +39,8 @@ public class BalanceApplier : MonoBehaviour
     public void ApplyDifficulty(int enemyID, bool increase) 
     {
         if(increase)
-            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);
+            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
         else
-            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, 0.5f, 2);
+            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 	}
 }

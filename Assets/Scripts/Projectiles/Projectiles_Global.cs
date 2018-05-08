@@ -23,6 +23,7 @@ public class Projectiles_Global : MonoBehaviour
 
 	string shooterLabel;
 
+
 	protected void Start()
     {
         this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();

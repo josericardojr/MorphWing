@@ -31,6 +31,8 @@ facts(minRiseHappenings, ("enemy1", "3"),
     ("enemy3", "10"),
     ("enemy4", "10"))
 
+increaseDifficulty(1);
+
 def increaseDifficulty (factor):
     x = var()
     y = var()
