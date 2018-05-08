@@ -7,9 +7,9 @@ minRiseHappenings = Relation()
 #infos retiradas do xml
 
 #numero de hits em ordem de tipo de inimigo
-hits = [0,0,0,0];
+hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [0,0,0,0];
+happenings = [0,0,0,0]
 
 #BASEAR EM TEMPO
 
@@ -32,22 +32,43 @@ facts(minRiseHappenings, ("enemy1", "3"),
 def increaseDifficulty (factor):
     x = var()
     y = var()
-    if(happenings[factor] > 0):
-        if(hits[factor] / happenings[factor] >= run(1, x, diffRiseFactor("enemy{0}".format(factor), x))[0] and
-           happenings[factor] >= run(1, y, minRiseHappenings("enemy" + factor, y))[0]):
-            print("true_increase")
-        else:
-            print("{0}false_increase;".format(factor))
+    runRiseHapp = run(1, y, (minRiseHappenings, "enemy{0}".format(factor), y))
+    runRiseFactor = run(1, x, diffRiseFactor("enemy{0}".format(factor), x))
+    hapFactor = happenings[factor]
+    hitFactor = hits[factor]
+
+    if len(runRiseHapp) > 0:
+        if len(runRiseFactor) > 0:
+
+            rRiseHapp = runRiseHapp[0]
+            rRiseFactor = runRiseFactor[0]
+
+            if hapFactor > 0:
+                if hitFactor / hapFactor >= rRiseFactor and hapFactor >= rRiseHapp:
+                    print("{0}true_increase;".format(factor))
+                else:
+                    print("{0}false_increase;".format(factor))
+
 
 def decreaseDifficulty (factor):
     x = var()
     y = var()
-    if(happenings[factor] > 0):
-        if(hits[factor] / happenings[factor] <= run(1, x, diffLowerFactor("enemy{0}".format(factor), x))[0] and
-           happenings[factor] >= run(1, y, minRiseHappenings("enemy" + factor, y))[0]):
-            print("true_decrease")
-        else:
-            print("{0}false_decrease;".format(factor))
+    runRiseHapp = run(1, y, minRiseHappenings("enemy{0}".format(factor), y))
+    runLowerFactor = run(1, x, diffLowerFactor("enemy{0}".format(factor), x))
+    hapFactor = happenings[factor]
+    hitFactor = hits[factor]
+
+    if len(runRiseHapp) > 0:
+        if len(runLowerFactor) > 0:
+
+            rRiseHapp = runRiseHapp[0]
+            rLowerFactor = runLowerFactor[0]
+
+            if hapFactor > 0:
+                if hitFactor / hapFactor <= rLowerFactor and hapFactor >= rRiseHapp:
+                    print("{0}true_decrease".format(factor))
+                else:
+                    print("{0}false_decrease;".format(factor))
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
@@ -78,16 +99,15 @@ def getXMLInfo(xml, args):
             if(xml.vertexs()[v].attributes()[6].value() == "Enemy_Irregular"):
                 happenings[3] += 1
 
-		#atr = v.attributes()
+        #atr = v.attributes()
         #for a in atr:
             #aux = aux + 1
                # print('attributes{0} name: {1} value: {2}'.format(aux, a.name(), a.value()))
         
-    print('_' * 10)
+    #print('_' * 10)
 
 
-    for i in range(len(args)):
-        print(args[i])
+    for i in range(len(args)):        
         if 'KEYENEMY1' not in args[i]:
             increaseDifficulty(0)
             decreaseDifficulty(0)
