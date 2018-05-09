@@ -31,19 +31,21 @@ facts(minRiseHappenings, ("enemy1", "3"),
     ("enemy3", "10"),
     ("enemy4", "10"))
 
-increaseDifficulty(1);
+
 
 def increaseDifficulty (factor):
     x = var()
     y = var()
-    runRiseHapp = run(1, y, (minRiseHappenings, "enemy{0}".format(factor), y))
-    runRiseFactor = run(1, x, diffRiseFactor("enemy{0}".format(factor), x))
+    ene = "enemy{0}".format(factor)
+    runRiseHapp = run(1, y, (minRiseHappenings, ene, y))
+    runRiseFactor = run(1, x, diffRiseFactor(ene, x))
+
     hapFactor = happenings[factor]
     hitFactor = hits[factor]
 
     if len(runRiseHapp) > 0 and len(runRiseFactor) > 0:
-        rRiseHapp = runRiseHapp[0]
-        rRiseFactor = runRiseFactor[0]
+        rRiseHapp = float(runRiseHapp[0])
+        rRiseFactor = float(runRiseFactor[0])
 
         if hapFactor > 0:
             if hitFactor / hapFactor >= rRiseFactor and hapFactor >= rRiseHapp:
@@ -61,8 +63,8 @@ def decreaseDifficulty (factor):
     hitFactor = hits[factor]
 
     if len(runRiseHapp) > 0 and len(runLowerFactor) > 0:
-        rRiseHapp = runRiseHapp[0]
-        rLowerFactor = runLowerFactor[0]
+        rRiseHapp = float(runRiseHapp[0])
+        rLowerFactor = float(runLowerFactor[0])
 
         if hapFactor > 0:
             if hitFactor / hapFactor <= rLowerFactor and hapFactor >= rRiseHapp:
