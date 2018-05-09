@@ -164,8 +164,15 @@ public class AcessPython : MonoBehaviour
                     BalanceApplier balance = FindObjectOfType<BalanceApplier>();
                     if (balance)
                     {
-                        print(split[j] + " find -> " + split[j].Contains("True"));
-                        balance.ApplyDifficulty(i, split[j].Contains("True"));
+                        bool aplly = split[j].Contains("True") || split[j].Contains("true");
+
+                        if (aplly)
+                        {
+                            print("__________");
+                            //print(split[j] + " find -> " + aplly);
+                            balance.ApplyDifficulty(i, aplly);
+                            //print("__________"); 
+                        }
                     }
                 }
             }

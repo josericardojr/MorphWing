@@ -13,16 +13,17 @@ public class BalanceApplier : MonoBehaviour
     public List<float> difficultyMultipliersMaximum;
     [SerializeField]
     public List<float> difficultyMultipliersMinimum;
-    float increaseMultiplier, decreaseMultiplier;
+    float increaseMultiplier, decreaseMultiplier, minValue;
 
     void Awake()
     {
-        if(instance == null)
+        minValue = 1;
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -38,9 +39,20 @@ public class BalanceApplier : MonoBehaviour
 
     public void ApplyDifficulty(int enemyID, bool increase) 
     {
-        if(increase)
+        print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+        if (increase)
+        {
             Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
+        }
         else
+        {
             Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-	}
+        }
+
+        if (this.difficultyMultipliers[enemyID] < minValue)
+        {
+            this.difficultyMultipliers[enemyID] = minValue;
+        }
+        print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+    }
 }

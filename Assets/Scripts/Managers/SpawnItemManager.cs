@@ -41,8 +41,14 @@ public class SpawnItemManager : MonoBehaviour {
 		this.transform.position = Camera.main.transform.position;
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		Prov_Agent();
+        float aux = cooldownSpawn;
         this.cooldownSpawn *= this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] *
             this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3];
+
+        if (cooldownSpawn < aux)
+        {
+            cooldownSpawn = aux;
+        }
 
 		// Register the types of power ups
 		foreach (Object_Efeitos.Effects eff in System.Enum.GetValues(typeof(Object_Efeitos.Effects))) {
