@@ -58,8 +58,13 @@ public class ScoreManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneManager.LoadScene(0);
+                print("hey");
                 Destroy(this.balanceApplier);
+                SceneManager.LoadScene(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene(1);
             }
             this.gameOverTime -= Time.deltaTime / 1.8f;
             if(this.gameOverTime <= 0)
