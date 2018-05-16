@@ -2,9 +2,7 @@ from kanren import Relation, facts, var, run
 
 KEYENEMY = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 
-diffLowerFactor = Relation()
-diffRiseFactor = Relation()
-minRiseHappenings = Relation()
+balanceFactor = Relation()
 
 #infos retiradas do xml
 
@@ -16,62 +14,22 @@ happenings = [0,0,0,0]
 #BASEAR EM TEMPO
 
 #infos estabelecidas aqui
-facts(diffLowerFactor, ("enemy1", "0.5"),
+facts(balanceFactor, ("enemy1", "0.5"),
     ("enemy2", "0.4"),
     ("enemy3", "0.3"),
     ("enemy4", "0.3"))
 
-facts(diffRiseFactor, ("enemy1", "0.5"),
-    ("enemy2", "0.4"),
-    ("enemy3", "0.3"),
-    ("enemy4", "0.3"))
 
-facts(minRiseHappenings, ("enemy1", "3"),
-    ("enemy2", "4"),
-    ("enemy3", "10"),
-    ("enemy4", "10"))
-
-
-
-def increaseDifficulty (factor):
+def adjustDifficulty (factor):
     x = var()
-    y = var()
     ene = "enemy{0}".format(factor)
-    runRiseHapp = run(1, y, (minRiseHappenings, ene, y))
-    runRiseFactor = run(1, x, diffRiseFactor(ene, x))
+    hapFactor = float(happenings[factor])
+    hitFactor = float(hits[factor])
+    balFactor = run(1, x, balanceFactor("enemy{0}".format(factor), x))
 
-    hapFactor = happenings[factor]
-    hitFactor = hits[factor]
-
-    if len(runRiseHapp) > 0 and len(runRiseFactor) > 0:
-        rRiseHapp = float(runRiseHapp[0])
-        rRiseFactor = float(runRiseFactor[0])
-
-        if hapFactor > 0:
-            if hitFactor / hapFactor >= rRiseFactor and hapFactor >= rRiseHapp:
-                print("{0}true_increase;".format(KEYENEMY[factor]))
-            else:
-                print("{0}false_increase;".format(KEYENEMY[factor]))
-                
-
-def decreaseDifficulty (factor):
-    x = var()
-    y = var()
-    runRiseHapp = run(1, y, minRiseHappenings("enemy{0}".format(factor), y))
-    runLowerFactor = run(1, x, diffLowerFactor("enemy{0}".format(factor), x))
-    hapFactor = happenings[factor]
-    hitFactor = hits[factor]
-
-    if len(runRiseHapp) > 0 and len(runLowerFactor) > 0:
-        rRiseHapp = float(runRiseHapp[0])
-        rLowerFactor = float(runLowerFactor[0])
-
-        if hapFactor > 0:
-            if hitFactor / hapFactor <= rLowerFactor and hapFactor >= rRiseHapp:
-                print("{0}true_decrease;".format(KEYENEMY[factor]))
-            else:
-                print("{0}false_decrease;".format(KEYENEMY[factor]))
-
+    if hapFactor > 0:
+        result = hitFactor/hapFactor * balFactor
+        print("{0}: {1};".format(KEYENEMY[factor], result))
 
 
 def getXMLInfo(xml, args):

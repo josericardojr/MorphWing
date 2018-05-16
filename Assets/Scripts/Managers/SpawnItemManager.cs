@@ -84,6 +84,15 @@ public class SpawnItemManager : MonoBehaviour {
 		this.currPowerUp++;
 	}
 
+    float ReturnPoolValue(float weight1, float weight2, float weight3, float weight4, bool invertProportion)
+    {
+        float value;
+        if(!invertProportion)
+            value = (this.balanceApplier.difficultyMultipliers[0] * weight1) * (this.balanceApplier.difficultyMultipliers[1] * weight2) * (this.balanceApplier.difficultyMultipliers[2] * weight3) * (this.balanceApplier.difficultyMultipliers[3] * weight4);
+        else
+            value = (3.1f - (this.balanceApplier.difficultyMultipliers[0] * weight1)) * (3.1f - (this.balanceApplier.difficultyMultipliers[1] * weight2)) * (3.1f - (this.balanceApplier.difficultyMultipliers[2] * weight3)) * (3.1f - (this.balanceApplier.difficultyMultipliers[3] * weight4));
+        return value;
+    }
 
 	private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
 	{
@@ -95,13 +104,13 @@ public class SpawnItemManager : MonoBehaviour {
             List<int> powerUpPool = new List<int>();
 
             // Damage Up
-            for (int j = 0; j < 25 * (2 - this.balanceApplier.difficultyMultipliers[0]) * (2 - this.balanceApplier.difficultyMultipliers[1]) * ((2 - this.balanceApplier.difficultyMultipliers[2]) * 3) * ((2 - this.balanceApplier.difficultyMultipliers[3]) * 2); j++)
+            for (int j = 0; j < 25 * (3.1f - this.balanceApplier.difficultyMultipliers[0]) * (3.1f - this.balanceApplier.difficultyMultipliers[1]) * ((3.1f - this.balanceApplier.difficultyMultipliers[2]) * 3) * ((3.1f - this.balanceApplier.difficultyMultipliers[3]) * 2); j++)
                 powerUpPool.Add(0);
             // Damage Down
             for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
                 powerUpPool.Add(1);
             // Speed Up
-            for (int j = 0; j < 25 * ((2 - this.balanceApplier.difficultyMultipliers[0]) * 2) * ((2 - this.balanceApplier.difficultyMultipliers[1]) * 3) * (2 - this.balanceApplier.difficultyMultipliers[2]) * (2 - this.balanceApplier.difficultyMultipliers[3]); j++)
+            for (int j = 0; j < 25 * ((3.1f - this.balanceApplier.difficultyMultipliers[0]) * 2) * ((3.1f - this.balanceApplier.difficultyMultipliers[1]) * 3) * (3.1f - this.balanceApplier.difficultyMultipliers[2]) * (3.1f - this.balanceApplier.difficultyMultipliers[3]); j++)
                 powerUpPool.Add(2);
             // Damage Down
             for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
