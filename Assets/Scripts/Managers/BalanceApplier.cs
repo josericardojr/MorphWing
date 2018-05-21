@@ -40,19 +40,8 @@ public class BalanceApplier : MonoBehaviour
     public void ApplyDifficulty(int enemyID, float value)
     {
         print(AcessPython.KEYENEMY[enemyID] + ": " + value);
-    }
-
-    public void ApplyDifficulty(int enemyID, bool increase) 
-    {
         print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
-        if (increase)
-        {
-            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-        }
-        else
-        {
-            Mathf.Clamp(this.difficultyMultipliers[enemyID] *= this.increaseMultiplier, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-        }
+        Mathf.Clamp(this.difficultyMultipliers[enemyID] *= value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 
         if (this.difficultyMultipliers[enemyID] < minValue)
         {
