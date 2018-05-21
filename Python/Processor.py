@@ -22,14 +22,13 @@ facts(balanceFactor, ("enemy1", "0.5"),
 
 def adjustDifficulty (factor):
     x = var()
-    ene = "enemy{0}".format(factor)
     hapFactor = float(happenings[factor])
     hitFactor = float(hits[factor])
     balFactor = run(1, x, balanceFactor("enemy{0}".format(factor), x))
 
     if hapFactor > 0:
-        result = hitFactor/hapFactor * balFactor
-        print("{0}:{1};".format(KEYENEMY[factor], result))
+        result = hitFactor/hapFactor * float(balFactor[0])
+        print("{0}: {1};".format(KEYENEMY[factor], result))
 
 
 def getXMLInfo(xml, args):
