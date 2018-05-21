@@ -153,25 +153,33 @@ public class AcessPython : MonoBehaviour
 
     private static void FindChanges(string pyInstruction)
     {
-        string[] split;
+        string[] splitReturn, splitEnemy;
+        float valueBalance;
         for (int i = 0; i < KEYENEMY.Length; i++)
         {
-            split = pyInstruction.Split(new char[] { ';' });
-            for (int j = 0; j < split.Length; j++)
+            splitReturn = pyInstruction.Split(new char[] { ';' });
+            for (int j = 0; j < splitReturn.Length; j++)
             {
-                if (split[j].Contains(KEYENEMY[i]))
+                if (splitReturn[j].Contains(KEYENEMY[i]))
                 {
                     BalanceApplier balance = FindObjectOfType<BalanceApplier>();
                     if (balance)
                     {
-                        bool aplly = split[j].Contains("True") || split[j].Contains("true");
+                        splitEnemy = splitReturn[j].Split(new char[] { ':' });
 
-                        if (aplly)
+                        if (splitEnemy.Length > 1)
                         {
-                            print("__________");
-                            //print(split[j] + " find -> " + aplly);
-                            balance.ApplyDifficulty(i, aplly);
-                            //print("__________"); 
+                            try
+                            {
+                                valueBalance = float.Parse(splitEnemy[splitEnemy.Length - 1]);
+                                balance.ApplyDifficulty(i, valueBalance);
+                                //print("__________");
+                                //print(split[j] + " find -> " + aplly);
+                            }
+                            catch 
+                            {
+                                print("Dont find value on: " + splitEnemy[splitEnemy.Length - 1]);
+                            }
                         }
                     }
                 }
