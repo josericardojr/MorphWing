@@ -37,6 +37,11 @@ public class BalanceApplier : MonoBehaviour
                 this.difficultyMultipliers[i] = 1;
     }
 
+    public void ApplyDifficulty(int enemyID, float value)
+    {
+        print(AcessPython.KEYENEMY[enemyID] + ": " + value);
+    }
+
     public void ApplyDifficulty(int enemyID, bool increase) 
     {
         print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
