@@ -11,6 +11,8 @@ public class SpawnItemManager : MonoBehaviour {
     [SerializeField]
     bool random;
 
+    [SerializeField]
+    Transform player;
 	[SerializeField]
 	List<int> effectOrder;
 	[SerializeField]
@@ -68,21 +70,57 @@ public class SpawnItemManager : MonoBehaviour {
 	{
 		if(this.currPowerUp == this.effectOrder.Count)
 			this.currPowerUp = 0;
-        GameObject g;
-        if(!this.random)
+        GameObject g = null;
+        if (!this.random)
             g = Instantiate(this.prefab, this.positionOrder[this.currPowerUp].position, Quaternion.identity);
         else
-            g = Instantiate(this.prefab, this.allPositions[Random.Range (0, 5)].position, Quaternion.identity);
+        {
+            g = Instantiate(this.prefab, new Vector2(0, 0), Quaternion.identity);
+        }
+        if (g != null)
+        {
+            g.transform.Translate(0, 0, 1);
+            g.gameObject.tag = "Item";
 
-		g.transform.Translate(0,0,1);
-		g.gameObject.tag = "Item";
+            if (!g.GetComponent<Object_Efeitos>())
+                g.AddComponent<Object_Efeitos>();
 
-		if (!g.GetComponent<Object_Efeitos>())
-			g.AddComponent<Object_Efeitos>();
-
-		g.GetComponent<Object_Efeitos>().SetEfeitoAtual(RandomEffect(g));
+            g.GetComponent<Object_Efeitos>().SetEfeitoAtual(RandomEffect(g));
+            // SPAWN ALEATÓRIO
+            if (player != null && this.random)
+            {
+                AdjustRandomSpawnPosition(g);
+                while (g.transform.position.x < -5 || g.transform.position.x > 5 ||
+                    g.transform.position.y < -2.7f || g.transform.position.y > 2.7f)
+                    AdjustRandomSpawnPosition(g);
+            }
+        }
 		this.currPowerUp++;
 	}
+
+    void AdjustRandomSpawnPosition(GameObject spawnObj)
+    {
+        float angle = Random.Range(0.0f, Mathf.PI * 2);
+        Vector3 V = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
+        float distance = 0.4f;
+        switch (spawnObj.GetComponent<Item>().effectId)
+        {
+            case 0:
+                distance *= ReturnPoolValue(1, 1, 3, 2, true);
+                break;
+            case 1:
+                distance *= ReturnPoolValue(1, 1, 3, 2, false);
+                break;
+            case 2:
+                distance *= ReturnPoolValue(2, 3, 1, 1, true);
+                break;
+            case 3:
+                distance *= ReturnPoolValue(2, 3, 1, 1, false);
+                break;
+        }
+        V *= Mathf.Clamp(distance, 1, 5.1f);
+        spawnObj.transform.position = player.transform.position + V;
+    }
 
     float ReturnPoolValue(float weight1, float weight2, float weight3, float weight4, bool invertProportion)
     {
@@ -90,7 +128,10 @@ public class SpawnItemManager : MonoBehaviour {
         if(!invertProportion)
             value = (this.balanceApplier.difficultyMultipliers[0] * weight1) * (this.balanceApplier.difficultyMultipliers[1] * weight2) * (this.balanceApplier.difficultyMultipliers[2] * weight3) * (this.balanceApplier.difficultyMultipliers[3] * weight4);
         else
-            value = (3.1f - (this.balanceApplier.difficultyMultipliers[0] * weight1)) * (3.1f - (this.balanceApplier.difficultyMultipliers[1] * weight2)) * (3.1f - (this.balanceApplier.difficultyMultipliers[2] * weight3)) * (3.1f - (this.balanceApplier.difficultyMultipliers[3] * weight4));
+            value = Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[0] * weight1)), 0.1f, 3.1f) * 
+                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[1] * weight2)), 0.1f, 3.1f) * 
+                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[2] * weight3)), 0.1f, 3.1f) * 
+                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[3] * weight4)), 0.1f, 3.1f);
         return value;
     }
 
@@ -104,16 +145,16 @@ public class SpawnItemManager : MonoBehaviour {
             List<int> powerUpPool = new List<int>();
 
             // Damage Up
-            for (int j = 0; j < 25 * (3.1f - this.balanceApplier.difficultyMultipliers[0]) * (3.1f - this.balanceApplier.difficultyMultipliers[1]) * ((3.1f - this.balanceApplier.difficultyMultipliers[2]) * 3) * ((3.1f - this.balanceApplier.difficultyMultipliers[3]) * 2); j++)
+            for (int j = 0; j < 25 * ReturnPoolValue(1, 1, 3, 2, true); j++)
                 powerUpPool.Add(0);
             // Damage Down
-            for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
+            for (int j = 0; j < 25 * ReturnPoolValue(1, 1, 3, 2, false); j++)
                 powerUpPool.Add(1);
             // Speed Up
-            for (int j = 0; j < 25 * ((3.1f - this.balanceApplier.difficultyMultipliers[0]) * 2) * ((3.1f - this.balanceApplier.difficultyMultipliers[1]) * 3) * (3.1f - this.balanceApplier.difficultyMultipliers[2]) * (3.1f - this.balanceApplier.difficultyMultipliers[3]); j++)
+            for (int j = 0; j < 25 * ReturnPoolValue(2, 3, 1, 1, true); j++)
                 powerUpPool.Add(2);
             // Damage Down
-            for (int j = 0; j < 25 * this.balanceApplier.difficultyMultipliers[0] * this.balanceApplier.difficultyMultipliers[1] * this.balanceApplier.difficultyMultipliers[2] * this.balanceApplier.difficultyMultipliers[3]; j++)
+            for (int j = 0; j < 25 * ReturnPoolValue(2, 3, 1, 1, false); j++)
                 powerUpPool.Add(3);
 
             aux = powerUpPool[Random.Range(0, powerUpPool.Count)];
@@ -151,7 +192,8 @@ public class SpawnItemManager : MonoBehaviour {
 			gameObjAtual.GetComponent<SpriteRenderer>().sprite = spriteColorInvert;
 			break;
 		}
-		gameObjAtual.GetComponent<Item> ().itemController = this.itemController;
+        gameObjAtual.GetComponent<Item>().itemController = this.itemController;
+        gameObjAtual.GetComponent<Item>().effectId = aux;
 		itemController.Increase (auxEffect.ToString ());
 
 		Prov_SpawnItem();

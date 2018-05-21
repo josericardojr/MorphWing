@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
+    public int effectId;
 	public float lifeTime = 4;
 	public Object_Efeitos.Effects effect;
 	public ItemController itemController;

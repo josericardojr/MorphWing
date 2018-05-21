@@ -20,15 +20,15 @@ facts(balanceFactor, ("enemy1", "0.5"),
     ("enemy4", "0.3"))
 
 
+
 def adjustDifficulty (factor):
-    x = var()
-    ene = "enemy{0}".format(factor)
-    hapFactor = float(happenings[factor])
-    hitFactor = float(hits[factor])
-    balFactor = run(1, x, balanceFactor("enemy{0}".format(factor), x))
+    x = var();
+    hapFactor = float(happenings[factor - 1])
+    hitFactor = float(hits[factor - 1])
+    balFactor = run(1, x, balanceFactor("enemy{0}".format(factor + 1), x))
 
     if hapFactor > 0:
-        result = hitFactor/hapFactor * balFactor
+        result = hitFactor/hapFactor * float(balFactor[0])
         print("{0}: {1};".format(KEYENEMY[factor], result))
 
 
