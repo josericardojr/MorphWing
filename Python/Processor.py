@@ -29,7 +29,7 @@ def adjustDifficulty (factor):
 
     if hapFactor > 0:
         result = hitFactor/hapFactor * balFactor
-        print("{0}: {1};".format(KEYENEMY[factor], result))
+        print("{0}:{1};".format(KEYENEMY[factor], result))
 
 
 def getXMLInfo(xml, args):
