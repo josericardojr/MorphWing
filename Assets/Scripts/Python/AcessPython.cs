@@ -127,7 +127,6 @@ public class AcessPython : MonoBehaviour
             else
             {
                 pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file + " " + args, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
-                //print(pyInstruction);
                 instruction = ("Result: " + pyInstruction);
 
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
