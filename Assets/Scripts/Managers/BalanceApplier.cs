@@ -7,6 +7,7 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
+    float damageModifier;
     [SerializeField]
     public List<float> difficultyMultipliers = new List<float>();
     [SerializeField]
@@ -48,5 +49,10 @@ public class BalanceApplier : MonoBehaviour
             this.difficultyMultipliers[enemyID] = minValue;
         }
         print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+    }
+
+    public void ModifyDamage(float modifier)
+    {
+        this.damageModifier = modifier;
     }
 }

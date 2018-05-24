@@ -4,6 +4,13 @@ KEYENEMY = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 
 balanceFactor = Relation()
 
+# Colocar hits do player aqui
+playerHits = 3;
+# Colocar tempo de jogo aqui
+gameTime = 2;
+
+damageBalanceFactor = 1;
+
 #infos retiradas do xml
 
 #numero de hits em ordem de tipo de inimigo
@@ -19,7 +26,6 @@ facts(balanceFactor, ("enemy1", "0.5"),
     ("enemy3", "0.3"),
     ("enemy4", "0.3"))
 
-
 def adjustDifficulty (factor):
     x = var()
     hapFactor = float(happenings[factor])
@@ -30,6 +36,11 @@ def adjustDifficulty (factor):
         result = hitFactor/hapFactor * float(balFactor[0])
         print("{0}:{1};".format(KEYENEMY[factor], result))
 
+def adjustPlayerDamage ():
+    result = float(playerHits) / float(gameTime) * float(damageBalanceFactor);
+    print("{0}:{1};".format("PlayerHitRate", result))
+
+adjustPlayerDamage();
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
