@@ -7,7 +7,7 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
-    float damageModifier;
+    float damageModifier = 1;
     [SerializeField]
     public List<float> difficultyMultipliers = new List<float>();
     [SerializeField]
@@ -15,6 +15,13 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     public List<float> difficultyMultipliersMinimum;
     float increaseMultiplier, decreaseMultiplier, minValue;
+    [SerializeField]
+    float damageModMax, damageModMin;
+
+    public float DamageModifier
+    {
+        get { return this.damageModifier; }
+    }
 
     void Awake()
     {
@@ -33,16 +40,19 @@ public class BalanceApplier : MonoBehaviour
 
     void Start()
     {
-        if(dontApplyBalance)
+        if (dontApplyBalance)
+        {
             for (int i = 0; i < 4; i++)
                 this.difficultyMultipliers[i] = 1;
+            this.damageModifier = 1;
+        }
     }
 
     public void ApplyDifficulty(int enemyID, float value)
     {
         print(AcessPython.KEYENEMY[enemyID] + ": " + value);
         print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
-        Mathf.Clamp(this.difficultyMultipliers[enemyID] *= value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
+        this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] * value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 
         if (this.difficultyMultipliers[enemyID] < minValue)
         {
@@ -51,8 +61,8 @@ public class BalanceApplier : MonoBehaviour
         print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
     }
 
-    public void ModifyDamage(float modifier)
+    public void ModifyDamage(float value)
     {
-        this.damageModifier = modifier;
+        this.damageModifier = Mathf.Clamp(this.damageModifier * value, this.damageModMin, this.damageModMax);
     }
 }
