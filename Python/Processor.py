@@ -1,15 +1,11 @@
 from kanren import Relation, facts, var, run
+from Data.PlayerDamageData import *
 
 KEYENEMY = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 
 balanceFactor = Relation()
 
-# Colocar hits do player aqui
-playerHits = 3;
-# Colocar tempo de jogo aqui
-gameTime = 2;
-
-damageBalanceFactor = 1;
+damageBalanceFactor = 1
 
 #infos retiradas do xml
 
@@ -36,11 +32,12 @@ def adjustDifficulty (factor):
         result = hitFactor/hapFactor * float(balFactor[0])
         print("{0}:{1};".format(KEYENEMY[factor], result))
 
-def adjustPlayerDamage ():
-    result = float(playerHits) / float(gameTime) * float(damageBalanceFactor);
+
+def adjustPlayerDamage (hit_time):
+    result = hit_time * float(damageBalanceFactor)
     print("{0}:{1};".format("PlayerHitRate", result))
 
-adjustPlayerDamage();
+
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
@@ -82,5 +79,7 @@ def getXMLInfo(xml, args):
         for j in range(len(KEYENEMY)):
             #print('Debug: {0} : {1};'.format(KEYENEMY[j], args[i]))
             if KEYENEMY[j] in args[i]:
-                adjustDifficulty(j);
+                adjustDifficulty(j)
 
+    damageData = DamageData(xml)
+    adjustPlayerDamage(damageData.result())

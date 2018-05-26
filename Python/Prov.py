@@ -17,13 +17,12 @@ file = ''
 args = sys.argv
 for i in range(len(args)):
     if args[i] == 'do':
-        if i + 1< len(sys.argv):
+        if i + 1 < len(sys.argv):
             file = args[i + 1]
         else:
             print('forgot the xml file name')
     if args[i] == 'test':
-        file = 'C:\\Users\\Felipe Machado\\Documents\\MorphWing_\\Assets\\info_16.5.2018;21.26.xml'
-
+        file = 'C:\\Users\\Lucas\\Documents\\JogoProveniência\\Assets\\info_26.5.2018;2.0.xml'
 
 
 if file != '':
