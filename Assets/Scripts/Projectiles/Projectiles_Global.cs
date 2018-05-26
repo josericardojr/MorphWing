@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectiles_Global : MonoBehaviour
 {
+    BalanceApplier balanceApplier;
     ScoreManager scoreManager;
 	Managers_Spawn managers_spawn;
 	new protected Rigidbody2D rigidbody;
@@ -14,7 +15,7 @@ public class Projectiles_Global : MonoBehaviour
 	[SerializeField]
 	List<GameObject> prefabList = new List<GameObject>();
 	[SerializeField]
-	float damage;
+	float damage, minPlayerDamage, maxPlayerDamage;
 	[SerializeField]
 	float speed;
 
@@ -26,7 +27,12 @@ public class Projectiles_Global : MonoBehaviour
 
 	protected void Start()
     {
-        this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        if (this.CompareTag("Player_Shot"))
+        {
+            this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
+            this.damage *= this.balanceApplier.DamageModifier;
+        }
         if (this.upEffect)
             this.GetComponent<Animator>().SetTrigger("Crazy");
 		this.rigidbody = this.GetComponent<Rigidbody2D>();

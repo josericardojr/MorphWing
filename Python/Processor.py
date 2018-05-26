@@ -14,6 +14,9 @@ hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
 happenings = [0,0,0,0]
 
+difficultyMultipliers = [1,1,1,1]
+itemDistances = [0,0,0,0]
+
 #BASEAR EM TEMPO
 
 #infos estabelecidas aqui
@@ -31,13 +34,32 @@ def adjustDifficulty (factor):
     if hapFactor > 0:
         result = hitFactor/hapFactor * float(balFactor[0])
         print("{0}:{1};".format(KEYENEMY[factor], result))
-
+        
 
 def adjustPlayerDamage (hit_time):
     result = hit_time * float(damageBalanceFactor)
     print("{0}:{1};".format("PlayerHitRate", result))
 
 
+
+
+def ReturnPoolValues(w1, w2, w3, w4, invert) :
+    value = 1;
+    if not invert:
+        value = (difficultyMultipliers[0] * w1) * (difficultyMultipliers[1] * w2) * (difficultyMultipliers[2] * w3) * (difficultyMultipliers[3] * w4);
+    else:
+        value = max(min(3.1 - (difficultyMultipliers[0] * w1), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[1] * w2), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[2] * w3), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[3] * w4), 3.1), 0.1);
+    return value;
+
+def GetItemDistances():
+    itemDistances[0] = ReturnPoolValues(1,1,3,2,True);
+    itemDistances[1] = ReturnPoolValues(1,1,3,2,False);
+    itemDistances[2] = ReturnPoolValues(2,3,1,1,True);
+    itemDistances[3] = ReturnPoolValues(2,3,1,1,False);
+    print("{0}:{1};".format("ItemDistance0", itemDistances[0]))
+    print("{0}:{1};".format("ItemDistance1", itemDistances[1]))
+    print("{0}:{1};".format("ItemDistance2", itemDistances[2]))
+    print("{0}:{1};".format("ItemDistance3", itemDistances[3]))
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
