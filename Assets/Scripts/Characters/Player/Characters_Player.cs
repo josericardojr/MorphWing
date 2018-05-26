@@ -166,7 +166,7 @@ public class Characters_Player : Characters_Global
 		base.CheckIfAlive(instanceID);
 	}
 
-    public string GetDate()
+    public static string GetDate()
     {
         System.DateTime time = System.DateTime.Now;
         return (time.Day + "." + time.Month + "." + time.Year + ";" + time.Hour + "." + time.Minute);

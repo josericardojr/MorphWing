@@ -23,7 +23,7 @@ public class AcessPython : MonoBehaviour
     private void Awake()
     {
         run = false;
-            myText = "start";
+            MyText = "start";
         if (!run)
         {
             string args = "";
@@ -40,11 +40,11 @@ public class AcessPython : MonoBehaviour
     {
         if (!Input.GetMouseButton(0))
         {
-            myText = "";
+            MyText = "";
         }
         else
         {
-            myText = instruction;
+            MyText = instruction;
         }
     }
 
@@ -126,7 +126,26 @@ public class AcessPython : MonoBehaviour
             }
             else
             {
+#if UNITY_EDITOR
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                // the code that you want to measure comes here
+#endif
                 pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file + " " + args, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+#if UNITY_EDITOR
+                watch.Stop();
+                var elapsedMs = watch.ElapsedMilliseconds;
+                print("Time to get Instruction: " + (elapsedMs));
+
+                string nameFile = "LogTime.txt";
+                if (File.Exists(nameFile))
+                {
+                    TextWriter tw = new StreamWriter(Directory.GetCurrentDirectory() + @"\" + nameFile, true);
+                    
+                    tw.WriteLine(Characters_Player.GetDate() + ":" + elapsedMs);
+                    
+                    tw.Close();
+                }
+#endif
                 instruction = ("Result: " + pyInstruction);
 
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
@@ -186,7 +205,7 @@ public class AcessPython : MonoBehaviour
         }
     }
 
-    public string myText
+    public string MyText
     {
         get
         {
