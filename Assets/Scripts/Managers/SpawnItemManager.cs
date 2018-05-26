@@ -103,36 +103,9 @@ public class SpawnItemManager : MonoBehaviour {
         float angle = Random.Range(0.0f, Mathf.PI * 2);
         Vector3 V = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
         float distance = 0.4f;
-        switch (spawnObj.GetComponent<Item>().effectId)
-        {
-            case 0:
-                distance *= ReturnPoolValue(1, 1, 3, 2, true);
-                break;
-            case 1:
-                distance *= ReturnPoolValue(1, 1, 3, 2, false);
-                break;
-            case 2:
-                distance *= ReturnPoolValue(2, 3, 1, 1, true);
-                break;
-            case 3:
-                distance *= ReturnPoolValue(2, 3, 1, 1, false);
-                break;
-        }
+        distance *= this.balanceApplier.itemDistances[spawnObj.GetComponent<Item>().effectId];
         V *= Mathf.Clamp(distance, 1, 5.1f);
         spawnObj.transform.position = player.transform.position + V;
-    }
-
-    float ReturnPoolValue(float weight1, float weight2, float weight3, float weight4, bool invertProportion)
-    {
-        float value;
-        if(!invertProportion)
-            value = (this.balanceApplier.difficultyMultipliers[0] * weight1) * (this.balanceApplier.difficultyMultipliers[1] * weight2) * (this.balanceApplier.difficultyMultipliers[2] * weight3) * (this.balanceApplier.difficultyMultipliers[3] * weight4);
-        else
-            value = Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[0] * weight1)), 0.1f, 3.1f) * 
-                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[1] * weight2)), 0.1f, 3.1f) * 
-                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[2] * weight3)), 0.1f, 3.1f) * 
-                    Mathf.Clamp((3.1f - (this.balanceApplier.difficultyMultipliers[3] * weight4)), 0.1f, 3.1f);
-        return value;
     }
 
 	private Object_Efeitos.Effects RandomEffect(GameObject gameObjAtual)
@@ -145,16 +118,16 @@ public class SpawnItemManager : MonoBehaviour {
             List<int> powerUpPool = new List<int>();
 
             // Damage Up
-            for (int j = 0; j < 25 * ReturnPoolValue(1, 1, 3, 2, true); j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[0]; j++)
                 powerUpPool.Add(0);
             // Damage Down
-            for (int j = 0; j < 25 * ReturnPoolValue(1, 1, 3, 2, false); j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[1]; j++)
                 powerUpPool.Add(1);
             // Speed Up
-            for (int j = 0; j < 25 * ReturnPoolValue(2, 3, 1, 1, true); j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[2]; j++)
                 powerUpPool.Add(2);
             // Damage Down
-            for (int j = 0; j < 25 * ReturnPoolValue(2, 3, 1, 1, false); j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[3]; j++)
                 powerUpPool.Add(3);
 
             aux = powerUpPool[Random.Range(0, powerUpPool.Count)];
