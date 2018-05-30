@@ -3,6 +3,7 @@ from Data.PlayerDamageData import *
 
 key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
+player_hit_rate = "PLAYERHITRATE"
 
 balanceFactor = Relation()
 
@@ -26,6 +27,10 @@ facts(balanceFactor, ("enemy1", "0.5"),
     ("enemy3", "0.3"),
     ("enemy4", "0.3"))
 
+
+def format_number(number):
+    return round(float(number),3)
+
 def adjustDifficulty (factor):
     x = var()
     hapFactor = float(happenings[factor])
@@ -34,16 +39,16 @@ def adjustDifficulty (factor):
 
     if hapFactor > 0:
         result = hitFactor/hapFactor * float(balFactor[0])
-        print("{0}:{1};".format(key_enemy[factor], result))
+        print("{0}:{1};".format(key_enemy[factor], format_number(result)))
         
 
 def adjustPlayerDamage (hit_time):
     result = hit_time * float(damageBalanceFactor)
-    print("{0}:{1};".format("PlayerHitRate", result))
+    print("{0}:{1};".format(player_hit_rate, format_number(result)))
 
 
 def ReturnPoolValues(w1, w2, w3, w4, invert) :
-    value = 1;
+    value = 1
     if not invert:
         value = (difficultyMultipliers[0] * w1) * (difficultyMultipliers[1] * w2) * (difficultyMultipliers[2] * w3) * (difficultyMultipliers[3] * w4);
     else:
@@ -59,10 +64,10 @@ def GetItemDistances(m1, m2, m3, m4):
     itemDistances[1] = ReturnPoolValues(1,1,3,2,False);
     itemDistances[2] = ReturnPoolValues(2,3,1,1,True);
     itemDistances[3] = ReturnPoolValues(2,3,1,1,False);
-    print("{0}:{1};".format("ItemDistance0", itemDistances[0]))
-    print("{0}:{1};".format("ItemDistance1", itemDistances[1]))
-    print("{0}:{1};".format("ItemDistance2", itemDistances[2]))
-    print("{0}:{1};".format("ItemDistance3", itemDistances[3]))
+
+    for j in range(len(itemDistances)):
+        print("{0}:{1};".format(key_dif_multi[j], format_number(itemDistances[j])))
+
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
@@ -101,20 +106,21 @@ def getXMLInfo(xml, args):
     #print('_' * 10)
 
     dif_multi = [0, 0, 0, 0]
-    for i in range(len(args)):
-        for j in range(len(key_enemy)):
-            #print('Debug: {0} : {1};'.format(KEYENEMY[j], args[i]))
+
+    for j in range(len(key_enemy)):
+        for i in range(len(args)):
             if key_enemy[j] in args[i]:
                 adjustDifficulty(j)
-        for j in range(len(key_dif_multi)):
+
+    for j in range(len(key_dif_multi)):
+        for i in range(len(args)):
             if key_dif_multi[j] in args[i]:
                 splited = args[i].split('=')
                 last = splited[len(splited) - 1]
                 if last.isdigit():
                     dif_multi[j] = float(last)
 
-
-    damageData = DamageData(xml)
-    adjustPlayerDamage(damageData.result())
+    damage_data = DamageData(xml)
+    adjustPlayerDamage(damage_data.result())
 
     GetItemDistances(dif_multi[0], dif_multi[1], dif_multi[2], dif_multi[3])

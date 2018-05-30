@@ -13,6 +13,8 @@ public class AcessPython : MonoBehaviour
 
     public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" }, KEYDIFMULTI = { "DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4" };
 
+    public static string PLAYERHITRATE = "PLAYERHITRATE";
+
     [SerializeField]
     private Text text;
 
@@ -186,11 +188,12 @@ public class AcessPython : MonoBehaviour
 
     private static void FindChanges(string pyInstruction)
     {
-        string[] splitReturn, splitEnemy;
+        string[] splitReturn = pyInstruction.Split(new char[] { ';' }), split;
         float valueBalance;
+
+        #region enemy
         for (int i = 0; i < KEYENEMY.Length; i++)
         {
-            splitReturn = pyInstruction.Split(new char[] { ';' });
             for (int j = 0; j < splitReturn.Length; j++)
             {
                 if (splitReturn[j].Contains(KEYENEMY[i]))
@@ -198,21 +201,85 @@ public class AcessPython : MonoBehaviour
                     BalanceApplier balance = FindObjectOfType<BalanceApplier>();
                     if (balance)
                     {
-                        splitEnemy = splitReturn[j].Split(new char[] { ':' });
+                        split = splitReturn[j].Split(new char[] { ':' });
 
-                        if (splitEnemy.Length > 1)
+                        if (split.Length > 1)
                         {
                             try
                             {
-                                valueBalance = float.Parse(splitEnemy[splitEnemy.Length - 1]);
+                                valueBalance = float.Parse(split[split.Length - 1]);
                                 balance.ApplyDifficulty(i, valueBalance);
                                 //print("__________");
-                                //print(split[j] + " find -> " + aplly);
+                                //print(split[j] + " find -> " + valueBalance);
                             }
-                            catch 
+                            catch
                             {
-                                print("Dont find value on: " + splitEnemy[splitEnemy.Length - 1]);
+                                print("Dont find value on: " + split[split.Length - 1]);
                             }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region dif multi
+        for (int i = 0; i < KEYDIFMULTI.Length; i++)
+        {
+            for (int j = 0; j < splitReturn.Length; j++)
+            {
+                if (splitReturn[j].Contains(KEYDIFMULTI[i]))
+                {
+                    BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+                    if (balance)
+                    {
+                        split = splitReturn[j].Split(new char[] { ':' });
+
+                        if (split.Length > 1)
+                        {
+                            try
+                            {
+                                valueBalance = float.Parse(split[split.Length - 1]);
+                                balance.itemDistances[i] = valueBalance;
+                                //print("__________");
+                                //print(split[0] + " find -> " + valueBalance);
+                            }
+                            catch (System.Exception e)
+                            {
+                                print(e.Message);
+                                print("Dont find value on:" + split[split.Length - 1]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+        for (int j = 0; j < splitReturn.Length; j++)
+        {
+            if (splitReturn[j].Contains(PLAYERHITRATE))
+            {
+                BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+                if (balance)
+                {
+                    split = splitReturn[j].Split(new char[] { ':' });
+
+                    if (split.Length > 1)
+                    {
+                        try
+                        {
+                            valueBalance = float.Parse(split[split.Length - 1]);
+                            balance.ModifyDamage(valueBalance);
+
+                            //print("__________");
+                            //print(split[0] + " find -> " + valueBalance);
+                        }
+                        catch (System.Exception e)
+                        {
+                            print(e.Message);
+                            print("Dont find value on:" + split[split.Length - 1]);
                         }
                     }
                 }

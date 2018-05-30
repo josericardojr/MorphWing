@@ -59,15 +59,15 @@ public class BalanceApplier : MonoBehaviour
 
     public void ApplyDifficulty(int enemyID, float value)
     {
-        print(AcessPython.KEYENEMY[enemyID] + ": " + value);
-        print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+        //print(AcessPython.KEYENEMY[enemyID] + ": " + value);
+        //print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
         this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] * value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 
         if (this.difficultyMultipliers[enemyID] < minValue)
         {
             this.difficultyMultipliers[enemyID] = minValue;
         }
-        print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+        //print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
     }
 
     public void ModifyDamage(float value)
