@@ -1,7 +1,8 @@
 from kanren import Relation, facts, var, run
 from Data.PlayerDamageData import *
 
-KEYENEMY = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
+key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
+key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
 
 balanceFactor = Relation()
 
@@ -12,10 +13,10 @@ damageBalanceFactor = 1
 #numero de hits em ordem de tipo de inimigo
 hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [0,0,0,0]
+happenings = [0, 0, 0, 0]
 
-difficultyMultipliers = [1,1,1,1]
-itemDistances = [0,0,0,0]
+difficultyMultipliers = [1, 1, 1, 1]
+itemDistances = [0, 0, 0, 0]
 
 #BASEAR EM TEMPO
 
@@ -33,7 +34,7 @@ def adjustDifficulty (factor):
 
     if hapFactor > 0:
         result = hitFactor/hapFactor * float(balFactor[0])
-        print("{0}:{1};".format(KEYENEMY[factor], result))
+        print("{0}:{1};".format(key_enemy[factor], result))
         
 
 def adjustPlayerDamage (hit_time):
@@ -99,11 +100,21 @@ def getXMLInfo(xml, args):
         
     #print('_' * 10)
 
+    dif_multi = [0, 0, 0, 0]
     for i in range(len(args)):
-        for j in range(len(KEYENEMY)):
+        for j in range(len(key_enemy)):
             #print('Debug: {0} : {1};'.format(KEYENEMY[j], args[i]))
-            if KEYENEMY[j] in args[i]:
+            if key_enemy[j] in args[i]:
                 adjustDifficulty(j)
+        for j in range(len(key_dif_multi)):
+            if key_dif_multi[j] in args[i]:
+                splited = args[i].split('=')
+                last = splited[len(splited) - 1]
+                if last.isdigit():
+                    dif_multi[j] = float(last)
+
 
     damageData = DamageData(xml)
     adjustPlayerDamage(damageData.result())
+
+    GetItemDistances(dif_multi[0], dif_multi[1], dif_multi[2], dif_multi[3])

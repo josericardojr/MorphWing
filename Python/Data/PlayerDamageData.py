@@ -14,7 +14,7 @@ class DamageData:
         self.d_sum_att = aux_sum_att
         self.d_bigger_time = aux_bigger_time
         aux_result = 0
-        
+
         if aux_bigger_time != 0:
             aux_result = aux_sum_att / aux_bigger_time
 
