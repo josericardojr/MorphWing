@@ -5,8 +5,6 @@ using UnityEngine;
 public class BalanceApplier : MonoBehaviour
 {
     [SerializeField]
-    protected ExtractProvenance extractProvenance;
-    [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
     float damageModifier = 1;
@@ -50,11 +48,6 @@ public class BalanceApplier : MonoBehaviour
                 this.difficultyMultipliers[i] = 1;
             this.damageModifier = 1;
         }
-        else
-        {
-            for (int i = 0; i < 4; i++)
-                Prov_DifficultyPass(i);
-        }
     }
 
     public void ApplyDifficulty(int enemyID, float value)
@@ -81,12 +74,6 @@ public class BalanceApplier : MonoBehaviour
         this.itemDistances[1] = item2;
         this.itemDistances[2] = item3;
         this.itemDistances[3] = item4;
-    }
-
-
-    protected void Prov_DifficultyPass(int id)
-    {
-        this.extractProvenance.NewActivityVertex("DifficultyMultiplier_" + id + "_" + this.difficultyMultipliers[id]);
     }
 
 }
