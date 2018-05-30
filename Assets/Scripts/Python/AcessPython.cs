@@ -11,7 +11,7 @@ public class AcessPython : MonoBehaviour
 {
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
-    public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" };
+    public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" }, KEYDIFMULTI = { "DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4" };
 
     [SerializeField]
     private Text text;
@@ -97,6 +97,16 @@ public class AcessPython : MonoBehaviour
     public void GetChanges(string xmlName)
     {
         xmlName += ".xml";
+        string args = GetArgs(xmlName);
+
+        if (!run)
+        {
+            StartCoroutine(MakeChanges(args));
+        }
+    }
+
+    private string GetArgs(string xmlName)
+    {
         file = Application.dataPath + @"\" + xmlName;
         PlayerPrefs.SetString(AcessPython.KEYFILEXML, file);
         string args = "";
@@ -105,11 +115,16 @@ public class AcessPython : MonoBehaviour
         {
             args += KEYENEMY[i] + " ";
         }
-
-        if (!run)
+        BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+        if (balance != null)
         {
-            StartCoroutine(MakeChanges(args));
+            for (int i = 0; i < KEYDIFMULTI.Length; i++)
+            {
+                args += KEYDIFMULTI[i] + "=" + balance.difficultyMultipliers[i] + " ";
+            }
         }
+
+        return args;
     }
 
     private IEnumerator MakeChanges(string args)
