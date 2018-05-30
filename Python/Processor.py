@@ -41,8 +41,6 @@ def adjustPlayerDamage (hit_time):
     print("{0}:{1};".format("PlayerHitRate", result))
 
 
-
-
 def ReturnPoolValues(w1, w2, w3, w4, invert) :
     value = 1;
     if not invert:
@@ -51,7 +49,11 @@ def ReturnPoolValues(w1, w2, w3, w4, invert) :
         value = max(min(3.1 - (difficultyMultipliers[0] * w1), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[1] * w2), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[2] * w3), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[3] * w4), 3.1), 0.1);
     return value;
 
-def GetItemDistances():
+def GetItemDistances(m1, m2, m3, m4):
+    difficultyMultipliers[0] = m1;
+    difficultyMultipliers[1] = m2;
+    difficultyMultipliers[2] = m3;
+    difficultyMultipliers[3] = m4;
     itemDistances[0] = ReturnPoolValues(1,1,3,2,True);
     itemDistances[1] = ReturnPoolValues(1,1,3,2,False);
     itemDistances[2] = ReturnPoolValues(2,3,1,1,True);
