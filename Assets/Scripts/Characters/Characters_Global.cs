@@ -143,7 +143,7 @@ public abstract class Characters_Global : MonoBehaviour
 	{
 		//Prov_GetAttributes();
 		string infID = instanceID.ToString();
-		this.Prov_TakeDamage(infID);
+        this.Prov_TakeDamage(infID);
 		//this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
 	}
 
@@ -161,6 +161,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.AddAttribute("infID", infID);
 		this.extractProvenance.NewActivityVertex("Heal");
 		this.extractProvenance.HasInfluence_ID(infID);
+        // AQUI
 	}
 
     protected void Prov_UsingAttack(string infID)
@@ -169,6 +170,7 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.AddAttribute("infID", infID);
         this.extractProvenance.NewActivityVertex("Attacking (" + this.objType + ")");
         this.extractProvenance.HasInfluence_ID(infID);
+        // AQUI
     }
 
 	/*
@@ -183,7 +185,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public void Prov_TakeDamage(string infID)
 	{
-
+        // AQUI
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
 		// Check Influence
@@ -197,6 +199,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     public void Prov_GetDestroyed(string infID)
     {
+        // AQUI
         this.Prov_GetAttributes();
         this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
         // Check Influence
@@ -215,7 +218,8 @@ public abstract class Characters_Global : MonoBehaviour
     */
 
 	public void Prov_PowerUp(string type, string infID)
-	{
+    {
+        // AQUI
 		Prov_GetAttributes();
 		this.extractProvenance.AddAttribute("InfID", infID);
 		this.extractProvenance.NewActivityVertex(type);
@@ -224,7 +228,8 @@ public abstract class Characters_Global : MonoBehaviour
 	}
 
 	public string Prov_EnemyAttack(int damageAmount)
-	{
+    {
+        // AQUI
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Colliding", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");
@@ -233,7 +238,8 @@ public abstract class Characters_Global : MonoBehaviour
 	}
 
 	public string Prov_PlayerShoot(float damageAmount, string infID)
-	{
+    {
+        // AQUI
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Player");
@@ -242,7 +248,8 @@ public abstract class Characters_Global : MonoBehaviour
 	}
 
 	public string Prov_EnemyShoot(float damageAmount, string infID)
-	{
+    {
+        // AQUI
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");
