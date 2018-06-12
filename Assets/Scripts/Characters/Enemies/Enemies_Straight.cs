@@ -17,5 +17,4 @@ public class Enemies_Straight : Characters_Enemies
         DestroyOffScreen();
         SetDirection();
     }
-
 }

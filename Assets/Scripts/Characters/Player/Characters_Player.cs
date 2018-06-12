@@ -179,7 +179,6 @@ public class Characters_Player : Characters_Global
 			this.extractProvenance.AddAttribute ("WeaponCD", this.currCooldown[1].ToString());
 		else
 			this.extractProvenance.AddAttribute ("WeaponCD", "0");
-
 	}
 
 	void ShotSlowdown()
