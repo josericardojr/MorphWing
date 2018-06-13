@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_Efeitos : MonoBehaviour {
-
+public class Object_Efeitos : MonoBehaviour 
+{
 
     public enum Effects
     {

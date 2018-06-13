@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
+    Managers_WriteText textWriter;
+
+    [SerializeField]
     Characters_Player player;
 
     private GameObject textTime;
@@ -15,16 +18,29 @@ public class ScoreManager : MonoBehaviour
     Text gameOverTimerText, scoreText;
     GameObject balanceApplier;
 
+    List<int> enemyKills = new List<int>();
+
     [SerializeField]
     float timeCurrent;
     float gameOverTime = 5, elapsedTime;
     
     int score;
 
+    public int Score
+    {
+        get { return this.score; }
+    }
+
     public float TimeCurrent
     {
     	get{ return this.timeCurrent; }
     	set{ this.timeCurrent = value; }
+    }
+
+    public List<int> EnemyKills
+    {
+        get { return this.enemyKills; }
+        set { this.enemyKills = value; }
     }
 
     public float ElapsedTime
@@ -34,11 +50,15 @@ public class ScoreManager : MonoBehaviour
 
     private static volatile bool running;
 
-    void Start ()
+    void Awake ()
     {
         balanceApplier = GameObject.Find("Provenance").gameObject;
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
+        for (int i = 0; i < 4; i++)
+        {
+            this.enemyKills.Add(0);
+        }
 	}
 
     void Update()
@@ -89,5 +109,6 @@ public class ScoreManager : MonoBehaviour
         this.score += 110 * (int)elapsedTime;
         running = false;
         this.gameOverTimerText.enabled = true;
+        this.textWriter.WriteResults();
     }
 }

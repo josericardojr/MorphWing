@@ -83,6 +83,7 @@ public class Characters_Enemies : Characters_Global
         if (this.temp_currHp <= 0)
         {
             this.spawnManager.EnemyDecrease();
+            this.scoreManager.EnemyKills[this.provIdNum]++;
             this.scoreManager.AddScore(this.scoreReward);
             this.scoreManager.TimeCurrent += this.timeReward;
             GameObject.Instantiate(this.popUpPrefab, Camera.main.WorldToScreenPoint(this.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform).transform.GetChild(1).GetComponent<Text>().text = "+" + this.timeReward.ToString();
