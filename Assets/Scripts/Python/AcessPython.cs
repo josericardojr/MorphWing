@@ -183,17 +183,17 @@ public class AcessPython : MonoBehaviour
     {
         string[] splitReturn = pyInstruction.Split(new char[] { ';' }), split;
         float valueBalance;
-
-        #region enemy
-        for (int i = 0; i < KEYENEMY.Length; i++)
+        BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+        if (balance)
         {
-            for (int j = 0; j < splitReturn.Length; j++)
+            #region enemy
+            for (int i = 0; i < KEYENEMY.Length; i++)
             {
-                if (splitReturn[j].Contains(KEYENEMY[i]))
+                for (int j = 0; j < splitReturn.Length; j++)
                 {
-                    BalanceApplier balance = FindObjectOfType<BalanceApplier>();
-                    if (balance)
+                    if (splitReturn[j].Contains(KEYENEMY[i]))
                     {
+
                         split = splitReturn[j].Split(new char[] { ':' });
 
                         if (split.Length > 1)
@@ -212,24 +212,22 @@ public class AcessPython : MonoBehaviour
                                 //print("Dont find value on:" + splitReturn[j]);
                             }
                         }
+
                     }
                 }
             }
-        }
-        #endregion
+            #endregion
 
-        #region dif multi
+            #region dif multi
 
-        string aux = "";
-        for (int i = 0; i < KEYDIFMULTI.Length; i++)
-        {
-            for (int j = 0; j < splitReturn.Length; j++)
+            string aux = "";
+            for (int i = 0; i < KEYDIFMULTI.Length; i++)
             {
-                if (splitReturn[j].Contains(KEYDIFMULTI[i]))
+                for (int j = 0; j < splitReturn.Length; j++)
                 {
-                    BalanceApplier balance = FindObjectOfType<BalanceApplier>();
-                    if (balance)
+                    if (splitReturn[j].Contains(KEYDIFMULTI[i]))
                     {
+
                         split = splitReturn[j].Split(new char[] { ':' });
                         if (split.Length > 1)
                         {
@@ -248,20 +246,18 @@ public class AcessPython : MonoBehaviour
                                 //print("Dont find value on:" + splitReturn[j]);
                             }
                         }
+
                     }
                 }
             }
-        }
-        #endregion
+            #endregion
 
 
-        for (int j = 0; j < splitReturn.Length; j++)
-        {
-            if (splitReturn[j].Contains(PLAYERHITRATE))
+            for (int j = 0; j < splitReturn.Length; j++)
             {
-                BalanceApplier balance = FindObjectOfType<BalanceApplier>();
-                if (balance)
+                if (splitReturn[j].Contains(PLAYERHITRATE))
                 {
+
                     split = splitReturn[j].Split(new char[] { ':' });
 
                     if (split.Length > 1)
@@ -280,11 +276,18 @@ public class AcessPython : MonoBehaviour
                             print("Dont find value on:" + split[split.Length - 1]);
                         }
                     }
+
                 }
             }
+
+            if (!balance.DontApplyBalance)
+            {
+                FindObjectOfType<Managers_WriteText>().WriteResults();
+            }
         }
-        FindObjectOfType<Managers_WriteText>().WriteResults();
+
     }
+    
 
     public string MyText
     {

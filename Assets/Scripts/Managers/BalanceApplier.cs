@@ -127,4 +127,12 @@ public class BalanceApplier : MonoBehaviour
     {
         get { return this.damageModifier; }
     }
+
+    public bool DontApplyBalance
+    {
+        get
+        {
+            return dontApplyBalance;
+        }
+    }
 }
