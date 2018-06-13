@@ -29,7 +29,7 @@ public class Managers_WriteText : MonoBehaviour
         string path = Application.dataPath + @"/Resources/Debug.txt";
         StreamWriter writer = new StreamWriter(path, true);
 
-        string text = "User: " + this.GetInstanceID() + " " + DateTime.Now.ToString() + Environment.NewLine +
+        string text = "User: " + this.GetComponent<BalanceApplier>().RandomID + " " + DateTime.Now.ToString() + Environment.NewLine +
                          "Time Survived: " + this.scoreManager.ElapsedTime + Environment.NewLine +
                          "Score: " + this.scoreManager.Score + Environment.NewLine +
                          "Straight: " + this.scoreManager.EnemyKills[0] + Environment.NewLine +

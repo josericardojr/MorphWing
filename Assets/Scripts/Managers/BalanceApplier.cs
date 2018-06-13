@@ -20,6 +20,13 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     float damageModMax, damageModMin;
 
+    string randomID;
+
+    public string RandomID
+    {
+        get { return this.randomID; }
+    }
+
     [Header("Debug")]
     [SerializeField]
     private float[] changedDifficultyMultiplier;
@@ -31,6 +38,7 @@ public class BalanceApplier : MonoBehaviour
 
     void Awake()
     {
+        this.randomID = Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString();
         minValue = 1;
         if (instance == null)
         {

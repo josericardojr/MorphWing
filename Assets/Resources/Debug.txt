@@ -19,3 +19,66 @@ item 3: -0.515
 item 4: 5
 Player Damage: 1
 
+User: 082704 6/13/2018 1:42:04 PM
+Time Survived: 5.765264
+Score: 550
+Straight: 0
+Chaser: 0
+Round: 0
+Irregular: 0
+PowerUp: 0
+PowerDown: 0
+SpeedUp: 0
+SpeedDown: 0
+enemy 1: 0
+enemy 2: 0
+enemy 3: 0
+enemy 4: 0
+item 1: 0
+item 2: 0
+item 3: 0
+item 4: 0
+Player Damage: 0
+
+User: 989574 6/13/2018 1:42:21 PM
+Time Survived: 2.708339
+Score: 220
+Straight: 0
+Chaser: 0
+Round: 0
+Irregular: 0
+PowerUp: 0
+PowerDown: 0
+SpeedUp: 0
+SpeedDown: 0
+enemy 1: 0
+enemy 2: 0
+enemy 3: 0
+enemy 4: 0
+item 1: 0
+item 2: 0
+item 3: 0
+item 4: 0
+Player Damage: 0
+
+User: 989574 6/13/2018 1:42:31 PM
+Time Survived: 2.708339
+Score: 220
+Straight: 0
+Chaser: 0
+Round: 0
+Irregular: 0
+PowerUp: 0
+PowerDown: 0
+SpeedUp: 0
+SpeedDown: 0
+enemy 1: 0
+enemy 2: 0
+enemy 3: 0
+enemy 4: 0
+item 1: 0
+item 2: 0
+item 3: 0
+item 4: 0
+Player Damage: 0
+
