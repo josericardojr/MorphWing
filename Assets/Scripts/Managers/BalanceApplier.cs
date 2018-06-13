@@ -20,10 +20,14 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     float damageModMax, damageModMin;
 
-    public float DamageModifier
-    {
-        get { return this.damageModifier; }
-    }
+    [Header("Debug")]
+    [SerializeField]
+    private float[] changedDifficultyMultiplier;
+    [SerializeField]
+    private float[] changedItemDistances;
+
+    [SerializeField]
+    private float changedDamageModifier;
 
     void Awake()
     {
@@ -38,6 +42,21 @@ public class BalanceApplier : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+
+        changedItemDistances = new float[4];
+        for (int i = 0; i < changedItemDistances.Length; i++)
+        {
+            changedItemDistances[i] = (0);
+        }
+
+        changedDifficultyMultiplier = new float[4];
+        for (int i = 0; i < changedDifficultyMultiplier.Length; i++)
+        {
+            changedDifficultyMultiplier[i] = (0);
+        }
+
+        changedDamageModifier = 0;
     }
 
     void Start()
@@ -45,35 +64,67 @@ public class BalanceApplier : MonoBehaviour
         if (dontApplyBalance)
         {
             for (int i = 0; i < 4; i++)
+            {
                 this.difficultyMultipliers[i] = 1;
+            }
             this.damageModifier = 1;
         }
     }
 
     public void ApplyDifficulty(int enemyID, float value)
     {
-        //print(AcessPython.KEYENEMY[enemyID] + ": " + value);
-        //print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+        changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID];
+
         this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] * value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 
         if (this.difficultyMultipliers[enemyID] < minValue)
         {
             this.difficultyMultipliers[enemyID] = minValue;
         }
-        //print("enemy" + enemyID + ": " + this.difficultyMultipliers[enemyID]);
+
+        changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID] - changedDifficultyMultiplier[enemyID];
     }
 
     public void ModifyDamage(float value)
     {
+        changedDamageModifier = this.damageModifier;
         this.damageModifier = Mathf.Clamp(this.damageModifier * value, this.damageModMin, this.damageModMax);
+        changedDamageModifier = this.damageModifier - changedDamageModifier;
     }
 
-    public void ItemDistances(float item1, float item2, float item3, float item4)
+    public void SetItemDistances(int index, float value)
     {
-        this.itemDistances[0] = item1;
-        this.itemDistances[1] = item2;
-        this.itemDistances[2] = item3;
-        this.itemDistances[3] = item4;
+        changedItemDistances[index] = this.itemDistances[index];
+        this.itemDistances[index] = value;
+        changedItemDistances[index] = this.itemDistances[index] - changedItemDistances[index];
     }
 
+    public float[] ChangedDifficultyMultiplier
+    {
+        get
+        {
+            return changedDifficultyMultiplier;
+        }
+    }
+
+    public float[] ChangedItemDistances
+    {
+        get
+        {
+            return changedItemDistances;
+        }
+    }
+
+    public float ChangedDamageModifier
+    {
+        get
+        {
+            return changedDamageModifier;
+        }
+    }
+
+    public float DamageModifier
+    {
+        get { return this.damageModifier; }
+    }
 }
