@@ -20,22 +20,15 @@ public class AcessPython : MonoBehaviour
 
     private string file, instruction, filePy = @"\Python\Prov.py";
 
+    private int contVertx;
+
     private bool run;
 
     private void Awake()
     {
         run = false;
-            MyText = "start";
-        if (!run)
-        {
-            string args = "";
-
-            for (int i = 0; i < KEYENEMY.Length; i++)
-            {
-                args += KEYENEMY[i] + " ";
-            }
-            StartCoroutine(MakeChanges(args));
-        }
+        MyText = "start";
+        contVertx = 0;
     }
 
     private void Update()
@@ -103,7 +96,8 @@ public class AcessPython : MonoBehaviour
 
         if (!run)
         {
-            StartCoroutine(MakeChanges(args));
+            StartCoroutine(MakeChanges(args, contVertx));
+            contVertx = 0;
         }
     }
 
@@ -129,7 +123,7 @@ public class AcessPython : MonoBehaviour
         return args;
     }
 
-    private IEnumerator MakeChanges(string args)
+    private IEnumerator MakeChanges(string args, int finalCount)
     {
         file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
         run = true;
@@ -157,14 +151,13 @@ public class AcessPython : MonoBehaviour
                 if (File.Exists(nameFile))
                 {
                     TextWriter tw = new StreamWriter(Directory.GetCurrentDirectory() + @"\" + nameFile, true);
-                    
-                    tw.WriteLine(Characters_Player.GetDate() + ":" + elapsedMs);
-                    
+
+                    tw.WriteLine(Characters_Player.GetDate() + ";" + elapsedMs + ";" + finalCount);
+
                     tw.Close();
                 }
 #endif
                 instruction = ("Result: " + pyInstruction);
-
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
                 {
                     run = false;
@@ -303,4 +296,9 @@ public class AcessPython : MonoBehaviour
         }
     }
 
+    public void AddContVertx()
+    {
+        contVertx++;
+        print(contVertx);
+    }
 }
