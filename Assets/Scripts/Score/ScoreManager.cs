@@ -8,9 +8,6 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    Managers_WriteText textWriter;
-
-    [SerializeField]
     Characters_Player player;
 
     private GameObject textTime;
@@ -109,6 +106,5 @@ public class ScoreManager : MonoBehaviour
         this.score += 110 * (int)elapsedTime;
         running = false;
         this.gameOverTimerText.enabled = true;
-        this.textWriter.WriteResults();
     }
 }

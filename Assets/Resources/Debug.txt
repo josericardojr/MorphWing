@@ -1,0 +1,21 @@
+User: 11522 6/13/2018 2:58:13 AM
+Time Survived: 11.3048
+Score: 1210
+Straight: 0
+Chaser: 0
+Round: 0
+Irregular: 0
+PowerUp: 0
+PowerDown: 0
+SpeedUp: 0
+SpeedDown: 0
+enemy 1: 0
+enemy 2: 0
+enemy 3: 0
+enemy 4: 0
+item 1: -0.515
+item 2: 5
+item 3: -0.515
+item 4: 5
+Player Damage: 1
+

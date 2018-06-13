@@ -145,7 +145,7 @@ public class AcessPython : MonoBehaviour
 #if UNITY_EDITOR
                 watch.Stop();
                 var elapsedMs = watch.ElapsedMilliseconds;
-                print("Time to get Instruction: " + (elapsedMs));
+                //print("Time to get Instruction: " + (elapsedMs));
 
                 string nameFile = "LogTime.txt";
                 if (File.Exists(nameFile))
@@ -205,9 +205,11 @@ public class AcessPython : MonoBehaviour
                                 //print("__________");
                                 //print(split[j] + " find -> " + valueBalance);
                             }
-                            catch
+                            catch (System.Exception e)
                             {
-                                print("Dont find value on: " + split[split.Length - 1]);
+                                print(e.Message);
+                                print(i);
+                                //print("Dont find value on:" + splitReturn[j]);
                             }
                         }
                     }
@@ -217,6 +219,8 @@ public class AcessPython : MonoBehaviour
         #endregion
 
         #region dif multi
+
+        string aux = "";
         for (int i = 0; i < KEYDIFMULTI.Length; i++)
         {
             for (int j = 0; j < splitReturn.Length; j++)
@@ -227,20 +231,21 @@ public class AcessPython : MonoBehaviour
                     if (balance)
                     {
                         split = splitReturn[j].Split(new char[] { ':' });
-
                         if (split.Length > 1)
                         {
                             try
                             {
-                                valueBalance = float.Parse(split[split.Length - 1]);
-                                balance.itemDistances[i] = valueBalance;
+                                aux = split[split.Length - 1];
+                                valueBalance = float.Parse(aux);
+                                balance.SetItemDistances(i, valueBalance);
                                 //print("__________");
                                 //print(split[0] + " find -> " + valueBalance);
                             }
                             catch (System.Exception e)
                             {
                                 print(e.Message);
-                                print("Dont find value on:" + split[split.Length - 1]);
+                                print(i);
+                                //print("Dont find value on:" + splitReturn[j]);
                             }
                         }
                     }
@@ -278,6 +283,7 @@ public class AcessPython : MonoBehaviour
                 }
             }
         }
+        FindObjectOfType<Managers_WriteText>().WriteResults();
     }
 
     public string MyText
@@ -299,6 +305,5 @@ public class AcessPython : MonoBehaviour
     public void AddContVertx()
     {
         contVertx++;
-        print(contVertx);
     }
 }
