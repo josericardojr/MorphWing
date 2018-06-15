@@ -1,20 +1,21 @@
 from kanren import Relation, facts, var, run
-from Data.PlayerDamageData import *
+#from Data.PlayerDamageData import *
 
 key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
 player_hit_rate = "PLAYERHITRATE"
 
 balanceFactor = Relation()
+difficultyAdjustMax = Relation()
 
 damageBalanceFactor = 1
 
 #infos retiradas do xml
 
 #numero de hits em ordem de tipo de inimigo
-hits = [0,0,0,0]
+hits = [1,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [0, 0, 0, 0]
+happenings = [1, 0, 0, 0]
 
 difficultyMultipliers = [1, 1, 1, 1]
 itemDistances = [0, 0, 0, 0]
@@ -22,25 +23,36 @@ itemDistances = [0, 0, 0, 0]
 #BASEAR EM TEMPO
 
 #infos estabelecidas aqui
-facts(balanceFactor, ("enemy1", "0.5"),
+facts(balanceFactor, ("enemy1", "1"),
     ("enemy2", "0.4"),
     ("enemy3", "0.3"),
     ("enemy4", "0.3"))
 
+difficultyAdjustMin = [0.8, 0.8, 0.8, 0.8]
+
+facts(difficultyAdjustMax, ("enemy1", "1.3"),
+    ("enemy2", "1.3"),
+    ("enemy3", "1.3"),
+    ("enemy4", "1.3"))
 
 def format_number(number):
     return round(float(number),3)
 
 def adjustDifficulty (factor):
     x = var()
+    y = var();
+    z = var();
     hapFactor = float(happenings[factor])
     hitFactor = float(hits[factor])
     balFactor = run(1, x, balanceFactor("enemy{0}".format(factor + 1), x))
+    minAdjust = float
+    maxAdjust = run(1, z, difficultyAdjustMax("enemy{0}".format(factor + 1), z))
 
     if hapFactor > 0:
-        result = hitFactor/hapFactor * float(balFactor[0])
+        result = max(min(hitFactor/hapFactor * float(balFactor[0]), maxAdjust), difficultyAdjustMin[factor])
         print("{0}:{1};".format(key_enemy[factor], format_number(result)))
-        
+
+adjustDifficulty(0);
 
 def adjustPlayerDamage (hit_time):
     result = hit_time * float(damageBalanceFactor)
