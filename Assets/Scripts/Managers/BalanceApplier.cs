@@ -7,7 +7,7 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
-    float damageModifier = 1;
+    public float damageModifier = 1;
     [SerializeField]
     public List<float> difficultyMultipliers = new List<float>();
     [SerializeField]

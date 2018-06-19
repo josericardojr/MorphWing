@@ -7,15 +7,16 @@ player_hit_rate = "PLAYERHITRATE"
 
 balanceFactor = Relation()
 difficultyAdjustMax = Relation()
+difficultyAdjustMin = Relation()
 
 damageBalanceFactor = 1
 
 #infos retiradas do xml
 
 #numero de hits em ordem de tipo de inimigo
-hits = [1,0,0,0]
+hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [1, 0, 0, 0]
+happenings = [0, 0, 0, 0]
 
 difficultyMultipliers = [1, 1, 1, 1]
 itemDistances = [0, 0, 0, 0]
@@ -23,17 +24,20 @@ itemDistances = [0, 0, 0, 0]
 #BASEAR EM TEMPO
 
 #infos estabelecidas aqui
-facts(balanceFactor, ("enemy1", "1"),
-    ("enemy2", "0.4"),
-    ("enemy3", "0.3"),
-    ("enemy4", "0.3"))
+facts(balanceFactor, ("enemy1", "2"),
+    ("enemy2", "1"),
+    ("enemy3", "2"),
+    ("enemy4", "8"))
 
-difficultyAdjustMin = [0.8, 0.8, 0.8, 0.8]
+facts(difficultyAdjustMin, ("enemy1", "-0.3"),
+    ("enemy2", "-0.3"),
+    ("enemy3", "-0.3"),
+    ("enemy4", "-0.3"))
 
-facts(difficultyAdjustMax, ("enemy1", "1.3"),
-    ("enemy2", "1.3"),
-    ("enemy3", "1.3"),
-    ("enemy4", "1.3"))
+facts(difficultyAdjustMax, ("enemy1", "0.5"),
+    ("enemy2", "0.5"),
+    ("enemy3", "0.5"),
+    ("enemy4", "0.5"))
 
 def format_number(number):
     return round(float(number),3)
@@ -45,11 +49,11 @@ def adjustDifficulty (factor):
     hapFactor = float(happenings[factor])
     hitFactor = float(hits[factor])
     balFactor = run(1, x, balanceFactor("enemy{0}".format(factor + 1), x))
-    minAdjust = float
+    minAdjust = run(1, y, difficultyAdjustMin("enemy{0}".format(factor + 1), y))
     maxAdjust = run(1, z, difficultyAdjustMax("enemy{0}".format(factor + 1), z))
 
     if hapFactor > 0:
-        result = max(min(hitFactor/hapFactor * float(balFactor[0]), maxAdjust), difficultyAdjustMin[factor])
+        result = min(max(0.05 * hapFactor - 0.05 * hitFactor * float(balFactor[0]), float(minAdjust[0])), float(maxAdjust[0]))
         print("{0}:{1};".format(key_enemy[factor], format_number(result)))
 
 adjustDifficulty(0);
@@ -57,7 +61,6 @@ adjustDifficulty(0);
 def adjustPlayerDamage (hit_time):
     result = hit_time * float(damageBalanceFactor)
     print("{0}:{1};".format(player_hit_rate, format_number(result)))
-
 
 def ReturnPoolValues(w1, w2, w3, w4, invert) :
     value = 1
