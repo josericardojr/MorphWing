@@ -27,10 +27,10 @@ public class Projectiles_Global : MonoBehaviour
 
 	protected void Start()
     {
+        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
         if (this.CompareTag("Player_Shot"))
         {
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-            this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
             this.damage *= this.balanceApplier.DamageModifier;
         }
         if (this.upEffect)
