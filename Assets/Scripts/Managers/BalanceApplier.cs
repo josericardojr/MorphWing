@@ -16,7 +16,7 @@ public class BalanceApplier : MonoBehaviour
     public List<float> difficultyMultipliersMaximum;
     [SerializeField]
     public List<float> difficultyMultipliersMinimum;
-    float increaseMultiplier, decreaseMultiplier, minValue;
+    float increaseMultiplier, decreaseMultiplier;
     [SerializeField]
     float damageModMax, damageModMin;
 
@@ -39,7 +39,7 @@ public class BalanceApplier : MonoBehaviour
     void Awake()
     {
         this.randomID = Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString();
-        minValue = 1;
+        
         if (instance == null)
         {
             instance = this;
@@ -83,12 +83,7 @@ public class BalanceApplier : MonoBehaviour
     {
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID];
 
-        this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] * value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-
-        if (this.difficultyMultipliers[enemyID] < minValue)
-        {
-            this.difficultyMultipliers[enemyID] = minValue;
-        }
+        this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] += value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
 
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID] - changedDifficultyMultiplier[enemyID];
     }
