@@ -75,10 +75,10 @@ def GetItemDistances(m1, m2, m3, m4):
     difficultyMultipliers[1] = m2;
     difficultyMultipliers[2] = m3;
     difficultyMultipliers[3] = m4;
-    itemDistances[0] = ReturnPoolValues(1,1,3,2,True);
-    itemDistances[1] = ReturnPoolValues(1,1,3,2,False);
-    itemDistances[2] = ReturnPoolValues(2,3,1,1,True);
-    itemDistances[3] = ReturnPoolValues(2,3,1,1,False);
+    itemDistances[0] = ReturnPoolValues(0.5,0.5,1.5,1,True);
+    itemDistances[1] = ReturnPoolValues(0.5,0.5,1.5,1,False);
+    itemDistances[2] = ReturnPoolValues(1,1.5,0.5,0.5,True);
+    itemDistances[3] = ReturnPoolValues(1,1.5,0.5,0.5,False);
 
     for j in range(len(itemDistances)):
         print("{0}:{1};".format(key_dif_multi[j], format_number(itemDistances[j])))

@@ -37,7 +37,7 @@ public class Projectiles_Global : MonoBehaviour
             this.GetComponent<Animator>().SetTrigger("Crazy");
 
         if (this.CompareTag("Enemy_Shot"))
-            this.speed *= this.shooter.GetComponent<Characters_Enemies>().ProvIdNum;
+            this.speed *= this.balanceApplier.difficultyMultipliers[this.shooter.GetComponent<Characters_Enemies>().ProvIdNum];
         
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		this.managers_spawn = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();

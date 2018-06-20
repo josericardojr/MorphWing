@@ -34,7 +34,7 @@ public class Characters_Enemies : Characters_Global
 		set { this.maxOffsetY = value; }
 	}
 
-    public float ProvIdNum
+    public int ProvIdNum
     {
         get { return this.provIdNum; }
         set { this.provIdNum = value; }
