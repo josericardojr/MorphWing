@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
     Characters_Player player;
+    List<int> itemsGot = new List<int>();
 
     private GameObject textTime;
     [SerializeField]
@@ -45,6 +46,12 @@ public class ScoreManager : MonoBehaviour
         get { return this.elapsedTime; }
     }
 
+    public List<int> ItemsGot
+    {
+        get { return this.itemsGot; }
+        set { this.itemsGot = value; }
+    }
+
     private static volatile bool running;
 
     void Awake ()
@@ -56,6 +63,8 @@ public class ScoreManager : MonoBehaviour
         {
             this.enemyKills.Add(0);
         }
+        for (int i = 0; i < 4; i++)
+            itemsGot.Add(0);
 	}
 
     void Update()
@@ -75,7 +84,6 @@ public class ScoreManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                print("hey");
                 Destroy(this.balanceApplier);
                 SceneManager.LoadScene(0);
             }

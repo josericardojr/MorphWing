@@ -22,7 +22,7 @@ public class EfeitoManager : MonoBehaviour {
 	Object_Efeitos.Effects auxEfeito;
 
     [SerializeField]
-    Managers_WriteText writeText;
+    ScoreManager scoreManager;
 
 	void Update ()
 	{
@@ -56,7 +56,7 @@ public class EfeitoManager : MonoBehaviour {
                     listaPrefab[i].GetComponent<Projectiles_Global>().Damage * multiDamageUp;
                 listaPrefab[i].GetComponent<Projectiles_Global>().UpEffect = true;
             }
-            this.writeText.ItemsGot[0]++;
+            this.scoreManager.ItemsGot[0]++;
 
 			break;
 		case Object_Efeitos.Effects.DAMAGE_DOWN:
@@ -66,7 +66,7 @@ public class EfeitoManager : MonoBehaviour {
 			for (int i = 0; i < listaPrefab2.Length; i++)
 				listaPrefab2[i].GetComponent<Projectiles_Global>().Damage =
 					listaPrefab2[i].GetComponent<Projectiles_Global>().Damage / multiDamageDown;
-            this.writeText.ItemsGot[1]++;
+            this.scoreManager.ItemsGot[1]++;
 
 			break;
         case Object_Efeitos.Effects.SPEED_UP:
@@ -74,13 +74,13 @@ public class EfeitoManager : MonoBehaviour {
             this.GetComponent<TrailRenderer>().material = this.speedUpMat;
             this.GetComponent<Animator>().SetBool("SpeedBuff", true);
             this.GetComponent<TrailRenderer>().enabled = true;
-            this.writeText.ItemsGot[2]++;
+            this.scoreManager.ItemsGot[2]++;
 
 			break;
         case Object_Efeitos.Effects.SPEED_DOWN:
             this.GetComponent<Animator>().SetBool("SpeedDown", true);
             this.GetComponent<Characters_Player>().speedMultiplier = this.multiSpeedDown;
-            this.writeText.ItemsGot[3]++;
+            this.scoreManager.ItemsGot[3]++;
 			break;
 		case Object_Efeitos.Effects.INVERT_CONTROL:
 			this.GetComponent<Characters_Player>().invertControl = true;

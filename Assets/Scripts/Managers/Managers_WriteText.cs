@@ -6,25 +6,12 @@ using System.IO;
 
 public class Managers_WriteText : MonoBehaviour 
 {
-    [SerializeField]
     ScoreManager scoreManager;
-    List<int> itemsGot = new List<int>();
 
-    void Start()
+	public void WriteResults ()
     {
-        this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        for (int i = 0; i < 4; i++)
-            itemsGot.Add(0);
-    }
-
-    public List<int> ItemsGot
-    {
-        get { return this.itemsGot; }
-        set { this.itemsGot = value; }
-    }
-
-	public void WriteResults () 
-    {
+        if(scoreManager == null)
+            this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         BalanceApplier balanceApplier = FindObjectOfType<BalanceApplier>();
         string path = Application.dataPath + @"/Resources/Debug.txt";
         bool firstLine = false;
@@ -64,10 +51,10 @@ public class Managers_WriteText : MonoBehaviour
                          this.scoreManager.EnemyKills[1] + ";" +
                          this.scoreManager.EnemyKills[2] + ";" +
                          this.scoreManager.EnemyKills[3] + ";" +
-                         this.itemsGot[0] + ";" +
-                         this.itemsGot[1] + ";" +
-                         this.itemsGot[2] + ";" +
-                         this.itemsGot[3] + ";" +
+                         this.scoreManager.ItemsGot[0] + ";" +
+                         this.scoreManager.ItemsGot[1] + ";" +
+                         this.scoreManager.ItemsGot[2] + ";" +
+                         this.scoreManager.ItemsGot[3] + ";" +
                          balanceApplier.difficultyMultipliers[0] + ";" +
                          balanceApplier.difficultyMultipliers[1] + ";" +
                          balanceApplier.difficultyMultipliers[2] + ";" +

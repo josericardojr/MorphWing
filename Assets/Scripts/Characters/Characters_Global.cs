@@ -73,7 +73,8 @@ public abstract class Characters_Global : MonoBehaviour
 	{
         if (this.temp_currHp <= 0)
         {
-            Destroy(this.gameObject);
+            if(this.gameObject != null)
+                Destroy(this.gameObject);
             this.Prov_GetDestroyed(instanceID);
         }
 	}

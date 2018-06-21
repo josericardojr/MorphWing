@@ -88,7 +88,6 @@ public class Characters_Enemies : Characters_Global
     {
         if (this.temp_currHp <= 0)
         {
-            this.spawnManager.EnemyDecrease();
             this.scoreManager.EnemyKills[this.provIdNum]++;
             this.scoreManager.AddScore(this.scoreReward);
             this.scoreManager.TimeCurrent += this.timeReward;
@@ -109,7 +108,6 @@ public class Characters_Enemies : Characters_Global
 			this.transform.position.x > this.maxOffsetX ||
 			this.transform.position.x < -this.maxOffsetX)
         {
-            this.spawnManager.EnemyDecrease();
 			Destroy(this.gameObject);
 		}
 	}

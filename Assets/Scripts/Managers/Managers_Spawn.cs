@@ -24,8 +24,6 @@ public class Managers_Spawn : MonoBehaviour
 	[SerializeField]
 	private float maxSpawnOffsetX = 0, maxSpawnOffsetY = 0;
 
-	private int noSpawned;
-
 	#region GETS & SETS
 
 	public bool Deactivated
@@ -54,46 +52,40 @@ public class Managers_Spawn : MonoBehaviour
 		SpawnEnemies();
 	}
 
-	void Update()
-	{
-	}
-
 	public void SpawnEnemies()
 	{
 		if(!this.deactivaded)
 			for(int i = 0; i < 4; i++)
 			{
-				this.noSpawned++;
 				SpawnNextEnemy();
 			}
 	}
 
-	public void EnemyDecrease()
-	{
-		this.noSpawned--;
-		if(this.noSpawned < 4)
-		{
-			if(this.currWave == this.waveCreation.Count)
-				SpawnRandomItem();
-			SpawnNextEnemy();
-			this.noSpawned++;
-		}
-	}
-
+    void Update()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length < 4)
+        {
+            if (this.currWave == this.waveCreation.Count)
+                SpawnRandomItem();
+            SpawnNextEnemy();
+        }
+    }
 
 	void SpawnNextEnemy()
 	{
-		if(this.currPositions.Count == 0)
-			for(int i = 0; i < 4; i++)
-				this.currPositions.Add(0);
-		SetOffsets();
-		if(this.currWave == this.waveCreation.Count)
-			this.currWave = 0;
-		int enemyGot = this.waveCreation[this.currWave];
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (this.currPositions.Count == 0)
+            for (int i = 0; i < 4; i++)
+                this.currPositions.Add(0);
+        SetOffsets();
+        if (this.currWave == this.waveCreation.Count)
+            this.currWave = 0;
+        int enemyGot = this.waveCreation[this.currWave];
         if (this.random)
             enemyGot = Random.Range(0, 4);
-		Vector2 spawnPos = new Vector2(0,0);
-		Transform spawnPoint = null;
+        Vector2 spawnPos = new Vector2(0, 0);
+        Transform spawnPoint = null;
         if (!this.random)
         {
             switch (enemyGot)
@@ -133,12 +125,12 @@ public class Managers_Spawn : MonoBehaviour
             spawnPoint = this.allPositions[Random.Range(0, 14)];
             spawnPos = spawnPoint.transform.position;
         }
-		GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
+        GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
         spawnedEnemy.name = spawnedEnemy.name.Remove(spawnedEnemy.name.Length - 7);
-		this.currWave++;
-		spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.x, spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.y);
-		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
-		spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
+        this.currWave++;
+        spawnedEnemy.GetComponent<Characters_Enemies>().InitDir = new Vector2(spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.x, spawnPoint.GetComponent<Objects_SpawnPoint>().InitDir.y);
+        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetX = this.maxSpawnOffsetX;
+        spawnedEnemy.GetComponent<Characters_Enemies>().MaxOffsetY = this.maxSpawnOffsetY;
 	}
 
 	void SpawnRandomItem()
