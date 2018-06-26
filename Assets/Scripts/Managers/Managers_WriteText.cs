@@ -13,7 +13,7 @@ public class Managers_WriteText : MonoBehaviour
         if(scoreManager == null)
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         BalanceApplier balanceApplier = FindObjectOfType<BalanceApplier>();
-        string path = Application.dataPath + @"/Resources/Debug.txt";
+        string path = Application.dataPath + @"/Resources/" + this.GetComponent<BalanceApplier>().RandomID.ToString();
         bool firstLine = false;
         if (!File.Exists(path))
             firstLine = true;
@@ -21,8 +21,7 @@ public class Managers_WriteText : MonoBehaviour
         StreamWriter writer = new StreamWriter(path, true);
 
         if(firstLine)
-            text += "User" + ";" +
-                         "Date" + ";" +
+            text += "Date" + ";" +
                          "Time Survived" + ";" +
                          "Score" + ";" +
                          "Straight" + ";" +
@@ -43,8 +42,7 @@ public class Managers_WriteText : MonoBehaviour
                          "Item4" + ";" +
                          "PlayerDamage" + ";" + Environment.NewLine;
 
-        text += this.GetComponent<BalanceApplier>().RandomID + ";" +
-                         DateTime.Now.ToString() + ";" +
+        text += DateTime.Now.ToString() + ";" +
                          this.scoreManager.ElapsedTime + ";" +
                          this.scoreManager.Score + ";" +
                          this.scoreManager.EnemyKills[0] + ";" +

@@ -102,9 +102,9 @@ public class SpawnItemManager : MonoBehaviour {
     {
         float angle = Random.Range(0.0f, Mathf.PI * 2);
         Vector3 V = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
-        float distance = 0.4f;
-        distance *= this.balanceApplier.itemDistances[spawnObj.GetComponent<Item>().effectId];
-        V *= Mathf.Clamp(distance, 1, 5.1f);
+        float distance;
+        distance = this.balanceApplier.itemDistances[spawnObj.GetComponent<Item>().effectId];
+        V *= Mathf.Clamp(distance, 0.7f, 5.1f);
         spawnObj.transform.position = player.transform.position + V;
     }
 
@@ -118,16 +118,16 @@ public class SpawnItemManager : MonoBehaviour {
             List<int> powerUpPool = new List<int>();
 
             // Damage Up
-            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[0]; j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[1]; j++)
                 powerUpPool.Add(0);
             // Damage Down
-            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[1]; j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[0]; j++)
                 powerUpPool.Add(1);
             // Speed Up
-            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[2]; j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[3]; j++)
                 powerUpPool.Add(2);
             // Damage Down
-            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[3]; j++)
+            for (int j = 0; j < 25 * this.balanceApplier.itemDistances[2]; j++)
                 powerUpPool.Add(3);
 
             aux = powerUpPool[Random.Range(0, powerUpPool.Count)];

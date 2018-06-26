@@ -63,26 +63,22 @@ def adjustPlayerDamage (hit_time):
     print("{0}:{1};".format(player_hit_rate, format_number(result)))
 
 def ReturnPoolValues(w1, w2, w3, w4, invert) :
-    value = 1
-    if not invert:
-        value = (difficultyMultipliers[0] * w1) * (difficultyMultipliers[1] * w2) * (difficultyMultipliers[2] * w3) * (difficultyMultipliers[3] * w4);
-    else:
-        value = max(min(3.1 - (difficultyMultipliers[0] * w1), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[1] * w2), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[2] * w3), 3.1), 0.1) * max(min(3.1 - (difficultyMultipliers[3] * w4), 3.1), 0.1);
-    return value;
+
+    value = (difficultyMultipliers[0] * w1) + (difficultyMultipliers[1] * w2) + (difficultyMultipliers[2] * w3) + (difficultyMultipliers[3] * w4);
+    if invert:
+        value = 5.1 - value;
+
+    return min(max(value, 0.7), 5.1);
 
 def GetItemDistances(m1, m2, m3, m4):
     difficultyMultipliers[0] = m1;
     difficultyMultipliers[1] = m2;
     difficultyMultipliers[2] = m3;
     difficultyMultipliers[3] = m4;
-    itemDistances[0] = ReturnPoolValues(0.5,0.5,1.5,1,True);
-    itemDistances[1] = ReturnPoolValues(0.5,0.5,1.5,1,False);
-    itemDistances[2] = ReturnPoolValues(1,1.5,0.5,0.5,True);
-    itemDistances[3] = ReturnPoolValues(1,1.5,0.5,0.5,False);
-
-    for j in range(len(itemDistances)):
-        print("{0}:{1};".format(key_dif_multi[j], format_number(itemDistances[j])))
-
+    itemDistances[0] = ReturnPoolValues(0.4, 1.1, 0.5, 0.4,False);
+    itemDistances[1] = ReturnPoolValues(0.4, 1.1, 0.5, 0.4,True);
+    itemDistances[2] = ReturnPoolValues(0.8,1.2,0.2,0.3,False);
+    itemDistances[3] = ReturnPoolValues(0.8,1.2,0.2,0.3,True);
 
 def getXMLInfo(xml, args):
     #xml = LoadedXML(fullpath('Lucas_5.xml', 'XML'))
