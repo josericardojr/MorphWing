@@ -66,8 +66,8 @@ public class Managers_Spawn : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length < 4)
         {
-            if (this.currWave == this.waveCreation.Count)
-                SpawnRandomItem();
+            //if (this.currWave == this.waveCreation.Count)
+            //    SpawnRandomItem();
             SpawnNextEnemy();
         }
     }

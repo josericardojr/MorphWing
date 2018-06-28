@@ -19,6 +19,7 @@ public class Projectiles_Global : MonoBehaviour
 	[SerializeField]
 	float speed;
 
+    protected int prov_id;
     [SerializeField]
     int hitScore;
 
@@ -37,7 +38,7 @@ public class Projectiles_Global : MonoBehaviour
             this.GetComponent<Animator>().SetTrigger("Crazy");
 
         if (this.CompareTag("Enemy_Shot"))
-            this.speed *= this.balanceApplier.difficultyMultipliers[this.shooter.GetComponent<Characters_Enemies>().ProvIdNum];
+            this.speed *= this.balanceApplier.difficultyMultipliers[this.prov_id];
         
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		this.managers_spawn = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
@@ -47,6 +48,8 @@ public class Projectiles_Global : MonoBehaviour
 
 	public void StatsReceiver(GameObject shooterObj, float damageValue, float dirXValue, float dirYValue, float instanceID, string objLabel)
 	{
+        if (shooterObj.GetComponent<Characters_Enemies>())
+            this.prov_id = shooterObj.GetComponent<Characters_Enemies>().ProvIdNum;
 		this.tag = shooterObj.tag.Split('_')[0] + "_Shot";
 		this.shooterLabel = objLabel;
 		this.shooter = shooterObj;

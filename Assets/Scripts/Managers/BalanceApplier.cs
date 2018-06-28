@@ -98,7 +98,7 @@ public class BalanceApplier : MonoBehaviour
     public void SetItemDistances(int index, float value)
     {
         changedItemDistances[index] = this.itemDistances[index];
-        this.itemDistances[index] = Mathf.Clamp(value, 1, 5.1f);
+        this.itemDistances[index] = value;
         changedItemDistances[index] = this.itemDistances[index] - changedItemDistances[index];
     }
 

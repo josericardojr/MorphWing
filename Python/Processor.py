@@ -1,5 +1,5 @@
 from kanren import Relation, facts, var, run
-from Data.PlayerDamageData import *
+#from Data.PlayerDamageData import *
 
 key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
@@ -16,7 +16,7 @@ damageBalanceFactor = 1
 #numero de hits em ordem de tipo de inimigo
 hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [0, 0, 0, 0]
+happenings = [10, 0, 0, 0]
 
 difficultyMultipliers = [1, 1, 1, 1]
 itemDistances = [0, 0, 0, 0]
@@ -24,20 +24,20 @@ itemDistances = [0, 0, 0, 0]
 #BASEAR EM TEMPO
 
 #infos estabelecidas aqui
-facts(balanceFactor, ("enemy1", "2"),
-    ("enemy2", "1"),
-    ("enemy3", "2"),
-    ("enemy4", "8"))
+facts(balanceFactor, ("enemy1", "11"),
+    ("enemy2", "10"),
+    ("enemy3", "17"),
+    ("enemy4", "9"))
 
-facts(difficultyAdjustMin, ("enemy1", "-0.3"),
-    ("enemy2", "-0.3"),
-    ("enemy3", "-0.3"),
-    ("enemy4", "-0.3"))
+facts(difficultyAdjustMin, ("enemy1", "-0.7"),
+    ("enemy2", "-0.8"),
+    ("enemy3", "-0.9"),
+    ("enemy4", "-0.7"))
 
 facts(difficultyAdjustMax, ("enemy1", "0.5"),
-    ("enemy2", "0.5"),
-    ("enemy3", "0.5"),
-    ("enemy4", "0.5"))
+    ("enemy2", "0.4"),
+    ("enemy3", "0.45"),
+    ("enemy4", "0.6"))
 
 
 def format_number(number):
@@ -58,6 +58,7 @@ def adjust_difficulty(factor):
         result = min(max(0.05 * hap_factor - 0.05 * hit_factor * float(bal_factor[0]), float(min_adjust[0])), float(max_adjust[0]))
         print("{0}:{1};".format(key_enemy[factor], format_number(result)))
 
+adjust_difficulty(0);
 
 def adjust_player_damage (hit_time):
     result = hit_time * float(damageBalanceFactor)
@@ -82,6 +83,10 @@ def get_item_distances(m1, m2, m3, m4):
     itemDistances[1] = return_pool_values(0.4, 1.1, 0.5, 0.4, True)
     itemDistances[2] = return_pool_values(0.8, 1.2, 0.2, 0.3, False)
     itemDistances[3] = return_pool_values(0.8, 1.2, 0.2, 0.3, True)
+    print("{0}:{1};".format(key_dif_multi[0], format_number(itemDistances[0])))
+    print("{0}:{1};".format(key_dif_multi[1], format_number(itemDistances[1])))
+    print("{0}:{1};".format(key_dif_multi[2], format_number(itemDistances[2])))
+    print("{0}:{1};".format(key_dif_multi[3], format_number(itemDistances[3])))
 
 
 def get_xml_info(xml, args):

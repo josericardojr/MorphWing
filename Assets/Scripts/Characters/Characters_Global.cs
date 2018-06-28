@@ -16,8 +16,9 @@ public abstract class Characters_Global : MonoBehaviour
     public float speedMultiplier = 1;
 
 	[SerializeField]
-	protected int stat_hp; 
-	protected int temp_currHp, dirX, dirY;
+	protected float stat_hp;
+    protected float temp_currHp;
+    protected int dirX, dirY;
 
 	[SerializeField]
 	protected string provIndentifier, objType;
@@ -28,7 +29,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     private AcessPython acessPython;
 
-    public int Temp_CurrHp
+    public float Temp_CurrHp
     {
         get { return this.temp_currHp; }
         set { this.temp_currHp = value; }
@@ -81,7 +82,6 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
 	{
-
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, projectile.GetComponent<Collider2D>().GetInstanceID(), this.provIndentifier);
 		if (this.provIndentifier.Equals("Player"))

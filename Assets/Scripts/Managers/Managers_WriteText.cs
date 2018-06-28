@@ -13,7 +13,7 @@ public class Managers_WriteText : MonoBehaviour
         if(scoreManager == null)
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         BalanceApplier balanceApplier = FindObjectOfType<BalanceApplier>();
-        string path = Application.dataPath + @"/Resources/" + this.GetComponent<BalanceApplier>().RandomID.ToString();
+        string path = Application.dataPath + @"/Resources/" + this.GetComponent<BalanceApplier>().RandomID.ToString() + ".txt";
         bool firstLine = false;
         if (!File.Exists(path))
             firstLine = true;

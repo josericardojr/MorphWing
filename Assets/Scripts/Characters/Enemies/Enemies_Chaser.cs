@@ -9,6 +9,7 @@ public class Enemies_Chaser : Characters_Enemies
 		base.Start();
         this.Prov_UsingAttack(this.GetInstanceID().ToString());
         this.stat_speed *= this.balanceApplier.difficultyMultipliers[this.provIdNum];
+        this.stat_hp *= this.balanceApplier.difficultyMultipliers[this.provIdNum];
 	}
 
 	void Update()

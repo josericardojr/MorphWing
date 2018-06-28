@@ -103,7 +103,7 @@ public class AcessPython : MonoBehaviour
 
     private string GetArgs(string xmlName)
     {
-        file = Application.dataPath + @"\" + xmlName;
+        file = Application.dataPath + @"/" + xmlName;
         PlayerPrefs.SetString(AcessPython.KEYFILEXML, file);
         string args = "";
 
@@ -193,14 +193,13 @@ public class AcessPython : MonoBehaviour
                 {
                     if (splitReturn[j].Contains(KEYENEMY[i]))
                     {
-
                         split = splitReturn[j].Split(new char[] { ':' });
-
                         if (split.Length > 1)
                         {
                             try
                             {
                                 valueBalance = float.Parse(split[split.Length - 1]);
+                                print(i + " " + valueBalance.ToString());
                                 balance.ApplyDifficulty(i, valueBalance);
                                 //print("__________");
                                 //print(split[j] + " find -> " + valueBalance);

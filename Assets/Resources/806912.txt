@@ -1,0 +1,3 @@
+Date;Time Survived;Score;Straight;Chaser;Round;Irregular;PowerUp;PowerDown;SpeedUp;SpeedDown;Enemy1;Enemy2;Enemy3;Enemy4;Item1;Item2;Item3;Item4;PlayerDamage;
+6/28/2018 7:23:28 PM;11.61896;1755;0;3;0;0;0;0;0;0;1.2;0.72;0.45;1.75;2.4;2.7;2.5;2.6;2;
+6/28/2018 7:24:44 PM;68.46342;16530;9;20;19;8;2;0;1;0;1.7;1.5;1.4;2.2;0.7;5.1;0.7;5.1;0.7;

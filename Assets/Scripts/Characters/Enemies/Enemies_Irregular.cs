@@ -10,6 +10,7 @@ public class Enemies_Irregular : Characters_Enemies
         this.dirX = (int)initDir.x;
         this.dirY = (int)initDir.y;
         Invoke("Stop", Random.Range(0.7f, 1.3f));
+        this.Prov_UsingAttack(this.GetInstanceID().ToString());
     }
 	
 	void Update ()

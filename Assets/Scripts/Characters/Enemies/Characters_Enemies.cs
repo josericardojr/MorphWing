@@ -57,8 +57,11 @@ public class Characters_Enemies : Characters_Global
 	{
 		if (c.CompareTag ("Player"))
 		{
-			if(!c.GetComponent<Characters_Player>().Invincible)
-				c.GetComponent<Characters_Global> ().GetDamaged(this.GetInstanceID(), this.provIndentifier, this.contactDamage);
+            if (!c.GetComponent<Characters_Player>().Invincible)
+            {
+                Prov_EnemyAttack(this.contactDamage);
+                c.GetComponent<Characters_Global>().GetDamaged(this.GetInstanceID(), this.provIndentifier, this.contactDamage);
+            }
 		}
 	}
 
@@ -68,7 +71,6 @@ public class Characters_Enemies : Characters_Global
 		{
 			if (c.GetComponent<Characters_Player> ().Invincible)
 			{
-				Prov_EnemyAttack(0);
 				c.GetComponent<Characters_Player>().InvicibleTouch(this.GetInstanceID(), this.provIndentifier);
 			}
 		}
