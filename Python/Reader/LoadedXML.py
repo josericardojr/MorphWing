@@ -2,6 +2,7 @@
 from Reader.Edge import *
 from Reader.Vertex import *
 
+
 class LoadedXML:
     def __init__(self, path):
         xml = loadxml(path)

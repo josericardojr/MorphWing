@@ -1,17 +1,10 @@
-print("OI PYTHON")
-try:
-	import sys
-	from Reader.LoadedXML import *
-	import subprocess
-except ImportError:
-	print("err")
-	
-	
-print(len(sys.argv))
+import sys
+from Reader.LoadedXML import *
+import subprocess
+
 
 def install(name):
     subprocess.call(['pip', 'install', name])
-
 
 
 try:
@@ -23,7 +16,7 @@ except ImportError:
 file = ''
 args = sys.argv
 for i in range(len(args)):
-	print(args[i])
+    print(args[i])
     if args[i] == 'do':
         if i + 1 < len(sys.argv):
             file = args[i + 1]
@@ -36,7 +29,7 @@ for i in range(len(args)):
 if file != '':
     try:
         xml = LoadedXML(file)
-        getXMLInfo(xml,args)
+        get_xml_info(xml, args)
     except ValueError:
         print("Unexpected error:", sys.exc_info()[0])
 else:
