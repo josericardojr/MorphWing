@@ -198,6 +198,7 @@ public class AcessPython : MonoBehaviour
                         {
                             try
                             {
+                                print(split[split.Length - 1]);
                                 valueBalance = float.Parse(split[split.Length - 1]);
                                 print(i + " " + valueBalance.ToString());
                                 balance.ApplyDifficulty(i, valueBalance);

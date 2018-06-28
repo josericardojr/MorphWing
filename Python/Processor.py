@@ -1,5 +1,5 @@
 from kanren import Relation, facts, var, run
-#from Data.PlayerDamageData import *
+from Data.PlayerDamageData import *
 
 key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
@@ -16,7 +16,7 @@ damageBalanceFactor = 1
 #numero de hits em ordem de tipo de inimigo
 hits = [0,0,0,0]
 #numero de usos de ataque em ordem de tipo de inimigo
-happenings = [10, 0, 0, 0]
+happenings = [0, 0, 0, 0]
 
 difficultyMultipliers = [1, 1, 1, 1]
 itemDistances = [0, 0, 0, 0]
@@ -58,7 +58,6 @@ def adjust_difficulty(factor):
         result = min(max(0.05 * hap_factor - 0.05 * hit_factor * float(bal_factor[0]), float(min_adjust[0])), float(max_adjust[0]))
         print("{0}:{1};".format(key_enemy[factor], format_number(result)))
 
-adjust_difficulty(0);
 
 def adjust_player_damage (hit_time):
     result = hit_time * float(damageBalanceFactor)
