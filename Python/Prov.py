@@ -23,7 +23,7 @@ for i in range(len(args)):
         else:
             print('forgot the xml file name')
     if args[i] == 'test':
-        file = 'C:\\Users\\Lucas\\Documents\\JogoProveniência\\Assets\\info_26.5.2018;2.0.xml'
+        file = 'C:\\MorphWing_\\Assets\\info_18.6.2018;23.21.xml'
 
 
 if file != '':

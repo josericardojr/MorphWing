@@ -7,9 +7,10 @@ public class Managers_Spawn : MonoBehaviour
 {
 	public ItemController itemController;
 	protected ExtractProvenance extractProvenance;
-	bool deactivaded;
+	bool deactivaded, canSpawn;
     [SerializeField]
     bool random;
+    float spawnTime = 0.8f, currSpawnTime;
 	Vector3 selectedPos;
 	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
@@ -57,19 +58,35 @@ public class Managers_Spawn : MonoBehaviour
 		if(!this.deactivaded)
 			for(int i = 0; i < 4; i++)
 			{
-				SpawnNextEnemy();
+                SpawnNextEnemy();
 			}
+        Invoke("CanStartSpawning", 1);
 	}
 
     void Update()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length < 4)
+        if (canSpawn && this.currSpawnTime == 0)
         {
-            //if (this.currWave == this.waveCreation.Count)
-            //    SpawnRandomItem();
-            SpawnNextEnemy();
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemies.Length < 4)
+            {
+                this.currSpawnTime = this.spawnTime;
+                //if (this.currWave == this.waveCreation.Count)
+                //    SpawnRandomItem();
+                SpawnNextEnemy();
+            }
         }
+        if (currSpawnTime > 0)
+        {
+            this.currSpawnTime -= Time.deltaTime;
+        }
+        if (this.currSpawnTime < 0)
+            this.currSpawnTime = 0;
+    }
+
+    void CanStartSpawning()
+    {
+        this.canSpawn = true;
     }
 
 	void SpawnNextEnemy()

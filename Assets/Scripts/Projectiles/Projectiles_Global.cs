@@ -10,7 +10,6 @@ public class Projectiles_Global : MonoBehaviour
 	new protected Rigidbody2D rigidbody;
 	GameObject shooter;
 	protected float receivedX, receivedY, maxOffsetX, maxOffsetY, shooterInstanceID;
-    [SerializeField]
     bool upEffect = false;
 	[SerializeField]
 	List<GameObject> prefabList = new List<GameObject>();
