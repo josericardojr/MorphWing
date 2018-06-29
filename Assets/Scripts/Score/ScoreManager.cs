@@ -103,8 +103,6 @@ public class ScoreManager : MonoBehaviour
             this.gameOverTimerText.text = ((int)gameOverTime + 1).ToString();
         }
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
-            this.timeCurrent = -1;
     }
     
     public void SaveTime()

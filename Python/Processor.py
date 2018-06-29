@@ -78,10 +78,10 @@ def get_item_distances(m1, m2, m3, m4):
     difficultyMultipliers[1] = m2
     difficultyMultipliers[2] = m3
     difficultyMultipliers[3] = m4
-    itemDistances[0] = return_pool_values(0.4, 1.1, 0.5, 0.4, False)
-    itemDistances[1] = return_pool_values(0.4, 1.1, 0.5, 0.4, True)
-    itemDistances[2] = return_pool_values(0.8, 1.2, 0.2, 0.3, False)
-    itemDistances[3] = return_pool_values(0.8, 1.2, 0.2, 0.3, True)
+    itemDistances[0] = return_pool_values(0.4, 1.2, 0.6, 0.4, False)
+    itemDistances[1] = return_pool_values(0.4, 1.2, 0.6, 0.4, True)
+    itemDistances[2] = return_pool_values(0.8, 1.3, 0.3, 0.3, False)
+    itemDistances[3] = return_pool_values(0.8, 1.3, 0.3, 0.3, True)
     print("{0}:{1};".format(key_dif_multi[0], format_number(itemDistances[0])))
     print("{0}:{1};".format(key_dif_multi[1], format_number(itemDistances[1])))
     print("{0}:{1};".format(key_dif_multi[2], format_number(itemDistances[2])))

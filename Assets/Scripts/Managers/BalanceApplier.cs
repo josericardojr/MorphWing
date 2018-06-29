@@ -19,6 +19,7 @@ public class BalanceApplier : MonoBehaviour
     float increaseMultiplier, decreaseMultiplier;
     [SerializeField]
     float damageModMax, damageModMin;
+    Animator balanceFeedbackAnimator;
 
     string randomID;
 
@@ -55,6 +56,7 @@ public class BalanceApplier : MonoBehaviour
 
     public void ReAwake()
     {
+        this.balanceFeedbackAnimator = GameObject.Find("Balance Feedback").GetComponent<Animator>();
         changedItemDistances = new float[4];
         for (int i = 0; i < changedItemDistances.Length; i++)
         {
@@ -72,6 +74,18 @@ public class BalanceApplier : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.dontApplyBalance = !this.dontApplyBalance;
+            if(this.dontApplyBalance)
+                this.balanceFeedbackAnimator.SetTrigger("Off");
+            else
+                this.balanceFeedbackAnimator.SetTrigger("On");
+        }
+    }
+
     public void Restart()
     {
         if (dontApplyBalance)
@@ -84,7 +98,6 @@ public class BalanceApplier : MonoBehaviour
         }
     }
 
-
     public void ApplyDifficulty(int enemyID, float value)
     {
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID];
@@ -95,7 +108,7 @@ public class BalanceApplier : MonoBehaviour
     public void ModifyDamage(float value)
     {
         changedDamageModifier = this.damageModifier;
-        this.damageModifier = Mathf.Clamp(this.damageModifier / value, this.damageModMin, this.damageModMax);
+        this.damageModifier = Mathf.Clamp(this.damageModifier * value, this.damageModMin, this.damageModMax);
         changedDamageModifier = this.damageModifier - changedDamageModifier;
     }
 

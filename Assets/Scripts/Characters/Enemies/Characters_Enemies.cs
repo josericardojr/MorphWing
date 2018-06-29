@@ -111,7 +111,6 @@ public class Characters_Enemies : Characters_Global
 			    this.transform.position.x > this.maxOffsetX ||
 			    this.transform.position.x < -this.maxOffsetX)
             {
-                print("!");
 			    Destroy(this.gameObject);
 		    }
 	}

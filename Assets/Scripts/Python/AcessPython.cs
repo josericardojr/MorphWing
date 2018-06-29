@@ -259,16 +259,13 @@ public class AcessPython : MonoBehaviour
             {
                 if (splitReturn[j].Contains(PLAYERHITRATE))
                 {
-
                     split = splitReturn[j].Split(new char[] { ':' });
-
                     if (split.Length > 1)
                     {
                         try
                         {
                             valueBalance = float.Parse(split[split.Length - 1]);
                             balance.ModifyDamage(valueBalance);
-
                             //print("__________");
                             //print(split[0] + " find -> " + valueBalance);
                         }
@@ -282,10 +279,8 @@ public class AcessPython : MonoBehaviour
                 }
             }
 
-            if (!balance.DontApplyBalance)
-            {
-                FindObjectOfType<Managers_WriteText>().WriteResults();
-            }
+            FindObjectOfType<Managers_WriteText>().WriteResults();
+            
         }
 
     }
