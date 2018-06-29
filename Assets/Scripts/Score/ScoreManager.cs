@@ -57,6 +57,7 @@ public class ScoreManager : MonoBehaviour
     void Awake ()
     {
         balanceApplier = GameObject.Find("Provenance").gameObject;
+        this.balanceApplier.GetComponent<BalanceApplier>().ReAwake();
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
         for (int i = 0; i < 4; i++)
@@ -66,6 +67,11 @@ public class ScoreManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
             itemsGot.Add(0);
 	}
+
+    void Start()
+    {
+        this.balanceApplier.GetComponent<BalanceApplier>().Restart();
+    }
 
     void Update()
 	{
@@ -96,6 +102,9 @@ public class ScoreManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             this.gameOverTimerText.text = ((int)gameOverTime + 1).ToString();
         }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            this.timeCurrent = -1;
     }
     
     public void SaveTime()

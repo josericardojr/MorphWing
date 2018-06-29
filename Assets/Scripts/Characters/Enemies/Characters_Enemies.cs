@@ -9,7 +9,7 @@ public class Characters_Enemies : Characters_Global
 	protected Characters_Player player;
 	protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
-	protected bool canDestroyOffScreen;
+	protected bool canDestroyOffScreen = false;
 	[SerializeField]
 	protected int provIdNum, contactDamage, scoreReward, timeReward;
 	protected float maxOffsetX, maxOffsetY;
@@ -50,7 +50,7 @@ public class Characters_Enemies : Characters_Global
         this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		if(GameObject.FindGameObjectWithTag("Player") != null)
 			this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
-		Invoke("CanDestroyOutOfScreen", 0.4f);
+		Invoke("CanDestroyOutOfScreen", 1f);
 	}
 
 	void OnTriggerStay2D(Collider2D c)
@@ -105,13 +105,15 @@ public class Characters_Enemies : Characters_Global
 
 	protected void DestroyOffScreen()
 	{
-		if (this.transform.position.y > this.maxOffsetY ||
-			this.transform.position.y < -this.maxOffsetY ||
-			this.transform.position.x > this.maxOffsetX ||
-			this.transform.position.x < -this.maxOffsetX)
-        {
-			Destroy(this.gameObject);
-		}
+        if(this.canDestroyOffScreen)
+		    if (this.transform.position.y > this.maxOffsetY ||
+			    this.transform.position.y < -this.maxOffsetY ||
+			    this.transform.position.x > this.maxOffsetX ||
+			    this.transform.position.x < -this.maxOffsetX)
+            {
+                print("!");
+			    Destroy(this.gameObject);
+		    }
 	}
 
 }

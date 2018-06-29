@@ -9,7 +9,7 @@ balanceFactor = Relation()
 difficultyAdjustMax = Relation()
 difficultyAdjustMin = Relation()
 
-damageBalanceFactor = 1
+damageBalanceFactor = 2
 
 #infos retiradas do xml
 

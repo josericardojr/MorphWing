@@ -148,14 +148,16 @@ public class AcessPython : MonoBehaviour
                 //print("Time to get Instruction: " + (elapsedMs));
 
                 string nameFile = "LogTime.txt";
-                if (File.Exists(nameFile))
-                {
-                    TextWriter tw = new StreamWriter(Directory.GetCurrentDirectory() + @"\" + nameFile, true);
-
-                    tw.WriteLine(Characters_Player.GetDate() + ";" + elapsedMs + ";" + finalCount);
+                bool firstTime = false;
+                if (!File.Exists(nameFile))
+                    firstTime = true;
+                TextWriter tw = new StreamWriter(Directory.GetCurrentDirectory() + @"\" + nameFile, true);
+                if (firstTime)
+                      tw.WriteLine("Date; Elapsed Milliseconds; Final Count;");
+                tw.WriteLine(Characters_Player.GetDate() + ";" + elapsedMs + ";" + finalCount);
 
                     tw.Close();
-                }
+                
 #endif
                 instruction = ("Result: " + pyInstruction);
                 if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
@@ -184,6 +186,7 @@ public class AcessPython : MonoBehaviour
         string[] splitReturn = pyInstruction.Split(new char[] { ';' }), split;
         float valueBalance;
         BalanceApplier balance = FindObjectOfType<BalanceApplier>();
+        List<int> balancedEnemy = new List<int>();
         if (balance)
         {
             #region enemy
@@ -198,9 +201,8 @@ public class AcessPython : MonoBehaviour
                         {
                             try
                             {
-                                print(split[split.Length - 1]);
+                                balancedEnemy.Add(i);
                                 valueBalance = float.Parse(split[split.Length - 1]);
-                                print(i + " " + valueBalance.ToString());
                                 balance.ApplyDifficulty(i, valueBalance);
                                 //print("__________");
                                 //print(split[j] + " find -> " + valueBalance);

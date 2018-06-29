@@ -16,14 +16,13 @@ except ImportError:
 file = ''
 args = sys.argv
 for i in range(len(args)):
-    print(args[i])
     if args[i] == 'do':
         if i + 1 < len(sys.argv):
             file = args[i + 1]
         else:
             print('forgot the xml file name')
     if args[i] == 'test':
-        file = 'C:\\Users\\Lucas\\Documents\\JogoProveniência\\Assets\\info_26.5.2018;2.0.xml'
+        file = 'C:\\MorphWing_\\Assets\\info_18.6.2018;23.21.xml'
 
 
 if file != '':

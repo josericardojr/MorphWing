@@ -51,7 +51,10 @@ public class BalanceApplier : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
+    }
 
+    public void ReAwake()
+    {
         changedItemDistances = new float[4];
         for (int i = 0; i < changedItemDistances.Length; i++)
         {
@@ -65,9 +68,11 @@ public class BalanceApplier : MonoBehaviour
         }
 
         changedDamageModifier = 0;
+        List<int> changedIDs = new List<int>();
+
     }
 
-    void Start()
+    public void Restart()
     {
         if (dontApplyBalance)
         {
@@ -79,19 +84,18 @@ public class BalanceApplier : MonoBehaviour
         }
     }
 
+
     public void ApplyDifficulty(int enemyID, float value)
     {
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID];
-
         this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] += value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID] - changedDifficultyMultiplier[enemyID];
     }
 
     public void ModifyDamage(float value)
     {
         changedDamageModifier = this.damageModifier;
-        this.damageModifier = Mathf.Clamp(this.damageModifier * value, this.damageModMin, this.damageModMax);
+        this.damageModifier = Mathf.Clamp(this.damageModifier / value, this.damageModMin, this.damageModMax);
         changedDamageModifier = this.damageModifier - changedDamageModifier;
     }
 
