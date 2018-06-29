@@ -10,7 +10,7 @@ class DamageData:
             if tag in xml.vertexs()[v].label():
                 aux_sum_att += 1
             elif tag_player in xml.vertexs()[v].label():
-                aux_bigger_time = float(xml.vertexs()[v].date())
+                aux_bigger_time = float(xml.vertexs()[v].attributes()[0].value())
 
         self.d_sum_att = aux_sum_att
         self.d_bigger_time = aux_bigger_time

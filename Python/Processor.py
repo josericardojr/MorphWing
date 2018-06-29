@@ -9,7 +9,7 @@ balanceFactor = Relation()
 difficultyAdjustMax = Relation()
 difficultyAdjustMin = Relation()
 
-damageBalanceFactor = 2
+damageBalanceFactor = 1.65
 
 #infos retiradas do xml
 
@@ -35,14 +35,12 @@ facts(difficultyAdjustMin, ("enemy1", "-0.7"),
     ("enemy4", "-0.7"))
 
 facts(difficultyAdjustMax, ("enemy1", "0.5"),
-    ("enemy2", "0.4"),
+    ("enemy2", "0.32"),
     ("enemy3", "0.45"),
-    ("enemy4", "0.6"))
-
+    ("enemy4", "0.5"))
 
 def format_number(number):
     return round(float(number), 3)
-
 
 def adjust_difficulty(factor):
     x = var()
@@ -127,8 +125,7 @@ def get_xml_info(xml, args):
             if key_dif_multi[j] in args[i]:
                 splited = args[i].split('=')
                 last = splited[len(splited) - 1]
-                if last.isdigit():
-                    dif_multi[j] = float(last)
+                dif_multi[j] = float(last)
 
     damage_data = DamageData(xml)
     adjust_player_damage(damage_data.result())

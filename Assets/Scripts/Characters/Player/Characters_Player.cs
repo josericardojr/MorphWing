@@ -162,6 +162,7 @@ public class Characters_Player : Characters_Global
             {
                 print(e.Message);
             }
+
             this.managers_score.StopTimer();
         }
 	}

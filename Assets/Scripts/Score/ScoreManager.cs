@@ -56,7 +56,7 @@ public class ScoreManager : MonoBehaviour
 
     void Awake ()
     {
-        balanceApplier = GameObject.Find("Provenance").gameObject;
+        balanceApplier = GameObject.Find("Balance").gameObject;
         this.balanceApplier.GetComponent<BalanceApplier>().ReAwake();
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
@@ -80,8 +80,11 @@ public class ScoreManager : MonoBehaviour
         if (this.timeCurrent < 0)
         {
             this.timeCurrent = 0;
-            this.player.Temp_CurrHp = 0;
-            this.player.CheckIfAlive(player.GetInstanceID());
+            if (player.Temp_CurrHp > 0)
+            {
+                this.player.Temp_CurrHp = 0;
+                this.player.CheckIfAlive(player.GetInstanceID());
+            }
         }
         if(running)
             this.elapsedTime += Time.deltaTime;

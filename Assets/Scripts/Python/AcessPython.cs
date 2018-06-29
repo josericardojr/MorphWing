@@ -186,7 +186,6 @@ public class AcessPython : MonoBehaviour
         string[] splitReturn = pyInstruction.Split(new char[] { ';' }), split;
         float valueBalance;
         BalanceApplier balance = FindObjectOfType<BalanceApplier>();
-        List<int> balancedEnemy = new List<int>();
         if (balance)
         {
             #region enemy
@@ -201,7 +200,6 @@ public class AcessPython : MonoBehaviour
                         {
                             try
                             {
-                                balancedEnemy.Add(i);
                                 valueBalance = float.Parse(split[split.Length - 1]);
                                 balance.ApplyDifficulty(i, valueBalance);
                                 //print("__________");
@@ -229,7 +227,6 @@ public class AcessPython : MonoBehaviour
                 {
                     if (splitReturn[j].Contains(KEYDIFMULTI[i]))
                     {
-
                         split = splitReturn[j].Split(new char[] { ':' });
                         if (split.Length > 1)
                         {
@@ -252,8 +249,8 @@ public class AcessPython : MonoBehaviour
                     }
                 }
             }
-            #endregion
 
+            #endregion
 
             for (int j = 0; j < splitReturn.Length; j++)
             {
@@ -266,6 +263,7 @@ public class AcessPython : MonoBehaviour
                         {
                             valueBalance = float.Parse(split[split.Length - 1]);
                             balance.ModifyDamage(valueBalance);
+                            print(valueBalance);
                             //print("__________");
                             //print(split[0] + " find -> " + valueBalance);
                         }

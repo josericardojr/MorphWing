@@ -7,9 +7,9 @@ public class DestroyProvenance : MonoBehaviour
 {
 	void Start ()
     {
-        if (GameObject.Find("Provenance"))
+        if (GameObject.Find("Balance"))
         {
-            Destroy(GameObject.Find("Provenance"));
+            Destroy(GameObject.Find("Balance"));
         }
 	}
 }

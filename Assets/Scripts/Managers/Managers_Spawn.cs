@@ -10,7 +10,7 @@ public class Managers_Spawn : MonoBehaviour
 	bool deactivaded, canSpawn;
     [SerializeField]
     bool random;
-    float spawnTime = 0.8f, currSpawnTime;
+    float spawnTime = 0.4f, currSpawnTime;
 	Vector3 selectedPos;
 	[SerializeField]
 	List<GameObject> enemyObjects = new List<GameObject>();
@@ -70,7 +70,8 @@ public class Managers_Spawn : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             if (enemies.Length < 4)
             {
-                this.currSpawnTime = this.spawnTime;
+                if(currSpawnTime <= 0)
+                    this.currSpawnTime = this.spawnTime;
                 //if (this.currWave == this.waveCreation.Count)
                 //    SpawnRandomItem();
                 SpawnNextEnemy();

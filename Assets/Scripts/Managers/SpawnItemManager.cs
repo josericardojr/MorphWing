@@ -39,7 +39,7 @@ public class SpawnItemManager : MonoBehaviour {
 
 	void Start ()
     {
-        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
+        this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();
 		this.transform.position = Camera.main.transform.position;
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		Prov_Agent();

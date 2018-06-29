@@ -7,7 +7,7 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     bool dontApplyBalance;
     public static BalanceApplier instance;
-    public float damageModifier = 1;
+    float damageModifier = 1;
     [SerializeField]
     public List<float> difficultyMultipliers = new List<float>();
     [SerializeField]
@@ -70,7 +70,6 @@ public class BalanceApplier : MonoBehaviour
         }
 
         changedDamageModifier = 0;
-        List<int> changedIDs = new List<int>();
 
     }
 
@@ -108,7 +107,7 @@ public class BalanceApplier : MonoBehaviour
     public void ModifyDamage(float value)
     {
         changedDamageModifier = this.damageModifier;
-        this.damageModifier = Mathf.Clamp(this.damageModifier * value, this.damageModMin, this.damageModMax);
+        this.damageModifier = Mathf.Clamp(this.damageModifier / value, this.damageModMin, this.damageModMax);
         changedDamageModifier = this.damageModifier - changedDamageModifier;
     }
 

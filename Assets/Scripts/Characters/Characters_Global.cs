@@ -37,9 +37,9 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected void Start()
 	{
-        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
+        this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();
 		this.temp_currHp = this.stat_hp;
-		GameObject provenanceObj = GameObject.FindGameObjectWithTag("Provenance");
+		GameObject provenanceObj = GameObject.Find("Provenance");
 		this.animator = this.GetComponent<Animator>();
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
@@ -66,7 +66,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.lastHitBy = objLabel;
 		this.Prov_TakeDamage(instanceID, damage);
 		this.animator.SetTrigger("Flash");
-		this.temp_currHp -= (int)damage;
+		this.temp_currHp -= damage;
 		CheckIfAlive(instanceID);
 	}
 
@@ -74,9 +74,8 @@ public abstract class Characters_Global : MonoBehaviour
 	{
         if (this.temp_currHp <= 0)
         {
-            if(this.gameObject != null)
-                Destroy(this.gameObject);
             this.Prov_GetDestroyed(instanceID);
+            Destroy(this.gameObject);
         }
 	}
 

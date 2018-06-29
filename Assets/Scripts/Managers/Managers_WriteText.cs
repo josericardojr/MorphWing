@@ -61,7 +61,7 @@ public class Managers_WriteText : MonoBehaviour
                          balanceApplier.itemDistances[1] + ";" +
                          balanceApplier.itemDistances[2] + ";" +
                          balanceApplier.itemDistances[3] + ";" +
-                         balanceApplier.damageModifier + ";";
+                         balanceApplier.DamageModifier + ";";
         /*
         if (balanceApplier)
         {   

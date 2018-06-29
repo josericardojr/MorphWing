@@ -27,7 +27,7 @@ public class Projectiles_Global : MonoBehaviour
 
 	protected void Start()
     {
-        this.balanceApplier = GameObject.Find("Provenance").GetComponent<BalanceApplier>();
+        this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();
         if (this.CompareTag("Player_Shot"))
         {
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
@@ -66,6 +66,8 @@ public class Projectiles_Global : MonoBehaviour
 			c.GetComponent<Characters_Global>().GetDamaged(this.GetComponent<Collider2D>().GetInstanceID(), this.shooterLabel, this.damage);
             if (this.CompareTag("Player_Shot"))
                 this.scoreManager.AddScore(this.hitScore);
+            if(this.CompareTag("Enemy_Shot") && this.shooter != null)
+                this.shooter.GetComponent<Characters_Global>().Prov_EnemyAttack((int)this.damage);
 		}
 	}
 
