@@ -24,18 +24,18 @@ public class Managers_WriteText : MonoBehaviour
             text += "Date" + ";" +
                          "Time Survived" + ";" +
                          "Score" + ";" +
-                         "Straight" + ";" +
-                         "Chaser" + ";" +
-                         "Round" + ";" +
-                         "Irregular" + ";" +
+                         "Straight Kills" + ";" +
+                         "Chaser Kills" + ";" +
+                         "Round Kills" + ";" +
+                         "Boomerang Kills" + ";" +
                          "PowerUp" + ";" +
                          "PowerDown" + ";" +
                          "SpeedUp" + ";" +
                          "SpeedDown" + ";" +
-                         "Enemy1" + ";" +
-                         "Enemy2" + ";" +
-                         "Enemy3" + ";" +
-                         "Enemy4" + ";" +
+                         "Straight Difficulty" + ";" +
+                         "Chaser Difficulty" + ";" +
+                         "Round Difficulty" + ";" +
+                         "Boomerang Difficulty" + ";" +
                          "Item1" + ";" +
                          "Item2" + ";" +
                          "Item3" + ";" +

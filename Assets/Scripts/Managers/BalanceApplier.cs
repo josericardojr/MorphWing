@@ -20,7 +20,6 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     float damageModMax, damageModMin;
 
-
     string randomID;
 
     public string RandomID
@@ -69,6 +68,7 @@ public class BalanceApplier : MonoBehaviour
         }
 
         changedDamageModifier = 0;
+        List<int> changedIDs = new List<int>();
 
     }
 
@@ -84,13 +84,11 @@ public class BalanceApplier : MonoBehaviour
         }
     }
 
+
     public void ApplyDifficulty(int enemyID, float value)
     {
-
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID];
-        print("ID: " + enemyID + " Value: " + value + " Current: " + this.difficultyMultipliers[enemyID]);
         this.difficultyMultipliers[enemyID] = Mathf.Clamp(this.difficultyMultipliers[enemyID] += value, this.difficultyMultipliersMinimum[enemyID], this.difficultyMultipliersMaximum[enemyID]);
-
         changedDifficultyMultiplier[enemyID] = this.difficultyMultipliers[enemyID] - changedDifficultyMultiplier[enemyID];
     }
 

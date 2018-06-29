@@ -16,7 +16,6 @@ except ImportError:
 file = ''
 args = sys.argv
 for i in range(len(args)):
-    print(args[i])
     if args[i] == 'do':
         if i + 1 < len(sys.argv):
             file = args[i + 1]
