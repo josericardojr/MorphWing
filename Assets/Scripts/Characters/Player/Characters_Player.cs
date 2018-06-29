@@ -144,7 +144,7 @@ public class Characters_Player : Characters_Global
 		{
 			this.hud_retryText.enabled = true;
 			this.managers_spawn.Deactivated = true;
-
+            base.CheckIfAlive(instanceID);
             string nameProv = "info_" + GetDate();
 
             try
@@ -164,7 +164,6 @@ public class Characters_Player : Characters_Global
             }
             this.managers_score.StopTimer();
         }
-		base.CheckIfAlive(instanceID);
 	}
 
     public static string GetDate()
