@@ -35,6 +35,12 @@ public abstract class Characters_Global : MonoBehaviour
         set { this.temp_currHp = value; }
     }
 
+    public float Stat_HP
+    {
+        get { return this.stat_hp; }
+        set { this.stat_hp = value; }
+    }
+
 	protected void Start()
 	{
         this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();

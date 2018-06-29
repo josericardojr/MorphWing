@@ -25,7 +25,22 @@ public class Characters_Player : Characters_Global
 	[HideInInspector]
 	public bool invertControl;
 
+    float damageMultiplier = 1;
+    bool attackBuff = false;
+
 	#region GETS & SETS
+
+    public float DamageMultiplier
+    {
+        get { return this.damageMultiplier; }
+        set { this.damageMultiplier = value; }
+    }
+
+    public bool AttackBuff
+    {
+        get { return this.attackBuff; }
+        set { this.attackBuff = value; }
+    }
 
 	public bool Invincible
 	{

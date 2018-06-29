@@ -6,6 +6,13 @@ public class Enemies_RoundShooter : Characters_Enemies
 {
     [SerializeField]
     List<Vector2> shootDirOrder = new List<Vector2>();
+    [SerializeField]
+    float prepareTime;
+
+    public float PrepareTime
+    {
+        get { return this.prepareTime; }
+    }
 
     private bool startShooting;
 
@@ -40,7 +47,7 @@ public class Enemies_RoundShooter : Characters_Enemies
     {
         for (int i = 0; i < this.shootDirOrder.Count; i++)
         {
-            yield return new WaitForSeconds(0.7f / this.balanceApplier.difficultyMultipliers[this.provIdNum]);
+            yield return new WaitForSeconds(this.prepareTime / this.balanceApplier.difficultyMultipliers[this.provIdNum]);
             ShootProjectile(0, (int)this.shootDirOrder[i].x, (int)this.shootDirOrder[i].y);
             this.Prov_UsingAttack(this.GetInstanceID().ToString());
         }

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemies_Irregular : Characters_Enemies
 {
+    [SerializeField]
+    float prepareTime;
+
+    public float PrepareTime
+    {
+        get { return this.prepareTime; }
+    }
+
 	new void Start ()
     {
         base.Start();
@@ -23,7 +31,7 @@ public class Enemies_Irregular : Characters_Enemies
     {
         this.dirX = 0;
         this.dirY = 0;
-        Invoke("Shoot", Random.Range(0.5f / this.balanceApplier.difficultyMultipliers[this.provIdNum], 1 / this.balanceApplier.difficultyMultipliers[this.provIdNum]));
+        Invoke("Shoot", this.prepareTime / this.balanceApplier.difficultyMultipliers[this.provIdNum]);
     }
 
     void Shoot()
@@ -32,7 +40,7 @@ public class Enemies_Irregular : Characters_Enemies
         ShootProjectile(0, 0, 1);
         ShootProjectile(0, -1, 0);
         ShootProjectile(0, 0, -1);
-        Invoke("GoBack", Random.Range(0.7f / this.balanceApplier.difficultyMultipliers[this.provIdNum], 1.2f / this.balanceApplier.difficultyMultipliers[this.provIdNum]));
+        Invoke("GoBack", this.prepareTime / this.balanceApplier.difficultyMultipliers[this.provIdNum]);
         this.Prov_UsingAttack(this.GetInstanceID().ToString());
     }
 

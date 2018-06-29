@@ -48,14 +48,8 @@ public class EfeitoManager : MonoBehaviour {
                 this.GetComponent<Animator>().SetBool("PowerBuff", true);
                 this.GetComponent<TrailRenderer>().material = this.powerUpMat;
                 this.GetComponent<TrailRenderer>().enabled = true;
-			GameObject[] listaPrefab;
-			listaPrefab = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-            for (int i = 0; i < listaPrefab.Length; i++)
-            {
-                listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
-                    listaPrefab[i].GetComponent<Projectiles_Global>().Damage * multiDamageUp;
-                listaPrefab[i].GetComponent<Projectiles_Global>().UpEffect = true;
-            }
+            this.GetComponent<Characters_Player>().AttackBuff = true;
+            this.GetComponent<Characters_Player>().DamageMultiplier = multiDamageUp;
             this.scoreManager.ItemsGot[0]++;
 
 			break;
@@ -63,9 +57,8 @@ public class EfeitoManager : MonoBehaviour {
 			GameObject[] listaPrefab2;
             this.GetComponent<Animator>().SetBool("PowerDown", true);
 			listaPrefab2 = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-			for (int i = 0; i < listaPrefab2.Length; i++)
-				listaPrefab2[i].GetComponent<Projectiles_Global>().Damage =
-					listaPrefab2[i].GetComponent<Projectiles_Global>().Damage / multiDamageDown;
+            this.GetComponent<Characters_Player>().AttackBuff = false;
+            this.GetComponent<Characters_Player>().DamageMultiplier = multiDamageDown;
             this.scoreManager.ItemsGot[1]++;
 
 			break;
@@ -100,23 +93,13 @@ public class EfeitoManager : MonoBehaviour {
 
             this.GetComponent<Animator>().SetBool("PowerBuff", false);
             this.GetComponent<TrailRenderer>().enabled = false;
-			GameObject[] listaPrefab;
-			listaPrefab = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-            for (int i = 0; i < listaPrefab.Length; i++)
-            {
-                listaPrefab[i].GetComponent<Projectiles_Global>().Damage =
-                    listaPrefab[i].GetComponent<Projectiles_Global>().Damage / multiDamageUp;
-                listaPrefab[i].GetComponent<Projectiles_Global>().UpEffect = false;
-            }
+            this.GetComponent<Characters_Player>().AttackBuff = false;
+            this.GetComponent<Characters_Player>().DamageMultiplier = 1;
 			break;
 
 		case Object_Efeitos.Effects.DAMAGE_DOWN:
-			GameObject[] listaPrefab2;
             this.GetComponent<Animator>().SetBool("PowerDown", false);
-			listaPrefab2 = this.GetComponent<Characters_Player>().PrefabList.ToArray();
-			for (int i = 0; i < listaPrefab2.Length; i++)
-				listaPrefab2[i].GetComponent<Projectiles_Global>().Damage =
-					listaPrefab2[i].GetComponent<Projectiles_Global>().Damage * multiDamageDown;
+            this.GetComponent<Characters_Player>().DamageMultiplier = 1;
 			break;
 
         case Object_Efeitos.Effects.SPEED_UP:

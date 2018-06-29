@@ -7,6 +7,10 @@ using System.IO;
 public class Managers_WriteText : MonoBehaviour 
 {
     ScoreManager scoreManager;
+    [SerializeField]
+    List<GameObject> enemyPrefabs;
+    [SerializeField]
+    GameObject bulletPrefab;
 
 	public void WriteResults ()
     {
@@ -33,9 +37,16 @@ public class Managers_WriteText : MonoBehaviour
                          "SpeedUp" + ";" +
                          "SpeedDown" + ";" +
                          "Straight Difficulty" + ";" +
+                         "Straight Speed" + ";" +
                          "Chaser Difficulty" + ";" +
+                         "Chaser Speed" + ";" +
+                         "Chaser HP" + ";" +
                          "Round Difficulty" + ";" +
+                         "Round Bullet Speed" + ";" +
+                         "Round Prepare Time" + ";" +
                          "Boomerang Difficulty" + ";" +
+                         "Boomerang Bullet Speed" + ";" +
+                         "Boomerang Prepare Time" + ";" +
                          "Item1" + ";" +
                          "Item2" + ";" +
                          "Item3" + ";" +
@@ -53,10 +64,22 @@ public class Managers_WriteText : MonoBehaviour
                          this.scoreManager.ItemsGot[1] + ";" +
                          this.scoreManager.ItemsGot[2] + ";" +
                          this.scoreManager.ItemsGot[3] + ";" +
+
                          balanceApplier.difficultyMultipliers[0] + ";" +
+                         this.enemyPrefabs[0].GetComponent<Characters_Enemies>().Stat_Speed * balanceApplier.difficultyMultipliers[0] + ";" +
+
                          balanceApplier.difficultyMultipliers[1] + ";" +
+                         this.enemyPrefabs[1].GetComponent<Characters_Enemies>().Stat_Speed * balanceApplier.difficultyMultipliers[1] + ";" +
+                         this.enemyPrefabs[1].GetComponent<Characters_Global>().Stat_HP * balanceApplier.difficultyMultipliers[1] + ";" +
+
                          balanceApplier.difficultyMultipliers[2] + ";" +
+                         this.bulletPrefab.GetComponent<Projectiles_Global>().Speed * balanceApplier.difficultyMultipliers[2] + ";" +
+                         this.enemyPrefabs[2].GetComponent<Enemies_RoundShooter>().PrepareTime * balanceApplier.difficultyMultipliers[2] + ";" +
+
                          balanceApplier.difficultyMultipliers[3] + ";" +
+                         this.bulletPrefab.GetComponent<Projectiles_Global>().Speed * balanceApplier.difficultyMultipliers[3] + ";" +
+                         this.enemyPrefabs[3].GetComponent<Enemies_Irregular>().PrepareTime * balanceApplier.difficultyMultipliers[3] + ";" +
+
                          balanceApplier.itemDistances[0] + ";" +
                          balanceApplier.itemDistances[1] + ";" +
                          balanceApplier.itemDistances[2] + ";" +

@@ -30,11 +30,12 @@ public class Projectiles_Global : MonoBehaviour
         this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();
         if (this.CompareTag("Player_Shot"))
         {
+            if(this.shooter.GetComponent<Characters_Player>().AttackBuff)
+                this.GetComponent<Animator>().SetTrigger("Crazy");
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
             this.damage *= this.balanceApplier.DamageModifier;
+            this.damage *= this.shooter.GetComponent<Characters_Player>().DamageMultiplier;
         }
-        if (this.upEffect)
-            this.GetComponent<Animator>().SetTrigger("Crazy");
 
         if (this.CompareTag("Enemy_Shot"))
             this.speed *= this.balanceApplier.difficultyMultipliers[this.prov_id];
@@ -105,6 +106,12 @@ public class Projectiles_Global : MonoBehaviour
     {
         get { return this.damage; }
         set { this.damage = value; }
+    }
+
+    public float Speed
+    {
+        get { return this.speed; }
+        set { this.speed = value; }
     }
 
 	public bool UpEffect
