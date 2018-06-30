@@ -1,0 +1,2 @@
+Date;Time Survived;Score;Straight Kills;Chaser Kills;Round Kills;Boomerang Kills;PowerUp;PowerDown;SpeedUp;SpeedDown;Straight Difficulty;Straight Speed;Chaser Difficulty;Chaser Speed;Chaser HP;Round Difficulty;Round Bullet Speed;Round Prepare Time;Boomerang Difficulty;Boomerang Bullet Speed;Boomerang Prepare Time;Item1;Item2;Item3;Item4;PlayerDamage;
+6/30/2018 8:02:07 PM;4.977346;555;1;0;0;0;0;0;0;0;0.1904762;1.7;0.2857142;0.7;5;0.3793104;5;0.7;0.2954546;5;0.8;1;1;1;1;1;

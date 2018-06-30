@@ -263,7 +263,6 @@ public class AcessPython : MonoBehaviour
                         {
                             valueBalance = float.Parse(split[split.Length - 1]);
                             balance.ModifyDamage(valueBalance);
-                            print(valueBalance);
                             //print("__________");
                             //print(split[0] + " find -> " + valueBalance);
                         }

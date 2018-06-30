@@ -28,6 +28,16 @@ public class BalanceApplier : MonoBehaviour
         get { return this.randomID; }
     }
 
+    public List<float> DifficultyMultipliersMinimum
+    {
+        get { return this.difficultyMultipliersMinimum; }
+    }
+
+    public List<float> DifficultyMultipliersMaximum
+    {
+        get { return this.difficultyMultipliersMaximum; }
+    }
+
     [Header("Debug")]
     [SerializeField]
     private float[] changedDifficultyMultiplier;

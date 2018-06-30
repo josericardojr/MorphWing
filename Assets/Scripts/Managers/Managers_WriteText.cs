@@ -53,6 +53,17 @@ public class Managers_WriteText : MonoBehaviour
                          "Item4" + ";" +
                          "PlayerDamage" + ";" + Environment.NewLine;
 
+        List<float> normalizedDifficulties = new List<float>();
+        normalizedDifficulties.Add((balanceApplier.difficultyMultipliers[0] - balanceApplier.DifficultyMultipliersMinimum[0]) /
+                                    (balanceApplier.difficultyMultipliersMaximum[0] - balanceApplier.difficultyMultipliersMinimum[0]));
+        normalizedDifficulties.Add((balanceApplier.difficultyMultipliers[1] - balanceApplier.DifficultyMultipliersMinimum[1]) /
+                                    (balanceApplier.difficultyMultipliersMaximum[1] - balanceApplier.difficultyMultipliersMinimum[1]));
+        normalizedDifficulties.Add((balanceApplier.difficultyMultipliers[2] - balanceApplier.DifficultyMultipliersMinimum[2]) /
+                                    (balanceApplier.difficultyMultipliersMaximum[2] - balanceApplier.difficultyMultipliersMinimum[2]));
+        normalizedDifficulties.Add((balanceApplier.difficultyMultipliers[3] - balanceApplier.DifficultyMultipliersMinimum[3]) /
+                                    (balanceApplier.difficultyMultipliersMaximum[3] - balanceApplier.difficultyMultipliersMinimum[3]));
+        
+
         text += DateTime.Now.ToString() + ";" +
                          this.scoreManager.ElapsedTime + ";" +
                          this.scoreManager.Score + ";" +
@@ -65,18 +76,18 @@ public class Managers_WriteText : MonoBehaviour
                          this.scoreManager.ItemsGot[2] + ";" +
                          this.scoreManager.ItemsGot[3] + ";" +
 
-                         balanceApplier.difficultyMultipliers[0] + ";" +
+                         normalizedDifficulties[0] + ";" +
                          this.enemyPrefabs[0].GetComponent<Characters_Enemies>().Stat_Speed * balanceApplier.difficultyMultipliers[0] + ";" +
 
-                         balanceApplier.difficultyMultipliers[1] + ";" +
+                         normalizedDifficulties[1] + ";" +
                          this.enemyPrefabs[1].GetComponent<Characters_Enemies>().Stat_Speed * balanceApplier.difficultyMultipliers[1] + ";" +
                          this.enemyPrefabs[1].GetComponent<Characters_Global>().Stat_HP * balanceApplier.difficultyMultipliers[1] + ";" +
 
-                         balanceApplier.difficultyMultipliers[2] + ";" +
+                         normalizedDifficulties[2] + ";" +
                          this.bulletPrefab.GetComponent<Projectiles_Global>().Speed * balanceApplier.difficultyMultipliers[2] + ";" +
                          this.enemyPrefabs[2].GetComponent<Enemies_RoundShooter>().PrepareTime * balanceApplier.difficultyMultipliers[2] + ";" +
 
-                         balanceApplier.difficultyMultipliers[3] + ";" +
+                         normalizedDifficulties[3] + ";" +
                          this.bulletPrefab.GetComponent<Projectiles_Global>().Speed * balanceApplier.difficultyMultipliers[3] + ";" +
                          this.enemyPrefabs[3].GetComponent<Enemies_Irregular>().PrepareTime * balanceApplier.difficultyMultipliers[3] + ";" +
 
