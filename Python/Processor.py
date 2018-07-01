@@ -3,6 +3,7 @@ from Data.PlayerDamageData import *
 
 key_enemy = ["KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4"]
 key_dif_multi = ["DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4"]
+enemy_difficult = [0, 0, 0, 0]
 player_hit_rate = "PLAYERHITRATE"
 
 balanceFactor = Relation()
@@ -39,8 +40,10 @@ facts(difficultyAdjustMax, ("enemy1", "0.5"),
     ("enemy3", "0.45"),
     ("enemy4", "0.5"))
 
+
 def format_number(number):
     return round(float(number), 3)
+
 
 def adjust_difficulty(factor):
     x = var()
@@ -54,6 +57,7 @@ def adjust_difficulty(factor):
 
     if hap_factor > 0:
         result = min(max(0.05 * hap_factor - 0.05 * hit_factor * float(bal_factor[0]), float(min_adjust[0])), float(max_adjust[0]))
+        enemy_difficult[factor] = format_number(result)
         print("{0}:{1};".format(key_enemy[factor], format_number(result)))
 
 
@@ -64,27 +68,26 @@ def adjust_player_damage (hit_time):
 
 def return_pool_values(w1, w2, w3, w4, invert):
 
-    value = (difficultyMultipliers[0] * w1) + (difficultyMultipliers[1] * w2) + (difficultyMultipliers[2] * w3) + (difficultyMultipliers[3] * w4);
+    value = (difficultyMultipliers[0] * w1) + (difficultyMultipliers[1] * w2) + (difficultyMultipliers[2] * w3) + (difficultyMultipliers[3] * w4)
     if invert:
         value = 5.1 - value
 
     return min(max(value, 0.7), 5.1)
 
 
-def get_item_distances(m1, m2, m3, m4):
-    difficultyMultipliers[0] = m1
-    difficultyMultipliers[1] = m2
-    difficultyMultipliers[2] = m3
-    difficultyMultipliers[3] = m4
+def get_item_distances(m):
+
+    for i in range(len(key_enemy)):
+        difficultyMultipliers[i] = m[i]
+
     itemDistances[0] = return_pool_values(0.4, 1.2, 0.6, 0.4, False)
     itemDistances[1] = return_pool_values(0.4, 1.2, 0.6, 0.4, True)
     itemDistances[2] = return_pool_values(0.8, 1.3, 0.3, 0.3, False)
     itemDistances[3] = return_pool_values(0.8, 1.3, 0.3, 0.3, True)
-    print("{0}:{1};".format(key_dif_multi[0], format_number(itemDistances[0])))
-    print("{0}:{1};".format(key_dif_multi[1], format_number(itemDistances[1])))
-    print("{0}:{1};".format(key_dif_multi[2], format_number(itemDistances[2])))
-    print("{0}:{1};".format(key_dif_multi[3], format_number(itemDistances[3])))
 
+    for i in range(len(key_enemy)):
+        print("{0}:{1};".format(key_dif_multi[i], format_number(itemDistances[i])))
+        
 
 def get_xml_info(xml, args):
     vertexs = xml.vertexs()
@@ -113,21 +116,12 @@ def get_xml_info(xml, args):
             if xml.vertexs()[v].attributes()[6].value() == "Enemy_Irregular":
                 happenings[3] += 1
 
-    dif_multi = [0, 0, 0, 0]
-
     for j in range(len(key_enemy)):
         for i in range(len(args)):
             if key_enemy[j] in args[i]:
                 adjust_difficulty(j)
-
-    for j in range(len(key_dif_multi)):
-        for i in range(len(args)):
-            if key_dif_multi[j] in args[i]:
-                splited = args[i].split('=')
-                last = splited[len(splited) - 1]
-                dif_multi[j] = float(last)
-
+   
     damage_data = DamageData(xml)
     adjust_player_damage(damage_data.result())
 
-    get_item_distances(dif_multi[0], dif_multi[1], dif_multi[2], dif_multi[3])
+    get_item_distances(enemy_difficult)

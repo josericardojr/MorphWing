@@ -116,7 +116,7 @@ public class AcessPython : MonoBehaviour
         {
             for (int i = 0; i < KEYDIFMULTI.Length; i++)
             {
-                args += KEYDIFMULTI[i] + "=" + balance.difficultyMultipliers[i] + " ";
+                args += KEYDIFMULTI[i];// + "=" + balance.difficultyMultipliers[i] + " ";
             }
         }
 
