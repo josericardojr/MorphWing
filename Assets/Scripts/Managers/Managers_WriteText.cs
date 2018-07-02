@@ -7,6 +7,7 @@ using System.IO;
 public class Managers_WriteText : MonoBehaviour 
 {
     ScoreManager scoreManager;
+    Managers_Spawn spawnManager;
     [SerializeField]
     List<GameObject> enemyPrefabs;
     [SerializeField]
@@ -16,6 +17,8 @@ public class Managers_WriteText : MonoBehaviour
     {
         if(scoreManager == null)
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        if (spawnManager == null)
+            this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
         BalanceApplier balanceApplier = FindObjectOfType<BalanceApplier>();
         string path = Application.dataPath + @"/Resources/" + this.GetComponent<BalanceApplier>().RandomID.ToString() + ".txt";
         bool firstLine = false;
@@ -28,9 +31,13 @@ public class Managers_WriteText : MonoBehaviour
             text += "Date" + ";" +
                          "Time Survived" + ";" +
                          "Score" + ";" +
+                         "Straight Spawns" + ";" +
                          "Straight Kills" + ";" +
+                         "Chaser Spawns" + ";" +
                          "Chaser Kills" + ";" +
+                         "Round Spawns" + ";" +
                          "Round Kills" + ";" +
+                         "Boomerang Spawns" + ";" +
                          "Boomerang Kills" + ";" +
                          "PowerUp" + ";" +
                          "PowerDown" + ";" +
@@ -67,9 +74,13 @@ public class Managers_WriteText : MonoBehaviour
         text += DateTime.Now.ToString() + ";" +
                          this.scoreManager.ElapsedTime + ";" +
                          this.scoreManager.Score + ";" +
+                         this.spawnManager.EnemySpawns[0] + ";" +
                          this.scoreManager.EnemyKills[0] + ";" +
+                         this.spawnManager.EnemySpawns[1] + ";" +
                          this.scoreManager.EnemyKills[1] + ";" +
+                         this.spawnManager.EnemySpawns[2] + ";" +
                          this.scoreManager.EnemyKills[2] + ";" +
+                         this.spawnManager.EnemySpawns[3] + ";" +
                          this.scoreManager.EnemyKills[3] + ";" +
                          this.scoreManager.ItemsGot[0] + ";" +
                          this.scoreManager.ItemsGot[1] + ";" +
