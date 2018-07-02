@@ -8,6 +8,7 @@ public class Managers_WriteText : MonoBehaviour
 {
     ScoreManager scoreManager;
     Managers_Spawn spawnManager;
+    SpawnItemManager spawnItemManager;
     [SerializeField]
     List<GameObject> enemyPrefabs;
     [SerializeField]
@@ -19,6 +20,9 @@ public class Managers_WriteText : MonoBehaviour
             this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         if (spawnManager == null)
             this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
+        if (spawnItemManager == null)
+            this.spawnItemManager = GameObject.Find("SpawnManager").GetComponent<SpawnItemManager>();
+
         BalanceApplier balanceApplier = FindObjectOfType<BalanceApplier>();
         string path = Application.dataPath + @"/Resources/" + this.GetComponent<BalanceApplier>().RandomID.ToString() + ".txt";
         bool firstLine = false;
@@ -39,10 +43,14 @@ public class Managers_WriteText : MonoBehaviour
                          "Round Kills" + ";" +
                          "Boomerang Spawns" + ";" +
                          "Boomerang Kills" + ";" +
-                         "PowerUp" + ";" +
-                         "PowerDown" + ";" +
-                         "SpeedUp" + ";" +
-                         "SpeedDown" + ";" +
+                         "PowerUp Spawns" + ";" +
+                         "PowerUp Got" + ";" +
+                         "PowerDown Spawns" + ";" +
+                         "PowerDown Got" + ";" +
+                         "SpeedUp Spawns" + ";" +
+                         "SpeedUp Got" + ";" +
+                         "SpeedDown Spawns" + ";" +
+                         "SpeedDown Got" + ";" +
                          "Straight Difficulty" + ";" +
                          "Straight Speed" + ";" +
                          "Chaser Difficulty" + ";" +
@@ -82,9 +90,14 @@ public class Managers_WriteText : MonoBehaviour
                          this.scoreManager.EnemyKills[2] + ";" +
                          this.spawnManager.EnemySpawns[3] + ";" +
                          this.scoreManager.EnemyKills[3] + ";" +
+
+                         this.spawnItemManager.SpawnedItems[0] + ";" +
                          this.scoreManager.ItemsGot[0] + ";" +
+                         this.spawnItemManager.SpawnedItems[1] + ";" +
                          this.scoreManager.ItemsGot[1] + ";" +
+                         this.spawnItemManager.SpawnedItems[2] + ";" +
                          this.scoreManager.ItemsGot[2] + ";" +
+                         this.spawnItemManager.SpawnedItems[3] + ";" +
                          this.scoreManager.ItemsGot[3] + ";" +
 
                          normalizedDifficulties[0] + ";" +

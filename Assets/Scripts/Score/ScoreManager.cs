@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
 
     private GameObject textTime;
     [SerializeField]
-    Text gameOverTimerText, scoreText;
+    Text gameOverTimerText, scoreText, bestText;
     GameObject balanceApplier;
 
     List<int> enemyKills = new List<int>();
@@ -57,6 +57,7 @@ public class ScoreManager : MonoBehaviour
     void Awake ()
     {
         balanceApplier = GameObject.Find("Balance").gameObject;
+        this.bestText.text = balanceApplier.GetComponent<BalanceApplier>().BestScore.ToString();
         this.balanceApplier.GetComponent<BalanceApplier>().ReAwake();
         this.textTime = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
         running = true;
@@ -98,6 +99,8 @@ public class ScoreManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                if(this.score > this.balanceApplier.GetComponent<BalanceApplier>().BestScore)
+                    this.balanceApplier.GetComponent<BalanceApplier>().BestScore = this.score;
                 SceneManager.LoadScene(1);
             }
             this.gameOverTime -= Time.deltaTime / 1.8f;
@@ -123,6 +126,7 @@ public class ScoreManager : MonoBehaviour
     {
         this.score += 110 * (int)elapsedTime;
         running = false;
+        this.scoreText.text = score.ToString();
         this.gameOverTimerText.enabled = true;
     }
 }

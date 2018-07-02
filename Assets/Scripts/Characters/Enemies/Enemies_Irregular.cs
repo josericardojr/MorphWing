@@ -17,12 +17,13 @@ public class Enemies_Irregular : Characters_Enemies
         base.Start();
         this.dirX = (int)initDir.x;
         this.dirY = (int)initDir.y;
-        Invoke("Stop", Random.Range(0.7f, 1.3f));
+        Invoke("Stop", Random.Range(1.1f, 1.3f));
         this.Prov_UsingAttack(this.GetInstanceID().ToString());
     }
 	
 	void Update ()
     {
+        CanDestroyOutOfScreen();
         MovementCall();
         DestroyOffScreen();
 	}

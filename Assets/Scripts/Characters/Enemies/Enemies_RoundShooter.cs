@@ -24,8 +24,8 @@ public class Enemies_RoundShooter : Characters_Enemies
 
     void Update()
     {
+        CanDestroyOutOfScreen();
         MovementCall();
-        DestroyOffScreen();
         SetDirection();
         Slowdown();
     }

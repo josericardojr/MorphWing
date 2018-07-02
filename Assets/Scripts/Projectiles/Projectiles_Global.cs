@@ -42,8 +42,6 @@ public class Projectiles_Global : MonoBehaviour
         
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		this.managers_spawn = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
-		this.maxOffsetX = this.managers_spawn.MaxOffsetX;
-		this.maxOffsetY = this.managers_spawn.MaxOffsetY;
 	}
 
 	public void StatsReceiver(GameObject shooterObj, float damageValue, float dirXValue, float dirYValue, float instanceID, string objLabel)

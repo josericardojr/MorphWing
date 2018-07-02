@@ -19,6 +19,13 @@ public class SpawnItemManager : MonoBehaviour {
 	List<Transform> positionOrder;
     [SerializeField]
     List<Transform> allPositions;
+    [SerializeField]
+    List<int> spawnedItems;
+
+    public List<int> SpawnedItems
+    {
+        get { return this.spawnedItems; }
+    }
 
 	int currPowerUp;
 
@@ -131,6 +138,7 @@ public class SpawnItemManager : MonoBehaviour {
                 powerUpPool.Add(3);
 
             aux = powerUpPool[Random.Range(0, powerUpPool.Count)];
+            this.spawnedItems[aux]++;
         }
 		switch (aux)
 		{

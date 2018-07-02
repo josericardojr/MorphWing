@@ -151,7 +151,6 @@ public class Managers_Spawn : MonoBehaviour
             spawnPoint = this.allPositions[Random.Range(0, 14)];
             spawnPos = spawnPoint.transform.position;
         }
-        this.enemySpawns[enemyGot]++;
         GameObject spawnedEnemy = (GameObject)GameObject.Instantiate(this.enemyObjects[enemyGot], new Vector3(spawnPos.x, spawnPos.y, 1), Quaternion.identity);
         spawnedEnemy.name = spawnedEnemy.name.Remove(spawnedEnemy.name.Length - 7);
         this.currWave++;

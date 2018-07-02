@@ -13,6 +13,7 @@ public class Enemies_Straight : Characters_Enemies
 
     void Update()
     {
+        CanDestroyOutOfScreen();
         MovementCall();
         DestroyOffScreen();
         SetDirection();

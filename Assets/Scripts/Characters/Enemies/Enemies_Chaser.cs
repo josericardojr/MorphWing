@@ -17,7 +17,7 @@ public class Enemies_Chaser : Characters_Enemies
         if(this.player != null)
 		Chase();
 		Movement();
-        DestroyOffScreen();
+        CanDestroyOutOfScreen();
 	}
 
 	void Chase()

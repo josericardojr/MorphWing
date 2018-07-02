@@ -11,6 +11,8 @@ public abstract class Characters_Global : MonoBehaviour
 	protected Animator animator;
 	new protected Rigidbody2D rigidbody;
 
+    protected bool initialInvic;
+
 	[SerializeField]
 	protected float stat_speed;
     public float speedMultiplier = 1;
@@ -69,11 +71,14 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public virtual void GetDamaged(float instanceID, string objLabel, float damage)
 	{
-		this.lastHitBy = objLabel;
-		this.Prov_TakeDamage(instanceID, damage);
-		this.animator.SetTrigger("Flash");
-		this.temp_currHp -= damage;
-		CheckIfAlive(instanceID);
+        if (!this.initialInvic)
+        {
+            this.lastHitBy = objLabel;
+            this.Prov_TakeDamage(instanceID, damage);
+            this.animator.SetTrigger("Flash");
+            this.temp_currHp -= damage;
+            CheckIfAlive(instanceID);
+        }
 	}
 
     public virtual void CheckIfAlive(float instanceID)

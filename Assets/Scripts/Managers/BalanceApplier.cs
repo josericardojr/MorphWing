@@ -20,12 +20,19 @@ public class BalanceApplier : MonoBehaviour
     [SerializeField]
     float damageModMax, damageModMin;
     Animator balanceFeedbackAnimator;
+    int bestScore;
 
     string randomID;
 
     public string RandomID
     {
         get { return this.randomID; }
+    }
+
+    public int BestScore
+    {
+        get { return this.bestScore; }
+        set { this.bestScore = value; }
     }
 
     public List<float> DifficultyMultipliersMinimum

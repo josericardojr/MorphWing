@@ -9,9 +9,10 @@ public class Characters_Enemies : Characters_Global
 	protected Characters_Player player;
 	protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
-	protected bool canDestroyOffScreen = false;
+	protected bool canDestroyOffScreen = false, dead;
 	[SerializeField]
 	protected int provIdNum, contactDamage, scoreReward, timeReward;
+    [SerializeField]
 	protected float maxOffsetX, maxOffsetY;
 
 	#region GETS & SETS
@@ -44,18 +45,19 @@ public class Characters_Enemies : Characters_Global
 
 	new protected void Start()
 	{
-		base.Start();
-		Prov_Agent ();
+        this.initialInvic = true;
+        base.Start();
+        this.animator.SetInteger("Invincibility", 1);
+        Prov_Agent();
         this.spawnManager = GameObject.Find("SpawnManager").GetComponent<Managers_Spawn>();
         this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
 		if(GameObject.FindGameObjectWithTag("Player") != null)
 			this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Characters_Player>();
-		Invoke("CanDestroyOutOfScreen", 1f);
 	}
 
 	void OnTriggerStay2D(Collider2D c)
 	{
-		if (c.CompareTag ("Player"))
+        if (c.CompareTag("Player") && !this.initialInvic)
 		{
             if (!c.GetComponent<Characters_Player>().Invincible)
             {
@@ -67,7 +69,7 @@ public class Characters_Enemies : Characters_Global
 
 	void OnTriggerEnter2D(Collider2D c)
 	{
-		if (c.CompareTag ("Player"))
+		if (c.CompareTag ("Player") && !this.initialInvic)
 		{
 			if (c.GetComponent<Characters_Player> ().Invincible)
 			{
@@ -88,8 +90,9 @@ public class Characters_Enemies : Characters_Global
 
     public override void CheckIfAlive(float instanceID)
     {
-        if (this.temp_currHp <= 0)
+        if (this.temp_currHp <= 0 && !this.dead)
         {
+            this.dead = true;
             this.scoreManager.EnemyKills[this.provIdNum]++;
             this.scoreManager.AddScore(this.scoreReward);
             this.scoreManager.TimeCurrent += this.timeReward;
@@ -98,9 +101,16 @@ public class Characters_Enemies : Characters_Global
         base.CheckIfAlive(instanceID);
 	}
 
-	void CanDestroyOutOfScreen ()
-	{
-		this.canDestroyOffScreen = true;
+	protected void CanDestroyOutOfScreen ()
+    {
+        if (!this.canDestroyOffScreen && this.transform.position.x < 5.3f && this.transform.position.x > -5.3f &&
+            this.transform.position.y > -5.3f && this.transform.position.y < 5.3f)
+        {
+            this.canDestroyOffScreen = true;
+            this.animator.SetInteger("Invincibility", -1);
+            this.spawnManager.EnemySpawns[this.provIdNum]++;
+            this.initialInvic = false;
+        }
 	}
 
 	protected void DestroyOffScreen()
