@@ -162,23 +162,27 @@ public class Characters_Player : Characters_Global
             string nameProv = "info_" + GetDate();
             base.CheckIfAlive(instanceID);
 
-            try
+            if (!this.balanceApplier.DontApplyBalance)
             {
-                this.extractProvenance.provenance.Save(nameProv);
-
-                AcessPython ac = FindObjectOfType<AcessPython>();
-
-                if (ac != null)
+                try
                 {
-                    ac.GetChanges(nameProv);
+                    this.extractProvenance.provenance.Save(nameProv);
+
+                    AcessPython ac = FindObjectOfType<AcessPython>();
+
+                    if (ac != null)
+                    {
+                        ac.GetChanges(nameProv);
+                    }
                 }
-            }
-            catch  (System.Exception e)
-            {
-                print(e.Message);
+                catch (System.Exception e)
+                {
+                    print(e.Message);
+                }
             }
 
             this.managers_score.StopTimer();
+            FindObjectOfType<Managers_WriteText>().WriteResults();
         }
 	}
 

@@ -275,8 +275,6 @@ public class AcessPython : MonoBehaviour
 
                 }
             }
-
-            FindObjectOfType<Managers_WriteText>().WriteResults();
             
         }
 

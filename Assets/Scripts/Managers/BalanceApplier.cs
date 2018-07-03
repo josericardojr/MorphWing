@@ -56,7 +56,7 @@ public class BalanceApplier : MonoBehaviour
 
     void Awake()
     {
-        this.randomID = Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString();
+        this.randomID = Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString() + Random.Range(0, 10).ToString();
         
         if (instance == null)
         {
@@ -92,7 +92,7 @@ public class BalanceApplier : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             this.dontApplyBalance = !this.dontApplyBalance;
             if(this.dontApplyBalance)
@@ -109,6 +109,10 @@ public class BalanceApplier : MonoBehaviour
             for (int i = 0; i < 4; i++)
             {
                 this.difficultyMultipliers[i] = 1;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                this.itemDistances[i] = 1;
             }
             this.damageModifier = 1;
         }
