@@ -203,9 +203,9 @@ public class Characters_Player : Characters_Global
 
 	void ShotSlowdown()
 	{
-		if (Input.GetKey(KeyCode.J))
+        if (Input.GetButton("Fire1"))
 			this.stat_speed = 1.5f;
-		else if (!Input.GetKey(KeyCode.J) && !Input.GetKey(KeyCode.K))
+        else
 			this.stat_speed = 3;
 	}
 
