@@ -11,7 +11,7 @@ public abstract class Characters_Global : MonoBehaviour
 	protected Animator animator;
 	new protected Rigidbody2D rigidbody;
 
-    protected bool initialInvic;
+    protected bool initialInvic, dead;
 
 	[SerializeField]
 	protected float stat_speed;
@@ -85,7 +85,11 @@ public abstract class Characters_Global : MonoBehaviour
 	{
         if (this.temp_currHp <= 0)
         {
-            this.Prov_GetDestroyed(instanceID);
+            if(!this.dead)
+            {
+                this.dead = true;
+                this.Prov_GetDestroyed(instanceID);
+            }
             Destroy(this.gameObject);
         }
 	}
@@ -203,7 +207,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
 		// Check Influence
-		//this.extractProvenance.HasInfluence(this.lastHitBy);
+		this.extractProvenance.HasInfluence(this.lastHitBy);
 		this.extractProvenance.HasInfluence_ID(infID);
 		if(this.provIndentifier.Equals("Player"))
 			this.extractProvenance.GenerateInfluenceE("Invencibilidade", this.GetInstanceID().ToString(), 
@@ -217,7 +221,7 @@ public abstract class Characters_Global : MonoBehaviour
         this.Prov_GetAttributes();
         this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
         // Check Influence
-        //this.extractProvenance.HasInfluence(this.lastHitBy);
+        this.extractProvenance.HasInfluence(this.lastHitBy);
         this.extractProvenance.HasInfluence_ID(infID);
     }
 
