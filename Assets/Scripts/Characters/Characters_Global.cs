@@ -162,7 +162,8 @@ public abstract class Characters_Global : MonoBehaviour
 		//Prov_GetAttributes();
 		string infID = instanceID.ToString();
         this.Prov_TakeDamage(infID);
-		//this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
+        //
+		this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
 	}
 
     public void Prov_GetDestroyed(float instanceID)
@@ -170,6 +171,7 @@ public abstract class Characters_Global : MonoBehaviour
         //Prov_GetAttributes();
         string infID = instanceID.ToString();
         this.Prov_GetDestroyed(infID);
+        //
         //this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
     }
 
