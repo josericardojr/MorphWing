@@ -22,7 +22,7 @@ public class Projectiles_Global : MonoBehaviour
     [SerializeField]
     int hitScore;
 
-	string shooterLabel;
+	string shooterLabel, shooterProvID;
 
 
 	protected void Start()

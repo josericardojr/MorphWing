@@ -9,7 +9,7 @@ public class Characters_Enemies : Characters_Global
 	protected Characters_Player player;
 	protected Managers_Spawn spawnManager;
 	protected Vector2 initDir;
-	protected bool canDestroyOffScreen = false, dead;
+	protected bool canDestroyOffScreen = false;
 	[SerializeField]
 	protected int provIdNum, contactDamage, scoreReward, timeReward;
     [SerializeField]

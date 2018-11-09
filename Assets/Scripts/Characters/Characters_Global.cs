@@ -45,6 +45,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	protected void Start()
 	{
+        this.provIndentifier = provIndentifier + "_" + this.GetInstanceID().ToString();
         this.balanceApplier = GameObject.Find("Balance").GetComponent<BalanceApplier>();
 		this.temp_currHp = this.stat_hp;
 		GameObject provenanceObj = GameObject.Find("Provenance");
@@ -85,16 +86,17 @@ public abstract class Characters_Global : MonoBehaviour
 	{
         if (this.temp_currHp <= 0)
         {
-            if(!this.dead)
-            {
-                this.dead = true;
-                this.Prov_GetDestroyed(instanceID);
-            }
-            Destroy(this.gameObject);
+            this.Prov_GetDestroyed(instanceID);
+            Invoke("Destroy", 0.1f);
         }
 	}
 
-	protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
+    void Destroy()
+    {
+        Destroy(this.gameObject);
+    }
+
+    protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
 		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, projectile.GetComponent<Collider2D>().GetInstanceID(), this.provIndentifier);
@@ -159,23 +161,47 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public void Prov_TakeDamage(float instanceID, float damageAmount)
 	{
-		//Prov_GetAttributes();
+		Prov_GetAttributes();
 		string infID = instanceID.ToString();
         this.Prov_TakeDamage(infID);
-        //
+        // Check Influence
 		this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
 	}
 
+    public void Prov_TakeDamage(string infID)
+    {
+        acessPython.AddContVertx();
+        this.Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
+        // Check Influence
+        this.extractProvenance.HasInfluence(this.lastHitBy);
+        this.extractProvenance.HasInfluence_ID(infID);
+        if (this.provIndentifier.Equals("Player"))
+            this.extractProvenance.GenerateInfluenceE("Invencibilidade", this.GetInstanceID().ToString(),
+                "Invulnerability", "", Time.time + 1);
+
+    }
+
     public void Prov_GetDestroyed(float instanceID)
     {
-        //Prov_GetAttributes();
+        Prov_GetAttributes();
         string infID = instanceID.ToString();
         this.Prov_GetDestroyed(infID);
         //
-        //this.extractProvenance.GenerateInfluenceCE("Damage", this.GetInstanceID().ToString(), "Health (" + this.name + ")", (-damageAmount).ToString(), 1, Time.time + 5); 
+        this.extractProvenance.GenerateInfluenceCE("Destroyed", this.GetInstanceID().ToString(), "Health (" + this.name + ")", "", 1, Time.time + 5);
     }
 
-	protected void Prov_Heal(string infID)
+    public void Prov_GetDestroyed(string infID)
+    {
+        acessPython.AddContVertx();
+        this.Prov_GetAttributes();
+        this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
+        // Check Influence
+        this.extractProvenance.HasInfluence(this.lastHitBy);
+        this.extractProvenance.HasInfluence_ID(infID);
+    }
+
+    protected void Prov_Heal(string infID)
 	{
 		Prov_GetAttributes();
 		this.extractProvenance.AddAttribute("infID", infID);
@@ -202,30 +228,6 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.GenerateInfluenceCE("PlayerDamage", this.GetInstanceID().ToString(), "Health (Player)", (-damageAmount).ToString(), 1, Time.time + 5);
         return this.GetInstanceID().ToString();
     }*/
-
-	public void Prov_TakeDamage(string infID)
-	{
-        acessPython.AddContVertx();
-		this.Prov_GetAttributes();
-		this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
-		// Check Influence
-		this.extractProvenance.HasInfluence(this.lastHitBy);
-		this.extractProvenance.HasInfluence_ID(infID);
-		if(this.provIndentifier.Equals("Player"))
-			this.extractProvenance.GenerateInfluenceE("Invencibilidade", this.GetInstanceID().ToString(), 
-				"Invulnerability", "", Time.time + 1);
-
-	}
-
-    public void Prov_GetDestroyed(string infID)
-    {
-        acessPython.AddContVertx();
-        this.Prov_GetAttributes();
-        this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
-        // Check Influence
-        this.extractProvenance.HasInfluence(this.lastHitBy);
-        this.extractProvenance.HasInfluence_ID(infID);
-    }
 
 	/*
 	public void Prov_TakeDamage()
