@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class AccessPython : MonoBehaviour
 {
+    public static AccessPython Instance { get; set; }
+
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
     public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" }, KEYDIFMULTI = { "DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4" };
@@ -26,9 +28,17 @@ public class AccessPython : MonoBehaviour
 
     private void Awake()
     {
-        run = false;
-        MyText = "start";
-        contVertx = 0;
+        if (Instance == null)
+        {
+            Instance = this;
+            run = false;
+            MyText = "start";
+            contVertx = 0;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
