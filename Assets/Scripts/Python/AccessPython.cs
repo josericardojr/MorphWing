@@ -43,14 +43,7 @@ public class AccessPython : MonoBehaviour
 
     private void Update()
     {
-        if (!Input.GetMouseButton(0))
-        {
-            MyText = "";
-        }
-        else
-        {
-            MyText = instruction;
-        }
+        text.enabled = Input.GetMouseButton(0);
     }
 
     /// <summary>
