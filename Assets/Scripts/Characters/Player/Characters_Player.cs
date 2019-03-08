@@ -168,7 +168,7 @@ public class Characters_Player : Characters_Global
                 {
                     this.extractProvenance.provenance.Save(nameProv);
 
-                    AcessPython ac = FindObjectOfType<AcessPython>();
+                    AccessPython ac = FindObjectOfType<AccessPython>();
 
                     if (ac != null)
                     {

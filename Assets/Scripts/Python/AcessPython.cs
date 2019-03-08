@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class AcessPython : MonoBehaviour
+public class AccessPython : MonoBehaviour
 {
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
@@ -104,7 +104,7 @@ public class AcessPython : MonoBehaviour
     private string GetArgs(string xmlName)
     {
         file = Application.dataPath + @"/" + xmlName;
-        PlayerPrefs.SetString(AcessPython.KEYFILEXML, file);
+        PlayerPrefs.SetString(AccessPython.KEYFILEXML, file);
         string args = "";
 
         for (int i = 0; i < KEYENEMY.Length; i++)
@@ -125,7 +125,7 @@ public class AcessPython : MonoBehaviour
 
     private IEnumerator MakeChanges(string args, int finalCount)
     {
-        file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
+        file = PlayerPrefs.GetString(AccessPython.KEYFILEXML);
         run = true;
         instruction = ("Start MakeChanges: " + file);
         string pyInstruction = "";
@@ -141,7 +141,7 @@ public class AcessPython : MonoBehaviour
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 // the code that you want to measure comes here
 #endif
-                pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file + " " + args, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+                pyInstruction = GetInstruction(Directory.GetCurrentDirectory() + filePy, "do " + file + " " + args, PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON));
 #if UNITY_EDITOR
                 watch.Stop();
                 var elapsedMs = watch.ElapsedMilliseconds;
@@ -160,13 +160,13 @@ public class AcessPython : MonoBehaviour
                 
 #endif
                 instruction = ("Result: " + pyInstruction);
-                if (file == PlayerPrefs.GetString(AcessPython.KEYFILEXML))
+                if (file == PlayerPrefs.GetString(AccessPython.KEYFILEXML))
                 {
                     run = false;
                 }
                 else
                 {
-                    file = PlayerPrefs.GetString(AcessPython.KEYFILEXML);
+                    file = PlayerPrefs.GetString(AccessPython.KEYFILEXML);
                 }
             }
             yield return new WaitForFixedUpdate();
