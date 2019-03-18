@@ -62,7 +62,7 @@ public class Projectiles_Global : MonoBehaviour
 		if(c.CompareTag("Enemy") && this.CompareTag("Player_Shot") ||
 			c.CompareTag("Player") && this.CompareTag("Enemy_Shot"))
 		{
-			c.GetComponent<Characters_Global>().GetDamaged(this.GetComponent<Collider2D>().GetInstanceID(), this.shooterLabel, this.damage);
+			c.GetComponent<Characters_Global>().GetDamaged(this.shooterInstanceID, this.shooterLabel, this.damage);
             if (this.CompareTag("Player_Shot"))
                 this.scoreManager.AddScore(this.hitScore);
             if(this.CompareTag("Enemy_Shot") && this.shooter != null)

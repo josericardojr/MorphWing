@@ -99,9 +99,9 @@ public abstract class Characters_Global : MonoBehaviour
     protected virtual void ShootProjectile(int projIndex, int passDirX, int passDirY)
 	{
 		GameObject projectile = GameObject.Instantiate(this.prefabList[projIndex], this.transform.position, Quaternion.identity);
-		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, projectile.GetComponent<Collider2D>().GetInstanceID(), this.provIndentifier);
+		projectile.GetComponent<Projectiles_Global>().StatsReceiver(this.gameObject, 3, passDirX, passDirY, this.GetInstanceID(), this.provIndentifier);
 		if (this.provIndentifier.Equals("Player"))
-			Prov_PlayerShoot(projectile.GetComponent<Projectiles_Global>().Damage, projectile.GetComponent<Collider2D>().GetInstanceID().ToString());
+			Prov_PlayerShoot(projectile.GetComponent<Projectiles_Global>().Damage, this.GetInstanceID().ToString());
 		//else
 			//Prov_EnemyShoot(projectile.GetComponent<Projectiles_Global>().Damage, projectile.GetComponent<Collider2D>().GetInstanceID().ToString());
 	}
@@ -172,6 +172,7 @@ public abstract class Characters_Global : MonoBehaviour
     {
         acessPython.AddContVertx();
         this.Prov_GetAttributes();
+        this.extractProvenance.AddAttribute("InstanceID", this.provIndentifier);
         this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
         // Check Influence
         this.extractProvenance.HasInfluence(this.lastHitBy);
