@@ -1,10 +1,10 @@
 # BinG: Automatic Balancing in Games
 
-Bing is a video game development framework that aims to balance the game's difficulty according to the current player's skill. This approach
-will be done in a way that the designer can freely determine which aspects of the game will change in accordance to the player, and under
-what circunstances.
-BinG operates by using python, more specifically the kanren library, to translate the conditions and actions specified by the game designer
-as rules and facts through logical programming.
+Bing is a video game development framework that aims to balance the game's difficulty according to the current player's skill. 
+
+This approach will be done in a way that the designer can freely determine which aspects of the game will change in accordance to the player, and under what circunstances.
+
+BinG operates by using python, more specifically the kanren library, to translate the conditions and actions specified by the game designer as rules and facts through logical programming.
 
 # Team
 
