@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
@@ -11,9 +10,7 @@ public class AcessPython : MonoBehaviour
 {
     public static AcessPython Instance { get; private set; }
 
-    private Process process;
-
-    private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA= "path_schema";
+    private ProcessorManager processorManager;
 
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
@@ -21,10 +18,6 @@ public class AcessPython : MonoBehaviour
 
     public static string PLAYERHITRATE = "PLAYERHITRATE";
 
-    [SerializeField]
-    private Text text;
-
-    private string lastOutputPython;
     private string file;
     private string instruction;
     private string filePy = @"\Python\Prov.py";
@@ -38,116 +31,32 @@ public class AcessPython : MonoBehaviour
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
+            processorManager = new ProcessorManager(PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
             Instance = this;
             run = false;
-            MyText = "start";
             contVertx = 0;
-
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string path_root = Directory.GetParent(currentDirectory).FullName;
-
-            string path_bing = path_root + @"\BinGTool";
-
-            string filePyName = "Data.py";
-            string pathPy = path_bing + @"\" + filePyName;
-            lastOutputPython = "";
-
-            try
-            {
-                if (!File.Exists(pathPy))
-                {
-                    print(".py dont exists: " + pathPy);
-                }
-                else
-                {
-                    string pathPythonEXE = PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON);
-                    if (!File.Exists(pathPythonEXE))
-                    {
-                        print("Python.exe dont exists: " + pathPythonEXE);
-                    }
-
-                    //print("fullFilename: " + pathPy);
-                    //print("pathPythonEXE: " + pathPythonEXE);
-
-                    string args = SetupArg(KEY_PATH_PROV, currentDirectory + @"\Assets\info.xml");
-                    args += SetupArg(KEY_PATH_SCHEMA, path_bing + @"\schema.xml");
-
-                    pathPy += " " + args;
-
-                    process = new Process
-                    {
-                        EnableRaisingEvents = true,
-                        StartInfo = new ProcessStartInfo(pathPythonEXE, pathPy)
-                        {
-                            RedirectStandardInput = true,
-                            RedirectStandardError = true,
-                            RedirectStandardOutput = true,
-                            UseShellExecute = false,
-                            CreateNoWindow = true,                            
-                        }
-                    };
-
-                    process.OutputDataReceived += Process_OutputDataReceived;
-                    process.ErrorDataReceived += Process_ErrorDataReceived;
-
-                    process.Start();
-                    process.BeginOutputReadLine();
-                    process.BeginErrorReadLine();
-                    process.WaitForExit(-1);
-
-                    //string output = p.StandardOutput.ReadToEnd();
-
-                }
-            }
-            catch (Exception e)
-            {
-                print(e.Message);
-            }
         }
         else
         {
-            Instance.text = text;
             Destroy(this);
         }
     }
 
-    private string SetupArg(string key, string arg)
+    private void OnApplicationQuit()
     {
-        return " " + key + ";" + arg;
-    }
-
-    private void Update()
-    {
-        if (!Input.GetMouseButton(0))
+        try
         {
-            MyText = "";
+            processorManager.Process.Kill();
         }
-        else
+        catch
         {
-            MyText = instruction;
-        }
-    }
-
-    private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-    {
-        if (!String.IsNullOrEmpty(e.Data))
-        {
-            lastOutputPython += e.Data + "\n"; 
-        }
-    }
-
-    private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-    {
-        if (!String.IsNullOrEmpty(e.Data))
-        {
-            lastOutputPython += "ERROR: " + e.Data + "\n"; 
         }
     }
 
 #if UNITY_EDITOR
     private void OnGUI()
     {
-        GUILayout.Box(lastOutputPython);
+        GUILayout.Box(processorManager.LastOutputPython);
     } 
 #endif
 
@@ -160,7 +69,7 @@ public class AcessPython : MonoBehaviour
     /// <returns></returns>
     public string GetInstruction(string fullFilename, string args, string pathPythonEXE)
     {
-        return lastOutputPython;
+        return processorManager.LastOutputPython;
     }
 
     public void GetChanges(string xmlName)
@@ -353,35 +262,6 @@ public class AcessPython : MonoBehaviour
         }
 
     }    
-
-    public string MyText
-    {
-        get
-        {
-            return text.text;
-        }
-
-        set
-        {
-            if (text != null)
-            {
-                text.text = value;
-            }
-        }
-    }
-
-    private Text Text
-    {
-        get
-        {
-            return text;
-        }
-
-        set
-        {
-            text = value;
-        }
-    }
 
     public void AddContVertx()
     {
