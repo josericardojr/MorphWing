@@ -2,11 +2,14 @@
 using System.Threading;
 using System.Diagnostics;
 using System.IO;
+using System;
 
 public class ProcessorManager
 {
     private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA = "path_schema";
     private const string KEY_TEST_PYTHON = "key_test_python";
+
+    private int count;
 
     public Process Process { get; private set; }
 
@@ -16,6 +19,7 @@ public class ProcessorManager
 
     public ProcessorManager(string pathPythonEXE)
     {
+        count = 0;
         LastOutputPython = "";
         Thread t = new Thread(() => SetupProcessor(pathPythonEXE));
         t.Start();
@@ -84,27 +88,65 @@ public class ProcessorManager
         }
     }
 
+    public string GetInfo(string instructions)
+    {
+        LastOutputPython = string.Empty;
+        SendMessagePython(instructions);
+
+#if UNITY_EDITOR
+        int safe = DateTime.Now.Second;
+#endif
+        while (string.IsNullOrEmpty(LastOutputPython))
+        {
+#if UNITY_EDITOR
+            if (Math.Abs( DateTime.Now.Second - safe) > 3)
+            {
+                UnityEngine.Debug.Log(LastOutputPython);
+                LastOutputPython = "safe < 0";
+            }
+#endif
+        }
+
+        return LastOutputPython;
+    }
+
     private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
     {
         if (!System.String.IsNullOrEmpty(e.Data))
         {
+            //UnityEngine.Debug.Log("Received: " + e.Data);
             if (e.Data.Contains(KEY_TEST_PYTHON))
             {
                 System.Random r = new System.Random();
-                Thread t = new Thread(() => SendMessagePython(r.Next(2) < 0.1f ? "continue" : "repeat"));
-                t.Start();
+                count++;
+                if (count > 2)
+                {
+                    count = 0;
+                }
+                else
+                {
+                    SendMessagePython(KEY_TEST_PYTHON);
+                }
             }
             else
             {
-                LastOutputPython += e.Data + "\n";
+                LastOutputPython = e.Data;
             }
 
         }
     }
 
-    private void SendMessagePython(string s)
+    public void SendMessagePython(string s)
     {
-        myStreamWriter.WriteLine(s);
+        Thread t = new Thread(() => myStreamWriter.WriteLine(s));
+        t.Start();
+        //UnityEngine.Debug.Log("Sended: " + s);
+    }
+
+    public bool CheckSendMessagePython(string s)
+    {
+        SendMessagePython(s);
+        return true;
     }
 
     private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)

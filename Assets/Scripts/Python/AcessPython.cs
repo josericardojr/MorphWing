@@ -56,7 +56,10 @@ public class AcessPython : MonoBehaviour
 #if UNITY_EDITOR
     private void OnGUI()
     {
-        GUILayout.Box(processorManager.LastOutputPython);
+        if (processorManager != null)
+        {
+            GUILayout.Box(processorManager.LastOutputPython); 
+        }
     } 
 #endif
 
@@ -72,16 +75,17 @@ public class AcessPython : MonoBehaviour
         return processorManager.LastOutputPython;
     }
 
-    public void GetChanges(string xmlName)
+    public string GetChanges(string instructions)
     {
-        xmlName += ".xml";
-        string args = GetArgs(xmlName);
-
-        if (!run)
-        {
-            StartCoroutine(MakeChanges(args, contVertx));
-            contVertx = 0;
-        }
+        //instructions += ".xml";
+        //string args = GetArgs(instructions);
+        //if (!run)
+        //{
+        //    StartCoroutine(MakeChanges(args, contVertx));
+        //    contVertx = 0;
+        //}
+        processorManager.SendMessagePython(instructions);
+        return processorManager.GetInfo(instructions);
     }
 
     private string GetArgs(string xmlName)

@@ -14,7 +14,7 @@ public class BingApplication : MonoBehaviour
     funcao de teste do processor, e printe aqui o valor de seu resultado*/
     public void FirstTest()
     {
-        string pythonReturn = "";
+        string pythonReturn = AcessPython.Instance.GetChanges("player_damage");
         print(pythonReturn);
     }
 }
