@@ -1,10 +1,10 @@
-# BinG: Automatic Balancing in Games
+# MorphWing
 
-Bing is a video game development framework that aims to balance the game's difficulty according to the current player's skill. 
+MorphWing is a simple "Shoot 'em Up" game in which the player has to dodge enemy attacks continuously while attacking them to survive as much time as it can.
 
-This approach's objective is to provide a way for the designer to freely determine which aspects of the game will change in accordance to the player, and under what circunstances.
+The game is used as a tool for testing the BinG framework for automatic game balancing, and was featured as so in the article "BinG: A Framework for Dynamic Game Balancing using Provenance", publicated in SBGames 2018.
 
-BinG operates by using python, more specifically the kanren library, to translate the conditions and actions specified by the game designer as rules and facts through logical programming.
+By using BinG and the provenance component, developed by Troy Kohwalter (UFF, Universidade Federal Fluminense), the game adapts itself in enemy behavior, item spawns, player damage and other aspects according to the player's performance.
 
 # Team
 
