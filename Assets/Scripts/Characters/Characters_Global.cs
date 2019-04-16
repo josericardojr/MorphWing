@@ -29,7 +29,7 @@ public abstract class Characters_Global : MonoBehaviour
 	[SerializeField]
 	protected List<string> prefabNames = new List<string>();
 
-    private AcessPython acessPython;
+    private AccessPython acessPython;
 
     public float Temp_CurrHp
     {
@@ -56,7 +56,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.provenance = provenanceObj.GetComponent<ProvenanceController>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		ProjectilesLoad();
-        acessPython = FindObjectOfType<AcessPython>();
+        acessPython = FindObjectOfType<AccessPython>();
 	}
 
 	void ProjectilesLoad()
@@ -144,7 +144,8 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.AddAttribute ("HP", this.temp_currHp.ToString());
 		this.extractProvenance.AddAttribute("Speed", this.stat_speed.ToString());
 		this.extractProvenance.AddAttribute("Last", this.lastHitBy);
-		this.extractProvenance.AddAttribute("Enemies", "S: " + GetEnemyNo("Straight") + " C: " + GetEnemyNo("Chaser") +
+        this.extractProvenance.AddAttribute("LastType", this.lastHitBy.Split('_')[0]);
+        this.extractProvenance.AddAttribute("Enemies", "S: " + GetEnemyNo("Straight") + " C: " + GetEnemyNo("Chaser") +
 			" I: " + GetEnemyNo("Irregular") + " R: " + GetEnemyNo("Round"));
 	}
 

@@ -86,7 +86,8 @@ public class Characters_Player : Characters_Global
 	public override void GetDamaged(float instanceID, string objLabel, float damage)
 	{
 		base.GetDamaged(instanceID, objLabel, damage);
-		this.animator.SetInteger("Invincibility", 1);
+        GameObject.FindObjectOfType<BingApplication>().FirstTest();
+        this.animator.SetInteger("Invincibility", 1);
 		this.invincible = true;
 		UpdateUI();
 		Invoke("StopInvincibility", this.invincibleTime);
@@ -159,32 +160,38 @@ public class Characters_Player : Characters_Global
 		{
 			this.hud_retryText.enabled = true;
 			this.managers_spawn.Deactivated = true;
-            string nameProv = "info_" + GetDate();
             base.CheckIfAlive(instanceID);
 
             if (!this.balanceApplier.DontApplyBalance)
             {
-                try
-                {
-                    this.extractProvenance.provenance.Save(nameProv);
-
-                    AcessPython ac = FindObjectOfType<AcessPython>();
-
-                    if (ac != null)
-                    {
-                        ac.GetChanges(nameProv);
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    print(e.Message);
-                }
+                SaveProvenance();
             }
 
             this.managers_score.StopTimer();
             FindObjectOfType<Managers_WriteText>().WriteResults();
         }
 	}
+
+
+    public void SaveProvenance()
+    {
+        string nameProv = "info_" + GetDate();
+        try
+        {
+            this.extractProvenance.provenance.Save(nameProv);
+            /*
+            AccessPython ac = FindObjectOfType<AccessPython>();
+
+            if (ac != null)
+            {
+                ac.GetChanges(nameProv);
+            }*/
+        }
+        catch (System.Exception e)
+        {
+            print(e.Message);
+        }
+    }
 
     public static string GetDate()
     {

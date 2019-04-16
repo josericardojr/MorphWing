@@ -6,11 +6,11 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AcessPython))]
+[RequireComponent(typeof(AccessPython))]
 [RequireComponent(typeof(Canvas))]
 public class TreatmentError : MonoBehaviour {
     
-    private AcessPython acess;
+    private AccessPython acess;
     
     private Canvas canvas;
 
@@ -21,7 +21,7 @@ public class TreatmentError : MonoBehaviour {
 
     void Start()
     {
-        acess = GetComponent<AcessPython>();
+        acess = GetComponent<AccessPython>();
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
 
@@ -42,7 +42,7 @@ public class TreatmentError : MonoBehaviour {
 
     private string TestePath()
     {
-        return (acess.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
+        return (acess.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON)));
     }
 
     private string GetPythonPath()
@@ -73,7 +73,7 @@ public class TreatmentError : MonoBehaviour {
 
     public void UpdatePath()
     {
-        PlayerPrefs.SetString(AcessPython.KEYPATHPYTHON, input.text);
+        PlayerPrefs.SetString(AccessPython.KEYPATHPYTHON, input.text);
         Start();
     }
 
