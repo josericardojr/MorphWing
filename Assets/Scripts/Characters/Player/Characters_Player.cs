@@ -173,7 +173,7 @@ public class Characters_Player : Characters_Global
 	}
 
 
-    public void SaveProvenance()
+    public string SaveProvenance()
     {
         string nameProv = "info_" + GetDate();
         try
@@ -186,11 +186,14 @@ public class Characters_Player : Characters_Global
             {
                 ac.GetChanges(nameProv);
             }*/
+            return nameProv;
         }
         catch (System.Exception e)
         {
             print(e.Message);
+            return "";
         }
+        
     }
 
     public static string GetDate()
