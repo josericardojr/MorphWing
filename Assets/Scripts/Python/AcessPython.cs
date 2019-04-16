@@ -271,4 +271,16 @@ public class AcessPython : MonoBehaviour
     {
         contVertx++;
     }
+
+    public bool Ready
+    {
+        get
+        {
+            if (processorManager != null)
+            {
+                return processorManager.Ready; 
+            }
+            return false;
+        }
+    }
 }

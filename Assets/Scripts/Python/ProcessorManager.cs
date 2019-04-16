@@ -6,10 +6,13 @@ using System;
 
 public class ProcessorManager
 {
+    public static string KEY_PATH_READY = "KEY_PATH_READY";
     private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA = "path_schema";
     private const string KEY_TEST_PYTHON = "key_test_python";
 
     private int count;
+
+    public bool Ready { get; private set; }
 
     public Process Process { get; private set; }
 
@@ -20,6 +23,7 @@ public class ProcessorManager
     public ProcessorManager(string pathPythonEXE)
     {
         count = 0;
+        Ready = false;
         LastOutputPython = "";
         Thread t = new Thread(() => SetupProcessor(pathPythonEXE));
         t.Start();
@@ -125,8 +129,12 @@ public class ProcessorManager
                 }
                 else
                 {
-                    SendMessagePython(KEY_TEST_PYTHON);
+                    SendMessagePython(KEY_TEST_PYTHON); 
                 }
+            }
+            else if (e.Data.Contains(KEY_PATH_READY))
+            {
+                Ready = true;
             }
             else
             {
