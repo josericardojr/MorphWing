@@ -83,7 +83,7 @@ public class TreatmentError : MonoBehaviour {
 
     public void UpdatePath()
     {
-        PlayerPrefs.SetString(AcessPython.KEYPATHPYTHON, input.text);
+        PlayerPrefs.SetString(AccessPython.KEYPATHPYTHON, input.text);
         Start();
     }
 
