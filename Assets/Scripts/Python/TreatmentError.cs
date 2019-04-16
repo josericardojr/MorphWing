@@ -16,11 +16,25 @@ public class TreatmentError : MonoBehaviour {
 
     string fileTest = @"\Python\Check.py";
 
-    void Start()
+    private void Start()
     {
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
+    }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.T))
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                TestPython();
+            } 
+        }
+    }
+
+    private void TestPython()
+    {
         if (!File.Exists(Directory.GetCurrentDirectory() + fileTest))
         {
             print("File dont Exists: " + Directory.GetCurrentDirectory() + fileTest);
