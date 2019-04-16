@@ -11,6 +11,10 @@ public class AcessPython : MonoBehaviour
 {
     public static AcessPython Instance { get; private set; }
 
+    private Process process;
+
+    private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA= "path_schema";
+
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
     public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" }, KEYDIFMULTI = { "DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4" };
@@ -20,7 +24,10 @@ public class AcessPython : MonoBehaviour
     [SerializeField]
     private Text text;
 
-    private string file, instruction, filePy = @"\Python\Prov.py";
+    private string lastOutputPython;
+    private string file;
+    private string instruction;
+    private string filePy = @"\Python\Prov.py";
 
     private int contVertx;
 
@@ -35,23 +42,78 @@ public class AcessPython : MonoBehaviour
             run = false;
             MyText = "start";
             contVertx = 0;
-            string path_bing = Directory.GetCurrentDirectory();
 
-            path_bing = Directory.GetParent(path_bing).FullName + @"\BinGTool";
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path_root = Directory.GetParent(currentDirectory).FullName;
 
-            print(path_bing);
-            print(Directory.Exists(path_bing));
+            string path_bing = path_root + @"\BinGTool";
 
+            string filePyName = "Data.py";
+            string pathPy = path_bing + @"\" + filePyName;
+            lastOutputPython = "";
 
-            //string pyInstruction = GetInstruction(filePy, "do " + file + " " + args, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+            try
+            {
+                if (!File.Exists(pathPy))
+                {
+                    print(".py dont exists: " + pathPy);
+                }
+                else
+                {
+                    string pathPythonEXE = PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON);
+                    if (!File.Exists(pathPythonEXE))
+                    {
+                        print("Python.exe dont exists: " + pathPythonEXE);
+                    }
 
-            //print(pyInstruction); 
+                    //print("fullFilename: " + pathPy);
+                    //print("pathPythonEXE: " + pathPythonEXE);
+
+                    string args = SetupArg(KEY_PATH_PROV, currentDirectory + @"\Assets\info.xml");
+                    args += SetupArg(KEY_PATH_SCHEMA, path_bing + @"\schema.xml");
+
+                    pathPy += " " + args;
+
+                    process = new Process
+                    {
+                        EnableRaisingEvents = true,
+                        StartInfo = new ProcessStartInfo(pathPythonEXE, pathPy)
+                        {
+                            RedirectStandardInput = true,
+                            RedirectStandardError = true,
+                            RedirectStandardOutput = true,
+                            UseShellExecute = false,
+                            CreateNoWindow = true,                            
+                        }
+                    };
+
+                    process.OutputDataReceived += Process_OutputDataReceived;
+                    process.ErrorDataReceived += Process_ErrorDataReceived;
+
+                    process.Start();
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+                    process.WaitForExit(-1);
+
+                    //string output = p.StandardOutput.ReadToEnd();
+
+                }
+            }
+            catch (Exception e)
+            {
+                print(e.Message);
+            }
         }
         else
         {
             Instance.text = text;
             Destroy(this);
         }
+    }
+
+    private string SetupArg(string key, string arg)
+    {
+        return " " + key + ";" + arg;
     }
 
     private void Update()
@@ -66,10 +128,28 @@ public class AcessPython : MonoBehaviour
         }
     }
 
-    public string GetInstruction()
+    private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
     {
-        return "error not implement";
+        if (!String.IsNullOrEmpty(e.Data))
+        {
+            lastOutputPython += e.Data + "\n"; 
+        }
     }
+
+    private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+    {
+        if (!String.IsNullOrEmpty(e.Data))
+        {
+            lastOutputPython += "ERROR: " + e.Data + "\n"; 
+        }
+    }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        GUILayout.Box(lastOutputPython);
+    } 
+#endif
 
     /// <summary>
     /// Retorna uma string com todos os prints do arquivo .py
@@ -80,43 +160,7 @@ public class AcessPython : MonoBehaviour
     /// <returns></returns>
     public string GetInstruction(string fullFilename, string args, string pathPythonEXE)
     {
-        try
-        {
-            if (!File.Exists(fullFilename))
-            {
-                print(".py dont exists: " + fullFilename);
-            }
-
-            fullFilename += " " + args;
-
-            if (!File.Exists(pathPythonEXE))
-            {
-                print("Python.exe dont exists: " + pathPythonEXE);
-            }
-
-            //print("fullFilename: " + fullFilename);
-            //print("pathPythonEXE: " + pathPythonEXE);
-
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
-            {
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            p.Start();
-
-
-            string output = p.StandardOutput.ReadToEnd();
-
-            p.WaitForExit();
-            return (output);
-        }
-        catch (Exception e)
-        {
-            return e.Message;
-        }
+        return lastOutputPython;
     }
 
     public void GetChanges(string xmlName)
@@ -308,8 +352,7 @@ public class AcessPython : MonoBehaviour
             
         }
 
-    }
-    
+    }    
 
     public string MyText
     {
