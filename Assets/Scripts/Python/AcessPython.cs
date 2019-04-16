@@ -1,4 +1,4 @@
-﻿     using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Diagnostics;
@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class AcessPython : MonoBehaviour
 {
+    public static AcessPython Instance { get; private set; }
+
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
     public static string[] KEYENEMY = { "KEYENEMY1", "KEYENEMY2", "KEYENEMY3", "KEYENEMY4" }, KEYDIFMULTI = { "DIFMULTI1", "DIFMULTI2", "DIFMULTI3", "DIFMULTI4" };
@@ -26,9 +28,30 @@ public class AcessPython : MonoBehaviour
 
     private void Awake()
     {
-        run = false;
-        MyText = "start";
-        contVertx = 0;
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+            run = false;
+            MyText = "start";
+            contVertx = 0;
+            string path_bing = Directory.GetCurrentDirectory();
+
+            path_bing = Directory.GetParent(path_bing).FullName + @"\BinGTool";
+
+            print(path_bing);
+            print(Directory.Exists(path_bing));
+
+
+            //string pyInstruction = GetInstruction(filePy, "do " + file + " " + args, PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
+
+            //print(pyInstruction); 
+        }
+        else
+        {
+            Instance.text = text;
+            Destroy(this);
+        }
     }
 
     private void Update()
@@ -41,6 +64,11 @@ public class AcessPython : MonoBehaviour
         {
             MyText = instruction;
         }
+    }
+
+    public string GetInstruction()
+    {
+        return "error not implement";
     }
 
     /// <summary>
@@ -72,6 +100,7 @@ public class AcessPython : MonoBehaviour
             Process p = new Process();
             p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
             {
+                RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
@@ -80,6 +109,7 @@ public class AcessPython : MonoBehaviour
 
 
             string output = p.StandardOutput.ReadToEnd();
+
             p.WaitForExit();
             return (output);
         }
@@ -294,6 +324,19 @@ public class AcessPython : MonoBehaviour
             {
                 text.text = value;
             }
+        }
+    }
+
+    private Text Text
+    {
+        get
+        {
+            return text;
+        }
+
+        set
+        {
+            text = value;
         }
     }
 

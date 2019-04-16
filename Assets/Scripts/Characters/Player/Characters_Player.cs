@@ -168,11 +168,10 @@ public class Characters_Player : Characters_Global
                 {
                     this.extractProvenance.provenance.Save(nameProv);
 
-                    AcessPython ac = FindObjectOfType<AcessPython>();
 
-                    if (ac != null)
+                    if (AcessPython.Instance != null)
                     {
-                        ac.GetChanges(nameProv);
+                        AcessPython.Instance.GetChanges(nameProv);
                     }
                 }
                 catch (System.Exception e)
