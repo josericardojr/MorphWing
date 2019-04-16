@@ -6,11 +6,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AccessPython))]
 [RequireComponent(typeof(Canvas))]
 public class TreatmentError : MonoBehaviour {
-    
-    private AccessPython acess;
     
     private Canvas canvas;
 
@@ -19,12 +16,25 @@ public class TreatmentError : MonoBehaviour {
 
     string fileTest = @"\Python\Check.py";
 
-    void Start()
+    private void Start()
     {
-        acess = GetComponent<AccessPython>();
         canvas = GetComponent<Canvas>();
         canvas.enabled = false;
+    }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.T))
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                TestPython();
+            } 
+        }
+    }
+
+    private void TestPython()
+    {
         if (!File.Exists(Directory.GetCurrentDirectory() + fileTest))
         {
             print("File dont Exists: " + Directory.GetCurrentDirectory() + fileTest);
@@ -42,7 +52,7 @@ public class TreatmentError : MonoBehaviour {
 
     private string TestePath()
     {
-        return (acess.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON)));
+        return (AcessPython.Instance.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
     }
 
     private string GetPythonPath()

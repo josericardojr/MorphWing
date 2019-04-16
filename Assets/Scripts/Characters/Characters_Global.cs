@@ -29,19 +29,19 @@ public abstract class Characters_Global : MonoBehaviour
 	[SerializeField]
 	protected List<string> prefabNames = new List<string>();
 
-    private AccessPython acessPython;
+  private AccessPython acessPython;
 
-    public float Temp_CurrHp
-    {
-        get { return this.temp_currHp; }
-        set { this.temp_currHp = value; }
-    }
+  public float Temp_CurrHp
+  {
+      get { return this.temp_currHp; }
+      set { this.temp_currHp = value; }
+  }
 
-    public float Stat_HP
-    {
-        get { return this.stat_hp; }
-        set { this.stat_hp = value; }
-    }
+  public float Stat_HP
+  {
+      get { return this.stat_hp; }
+      set { this.stat_hp = value; }
+  }
 
 	protected void Start()
 	{
@@ -56,7 +56,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.provenance = provenanceObj.GetComponent<ProvenanceController>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		ProjectilesLoad();
-        acessPython = FindObjectOfType<AccessPython>();
+    acessPython = FindObjectOfType<AccessPython>();
 	}
 
 	void ProjectilesLoad()
@@ -171,7 +171,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     public void Prov_TakeDamage(string infID)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
         this.Prov_GetAttributes();
         this.extractProvenance.AddAttribute("InstanceID", this.provIndentifier);
         this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
@@ -195,7 +195,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     public void Prov_GetDestroyed(string infID)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
         this.Prov_GetAttributes();
         this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
         // Check Influence
@@ -209,7 +209,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.AddAttribute("infID", infID);
 		this.extractProvenance.NewActivityVertex("Heal");
 		this.extractProvenance.HasInfluence_ID(infID);
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
 	}
 
     protected void Prov_UsingAttack(string infID)
@@ -218,7 +218,7 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.AddAttribute("infID", infID);
         this.extractProvenance.NewActivityVertex("Attacking (" + this.objType + ")");
         this.extractProvenance.HasInfluence_ID(infID);
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
     }
 
 	/*
@@ -243,7 +243,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public void Prov_PowerUp(string type, string infID)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
 		Prov_GetAttributes();
 		this.extractProvenance.AddAttribute("InfID", infID);
 		this.extractProvenance.NewActivityVertex(type);
@@ -253,7 +253,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_EnemyAttack(int damageAmount)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Colliding", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");
@@ -263,7 +263,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_PlayerShoot(float damageAmount, string infID)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Player");
@@ -273,7 +273,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_EnemyShoot(float damageAmount, string infID)
     {
-        acessPython.AddContVertx();
+        AcessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");
