@@ -1,6 +1,5 @@
-﻿     using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections;
+using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
@@ -9,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class AccessPython : MonoBehaviour
 {
-    public static AccessPython Instance { get; set; }
+    public static AccessPython Instance { get; private set; }
+
+    private ProcessorManager processorManager;
 
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
 
@@ -17,10 +18,9 @@ public class AccessPython : MonoBehaviour
 
     public static string PLAYERHITRATE = "PLAYERHITRATE";
 
-    [SerializeField]
-    private Text text;
-
-    private string file, instruction, filePy = @"\Python\Prov.py";
+    private string file;
+    private string instruction;
+    private string filePy = @"\Python\Prov.py";
 
     private int contVertx;
 
@@ -30,21 +30,38 @@ public class AccessPython : MonoBehaviour
     {
         if (Instance == null)
         {
+            DontDestroyOnLoad(gameObject);
+            processorManager = new ProcessorManager(PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON));
             Instance = this;
             run = false;
-            MyText = "start";
             contVertx = 0;
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
-    private void Update()
+    private void OnApplicationQuit()
     {
-        text.enabled = Input.GetMouseButton(0);
+        try
+        {
+            processorManager.Process.Kill();
+        }
+        catch
+        {
+        }
     }
+
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if (processorManager != null)
+        {
+            GUILayout.Box(processorManager.AllOutputPython); 
+        }
+    } 
+#endif
 
     /// <summary>
     /// Retorna uma string com todos os prints do arquivo .py
@@ -55,53 +72,20 @@ public class AccessPython : MonoBehaviour
     /// <returns></returns>
     public string GetInstruction(string fullFilename, string args, string pathPythonEXE)
     {
-        try
-        {
-            if (!File.Exists(fullFilename))
-            {
-                print(".py dont exists: " + fullFilename);
-            }
-
-            fullFilename += " " + args;
-
-            if (!File.Exists(pathPythonEXE))
-            {
-                print("Python.exe dont exists: " + pathPythonEXE);
-            }
-
-            //print("fullFilename: " + fullFilename);
-            //print("pathPythonEXE: " + pathPythonEXE);
-
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(pathPythonEXE, fullFilename)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            p.Start();
-
-
-            string output = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
-            return (output);
-        }
-        catch (Exception e)
-        {
-            return e.Message;
-        }
+        return processorManager.LastOutputPython;
     }
 
-    public void GetChanges(string xmlName)
+    public string GetChanges(string instructions)
     {
-        xmlName += ".xml";
-        string args = GetArgs(xmlName);
-
-        if (!run)
-        {
-            StartCoroutine(MakeChanges(args, contVertx));
-            contVertx = 0;
-        }
+        //instructions += ".xml";
+        //string args = GetArgs(instructions);
+        //if (!run)
+        //{
+        //    StartCoroutine(MakeChanges(args, contVertx));
+        //    contVertx = 0;
+        //}
+        processorManager.SendMessagePython(instructions);
+        return processorManager.GetInfo(instructions);
     }
 
     private string GetArgs(string xmlName)
@@ -281,27 +265,22 @@ public class AccessPython : MonoBehaviour
             
         }
 
-    }
-    
-
-    public string MyText
-    {
-        get
-        {
-            return text.text;
-        }
-
-        set
-        {
-            if (text != null)
-            {
-                text.text = value;
-            }
-        }
-    }
+    }    
 
     public void AddContVertx()
     {
         contVertx++;
+    }
+
+    public bool Ready
+    {
+        get
+        {
+            if (processorManager != null)
+            {
+                return processorManager.Ready; 
+            }
+            return false;
+        }
     }
 }

@@ -19,12 +19,14 @@ public class ProcessorManager
     private StreamWriter myStreamWriter;
 
     public string LastOutputPython { get; private set; }
+    public string AllOutputPython { get; private set; }
 
     public ProcessorManager(string pathPythonEXE)
     {
         count = 0;
         Ready = false;
         LastOutputPython = "";
+        AllOutputPython = "";
         Thread t = new Thread(() => SetupProcessor(pathPythonEXE));
         t.Start();
     }
@@ -139,6 +141,7 @@ public class ProcessorManager
             else
             {
                 LastOutputPython = e.Data;
+                AllOutputPython = LastOutputPython + "\n" + AllOutputPython;
             }
 
         }
