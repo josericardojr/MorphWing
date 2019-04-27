@@ -171,7 +171,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     public void Prov_TakeDamage(string infID)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
         this.Prov_GetAttributes();
         this.extractProvenance.AddAttribute("InstanceID", this.provIndentifier);
         this.extractProvenance.NewActivityVertex("Being Hit(" + this.objType + ")");
@@ -195,7 +195,7 @@ public abstract class Characters_Global : MonoBehaviour
 
     public void Prov_GetDestroyed(string infID)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
         this.Prov_GetAttributes();
         this.extractProvenance.NewActivityVertex("Destroyed(" + this.objType + ")");
         // Check Influence
@@ -209,7 +209,7 @@ public abstract class Characters_Global : MonoBehaviour
 		this.extractProvenance.AddAttribute("infID", infID);
 		this.extractProvenance.NewActivityVertex("Heal");
 		this.extractProvenance.HasInfluence_ID(infID);
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
 	}
 
     protected void Prov_UsingAttack(string infID)
@@ -218,7 +218,7 @@ public abstract class Characters_Global : MonoBehaviour
         this.extractProvenance.AddAttribute("infID", infID);
         this.extractProvenance.NewActivityVertex("Attacking (" + this.objType + ")");
         this.extractProvenance.HasInfluence_ID(infID);
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
     }
 
 	/*
@@ -243,7 +243,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public void Prov_PowerUp(string type, string infID)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
 		Prov_GetAttributes();
 		this.extractProvenance.AddAttribute("InfID", infID);
 		this.extractProvenance.NewActivityVertex(type);
@@ -253,7 +253,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_EnemyAttack(int damageAmount)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Colliding", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");
@@ -263,7 +263,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_PlayerShoot(float damageAmount, string infID)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Player");
@@ -273,7 +273,7 @@ public abstract class Characters_Global : MonoBehaviour
 
 	public string Prov_EnemyShoot(float damageAmount, string infID)
     {
-        AcessPython.Instance.AddContVertx();
+        AccessPython.Instance.AddContVertx();
 		this.Prov_GetAttributes();
 		this.extractProvenance.NewActivityVertex("Firing", this.gameObject);
 		this.extractProvenance.HasInfluence("Enemy");

@@ -52,7 +52,7 @@ public class TreatmentError : MonoBehaviour {
 
     private string TestePath()
     {
-        return (AcessPython.Instance.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON)));
+        return (AccessPython.Instance.GetInstruction(Directory.GetCurrentDirectory() + fileTest, "Test", PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON)));
     }
 
     private string GetPythonPath()

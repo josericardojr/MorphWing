@@ -9,7 +9,7 @@ public class ScenePass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (AcessPython.Instance.Ready)
+            if (AccessPython.Instance.Ready)
             {
                 SceneManager.LoadScene(1); 
             }
