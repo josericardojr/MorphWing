@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BingApplication : MonoBehaviour
 {
-    string currentXMLName;
+    public string currentXMLName = "info.xml";
 
     public void UpdateXML()
     {
