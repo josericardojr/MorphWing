@@ -12,7 +12,10 @@ public class AccessPython : MonoBehaviour
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            processorManager = new ProcessorManager(PlayerPrefs.GetString(ProcessorManager.KEYPATHPYTHON));
+
+            string pathProv = Application.dataPath + @"\info.xml";
+
+            processorManager = new ProcessorManager(PlayerPrefs.GetString(BingConfig.KEY_PYTHON_PATH), PlayerPrefs.GetString(BingConfig.KEY_BING_PATH), pathProv);
             Instance = this;
         }
         else

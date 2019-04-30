@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Threading;
+﻿using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using System;
@@ -8,7 +7,6 @@ namespace Bing
 {
     public class ProcessorManager
     {
-        public static string KEYPATHPYTHON = "KEYPATHPYTHON";
         public static string KEY_PATH_READY = "KEY_PATH_READY";
         private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA = "path_schema";
         private const string KEY_TEST_PYTHON = "key_test_python";
@@ -24,31 +22,34 @@ namespace Bing
         public string LastOutputPython { get; private set; }
         public string AllOutputPython { get; private set; }
 
-        public ProcessorManager(string pathPythonEXE)
+        public ProcessorManager(string pathPythonEXE, string pathBingFolder, string pathFirstProv)
         {
             count = 0;
             Ready = false;
             LastOutputPython = "";
             AllOutputPython = "";
-            Thread t = new Thread(() => SetupProcessor(pathPythonEXE));
+            Thread t = new Thread(() => SetupProcessor(pathPythonEXE, pathBingFolder, pathFirstProv));
             t.Start();
         }
 
-        private void SetupProcessor(string pathPythonEXE)
+        private void SetupProcessor(string pathPythonEXE, string pathBingFolder, string pathFirstProv)
         {
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string path_root = Directory.GetParent(currentDirectory).FullName;
-
-            string path_bing = path_root + @"\BinGTool";
-
             string filePyName = "Data.py";
-            string pathPy = path_bing + @"\" + filePyName;
+            string pathPy = pathBingFolder + @"\" + filePyName;
 
             try
             {
                 if (!File.Exists(pathPy))
                 {
-                    UnityEngine.Debug.Log(".py dont exists: " + pathPy);
+                    UnityEngine.Debug.Log(".py dont exist");
+                    if (!String.IsNullOrEmpty(pathBingFolder))
+                    {
+                        UnityEngine.Debug.Log("Actual path: " + pathPy);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.Log("Actual path is empty");
+                    }
                 }
                 else
                 {
@@ -60,8 +61,8 @@ namespace Bing
                     //print("fullFilename: " + pathPy);
                     //print("pathPythonEXE: " + pathPythonEXE);
 
-                    string args = SetupArg(KEY_PATH_PROV, currentDirectory + @"\Assets\info.xml");
-                    args += SetupArg(KEY_PATH_SCHEMA, path_bing + @"\schema.xml");
+                    string args = SetupArg(KEY_PATH_PROV, pathFirstProv);
+                    args += SetupArg(KEY_PATH_SCHEMA, pathBingFolder + @"\schema.xml");
 
                     pathPy += " " + args;
 
@@ -174,32 +175,6 @@ namespace Bing
         private string SetupArg(string key, string arg)
         {
             return " " + key + ";" + arg;
-        }
-
-        public static string GetPythonPath()
-        {
-            string pathPython = "could not find automatically the path";
-            IDictionary environmentVariables = Environment.GetEnvironmentVariables();
-            string pathVariable = environmentVariables["Path"] as string;
-            if (pathVariable != null)
-            {
-                string[] allPaths = pathVariable.Split(';');
-                foreach (var path in allPaths)
-                {
-                    string pythonPathFromEnv = path + @"python.exe";
-                    //& !pythonPathFromEnv.Contains("Python2")
-                    if (File.Exists(pythonPathFromEnv))
-                    {
-                        //print("Change: ");
-                        pathPython = pythonPathFromEnv;
-                        //print("Path: " + pathPython);
-                    }
-                }
-            }
-            // 
-            //print("___________________");
-            //print("Final: " + pathPython);
-            return pathPython;
         }
     }
 }
