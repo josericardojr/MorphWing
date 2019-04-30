@@ -19,7 +19,7 @@ public class BingAcess : MonoBehaviour
         string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, BINGTOOLPATH);
         path = Path.Combine(path, DATABINGTOOLPATH);
 
-        string bingReturn = AccessPython.Instance.GetInstruction(path, "Test", PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON));
+        string bingReturn = AccessPython.Instance.GetChanges("Test");
 
         print(bingReturn);
     }
