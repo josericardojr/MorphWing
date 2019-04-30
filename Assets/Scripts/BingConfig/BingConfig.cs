@@ -36,58 +36,79 @@ namespace Bing
             tempPythonPath = PythonPath;
 
             changeConfigXml = false;
+
+
+
+            if (File.Exists(ConfigXmlPath))
+            {
+                bingXmlDocument = new XmlDocument();
+                bingXmlDocument.Load(ConfigXmlPath);
+            }
         }
 
         private void OnGUI()
         {
             PythonSetup();
             BingSetup();
-            ConfigSetup();
-
+            SetupBingConfig();
         }
 
-        private void ConfigSetup()
+        private void SetupBingConfig()
         {
             if (Directory.Exists(BingPath))
             {
                 if (bingXmlDocument == null)
                 {
-                    if (File.Exists(ConfigXmlPath))
+                    if (changeConfigXml == false)
                     {
-                        GUILayout.Label("config.xml exists");
+                        GUILayout.Label("config.xml do not exists");
+
+                        if (GUILayout.Button("Create new config.xml"))
+                        {
+                            changeConfigXml = true;
+                            tempSchemaPath = Path.Combine(BingPath, "schema.xml");
+                        }
                     }
                     else
                     {
-                        if (changeConfigXml == false)
-                        {
-                            GUILayout.Label("config.xml do not exists");
-
-                            if (GUILayout.Button("Create new config.xml"))
-                            {
-                                changeConfigXml = true;
-                                tempSchemaPath = Path.Combine(BingPath, "schema.xml");
-                            }
-                        }
-                        else
-                        {
-                            GUILayout.Label("please intert the schema's path");
-                            tempSchemaPath = GUILayout.TextArea(tempSchemaPath);
-
-
-                            if (GUILayout.Button("Save new config.xml"))
-                            {
-                                CreateNewConfig();
-                                bingXmlDocument.Save(ConfigXmlPath);
-                            }
-                        }
+                        SetupConfig();
                     }
                 }
                 else
                 {
+                    GUILayout.Label("config.xml exists");
+
                     GUILayout.BeginHorizontal();
                     GUILayout.Box(HelperXml.PrettyXml(bingXmlDocument.OuterXml));
                     GUILayout.EndHorizontal();
+
+                    if (changeConfigXml == false)
+                    {
+                        if (GUILayout.Button("Update new config.xml"))
+                        {
+                            changeConfigXml = true;
+                            tempSchemaPath = Path.Combine(BingPath, "schema.xml");
+                        }
+                    }
+                    else
+                    {
+                        SetupConfig();
+                    }
                 }
+            }
+        }
+
+        private void SetupConfig()
+        {
+            GUILayout.Label("please intert the schema's path");
+            tempSchemaPath = GUILayout.TextArea(tempSchemaPath);
+
+
+            if (GUILayout.Button("Save new config.xml"))
+            {
+                CreateNewConfig();
+                bingXmlDocument.Save(ConfigXmlPath);
+                changeConfigXml = false;
             }
         }
 
