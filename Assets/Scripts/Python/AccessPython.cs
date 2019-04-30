@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Threading;
-using System.Diagnostics;
-using System.IO;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using Bing;
 
 public class AccessPython : MonoBehaviour
 {
@@ -12,14 +7,12 @@ public class AccessPython : MonoBehaviour
 
     private ProcessorManager processorManager;
 
-    public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
-
     private void Awake()
     {
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            processorManager = new ProcessorManager(PlayerPrefs.GetString(AccessPython.KEYPATHPYTHON));
+            processorManager = new ProcessorManager(PlayerPrefs.GetString(ProcessorManager.KEYPATHPYTHON));
             Instance = this;
         }
         else
