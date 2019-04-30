@@ -8,7 +8,7 @@ namespace Bing
     public class ProcessorManager
     {
         public static string KEY_PATH_READY = "KEY_PATH_READY";
-        private const string KEY_PATH_PROV = "path_prov", KEY_PATH_SCHEMA = "path_schema";
+        private const string KEY_PATH_PROV = "path_prov";
         private const string KEY_TEST_PYTHON = "key_test_python";
 
         private int count;
@@ -62,7 +62,6 @@ namespace Bing
                     //print("pathPythonEXE: " + pathPythonEXE);
 
                     string args = SetupArg(KEY_PATH_PROV, pathFirstProv);
-                    args += SetupArg(KEY_PATH_SCHEMA, pathBingFolder + @"\schema.xml");
 
                     pathPy += " " + args;
 
