@@ -11,6 +11,11 @@ namespace Bing
 {
     public class BingConfig : EditorWindow
     {
+        private GUIStyle guiStyle;
+
+        private bool showPythonOptions;
+        private bool showBingOptions;
+
         public static string KEY_PYTHON_PATH = "KEY_PATH_PYTHON";
         public static string KEY_BING_PATH = "KEY_PATH_BING";
 
@@ -23,9 +28,9 @@ namespace Bing
         private bool changeConfigXml;
 
         [MenuItem("Bing/BingConfig")]
-        static void Init()
+        public static void ShowWindow()
         {
-            BingConfig window = (BingConfig)EditorWindow.GetWindow(typeof(BingConfig));
+            GetWindow<BingConfig>("BingConfig");
         }
 
         private void Awake()
@@ -48,9 +53,41 @@ namespace Bing
 
         private void OnGUI()
         {
-            PythonSetup();
-            BingSetup();
-            SetupBingConfig();
+            GetWindow<BingConfig>().minSize = new Vector2(350, 400);
+            GetWindow<BingConfig>().maxSize = new Vector2(350, 400);
+
+            GUILayout.BeginHorizontal();
+
+            //Buttons Category
+            if (GUILayout.Button("Python Options", GUILayout.Height(40)))
+            {
+                showPythonOptions = true;
+                showBingOptions = false;
+            }
+            if (GUILayout.Button("Bing Options", GUILayout.Height(40)))
+            {
+                showPythonOptions = false;
+                showBingOptions = true;
+            }
+
+            GUILayout.EndHorizontal();
+
+            if (showPythonOptions)
+                PythonSetup();
+            if (showBingOptions)
+            {
+                BingSetup();
+                SetupBingConfig();
+            } 
+        }
+
+        private void DrawLabel(string text, int size, Color color, FontStyle fontStyle)
+        {
+            guiStyle = new GUIStyle();
+            guiStyle.fontSize = size;
+            guiStyle.normal.textColor = color;
+            guiStyle.fontStyle = fontStyle;
+            GUILayout.Label(text, guiStyle);
         }
 
         private void SetupBingConfig()
@@ -61,9 +98,20 @@ namespace Bing
                 {
                     if (changeConfigXml == false)
                     {
-                        GUILayout.Label("config.xml do not exists");
 
-                        if (GUILayout.Button("Create new config.xml"))
+                        GUILayout.Space(15);
+
+                        GUILayout.BeginHorizontal();
+                        GUILayout.FlexibleSpace();
+
+                        DrawLabel("config.xml do not exists", 13, Color.red, FontStyle.Bold);
+
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+
+                        GUILayout.Space(5);
+
+                        if (GUILayout.Button("Create new config.xml", GUILayout.Height(30)))
                         {
                             changeConfigXml = true;
                             tempSchemaPath = Path.Combine(BingPath, "schema.xml");
@@ -76,15 +124,25 @@ namespace Bing
                 }
                 else
                 {
-                    GUILayout.Label("config.xml exists");
+                    GUILayout.Space(15);
 
                     GUILayout.BeginHorizontal();
-                    GUILayout.Box(HelperXml.PrettyXml(bingXmlDocument.OuterXml));
+                    GUILayout.FlexibleSpace();
+
+                    DrawLabel("config.xml exists", 13, Color.blue, FontStyle.Bold);
+
+                    GUILayout.FlexibleSpace();
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.Space(5);
+
+                    GUILayout.BeginHorizontal();
+                    //GUILayout.Box(HelperXml.PrettyXml(bingXmlDocument.OuterXml));
                     GUILayout.EndHorizontal();
 
                     if (changeConfigXml == false)
                     {
-                        if (GUILayout.Button("Update new config.xml"))
+                        if (GUILayout.Button("Update new config.xml", GUILayout.Height(30)))
                         {
                             changeConfigXml = true;
                             tempSchemaPath = Path.Combine(BingPath, "schema.xml");
@@ -100,11 +158,10 @@ namespace Bing
 
         private void SetupConfig()
         {
-            GUILayout.Label("please intert the schema's path");
+            DrawLabel("Please intert the schema's path", 13, Color.red, FontStyle.Bold);
             tempSchemaPath = GUILayout.TextArea(tempSchemaPath);
 
-
-            if (GUILayout.Button("Save new config.xml"))
+            if (GUILayout.Button("Save new config.xml", GUILayout.Height(30)))
             {
                 CreateNewConfig();
                 bingXmlDocument.Save(ConfigXmlPath);
@@ -130,9 +187,19 @@ namespace Bing
         {
             if (Directory.Exists(BingPath))
             {
-                GUILayout.Label("Bing Path is setup");
+                GUILayout.Space(15);
 
-                if (GUILayout.Button("Update Python Path"))
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+
+                DrawLabel("Bing Path is setup", 13, Color.blue, FontStyle.Bold);
+                
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.Space(5);
+
+                if (GUILayout.Button("Update Bing Path", GUILayout.Height(30)))
                 {
                     tempBingPath = BingPath;
                     BingPath = "";
@@ -140,23 +207,35 @@ namespace Bing
             }
             else
             {
-                GUILayout.Label("Bing Path is not setup");
+                GUILayout.Space(15);
+
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+
+                DrawLabel("Bing Path is not setup", 13, Color.red, FontStyle.Bold);
+
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.Space(5);
 
                 GUILayout.BeginHorizontal();
 
-                tempBingPath = GUILayout.TextArea(tempBingPath);
+                tempBingPath = GUILayout.TextField(tempBingPath, GUILayout.Height(20));
 
-                if (GUILayout.Button("Try find Bing Path"))
+                if (GUILayout.Button("Try find Bing Path",GUILayout.Height(20)))
                 {
                     tempBingPath = TryGetStandardBingPath();
                 }
 
                 GUILayout.EndHorizontal();
+                GUILayout.Space(5);
 
-                if (GUILayout.Button("Save Bing Path"))
+                if (GUILayout.Button("Save Bing Path", GUILayout.Height(30)))
                 {
                     BingPath = tempBingPath;
                 }
+                
             }
         }
 
@@ -164,9 +243,19 @@ namespace Bing
         {
             if (File.Exists(PythonPath))
             {
-                GUILayout.Label("Python Path is setup");
+                GUILayout.Space(15);
 
-                if (GUILayout.Button("Update Python Path"))
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+
+                DrawLabel("Python Path is setup", 13, Color.blue, FontStyle.Bold);
+
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.Space(5);
+
+                if (GUILayout.Button("Update Python Path", GUILayout.Height(30)))
                 {
                     tempPythonPath = PythonPath;
                     PythonPath = "";
@@ -174,19 +263,32 @@ namespace Bing
             }
             else
             {
-                GUILayout.Label("Python Path is not setup");
+                GUILayout.Space(15);
+
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+
+                DrawLabel("Python Path is not setup", 13, Color.red, FontStyle.Bold);
+
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.Space(5);
 
                 GUILayout.BeginHorizontal();
 
-                tempPythonPath = GUILayout.TextArea(tempPythonPath);
-                if (GUILayout.Button("Try find Python Path"))
+                tempPythonPath = GUILayout.TextField(tempPythonPath, GUILayout.Height(20));
+
+                if (GUILayout.Button("Try find Python Path", GUILayout.Height(20)))
                 {
                     tempPythonPath = TryGetStandardPythonPath();
                 }
 
                 GUILayout.EndHorizontal();
 
-                if (GUILayout.Button("Save Python Path"))
+                GUILayout.Space(5);
+
+                if (GUILayout.Button("Save Python Path", GUILayout.Height(30)))
                 {
                     PythonPath = tempPythonPath;
                 }
