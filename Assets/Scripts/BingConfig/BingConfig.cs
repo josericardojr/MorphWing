@@ -31,6 +31,7 @@ namespace Bing
         public static void ShowWindow()
         {
             GetWindow<BingConfig>("BingConfig");
+            
         }
 
         private void Awake()
@@ -54,7 +55,7 @@ namespace Bing
         private void OnGUI()
         {
             GetWindow<BingConfig>().minSize = new Vector2(350, 400);
-            GetWindow<BingConfig>().maxSize = new Vector2(350, 400);
+            //GetWindow<BingConfig>().maxSize = new Vector2(350, 400);
 
             GUILayout.BeginHorizontal();
 
@@ -220,14 +221,14 @@ namespace Bing
                 GUILayout.Space(5);
 
                 GUILayout.BeginHorizontal();
-
-                tempBingPath = GUILayout.TextField(tempBingPath, GUILayout.Height(20));
+                // GUILayout.FlexibleSpace();
+                tempBingPath = GUILayout.TextField(tempBingPath, GUILayout.Width(Screen.width/2));
 
                 if (GUILayout.Button("Try find Bing Path",GUILayout.Height(20)))
                 {
                     tempBingPath = TryGetStandardBingPath();
                 }
-
+                //GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(5);
 
@@ -277,7 +278,7 @@ namespace Bing
 
                 GUILayout.BeginHorizontal();
 
-                tempPythonPath = GUILayout.TextField(tempPythonPath, GUILayout.Height(20));
+                tempPythonPath = GUILayout.TextField(tempPythonPath, GUILayout.Width(Screen.width / 2));
 
                 if (GUILayout.Button("Try find Python Path", GUILayout.Height(20)))
                 {
