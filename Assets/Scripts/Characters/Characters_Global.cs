@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PinGU;
 
 public abstract class Characters_Global : MonoBehaviour
 {
@@ -52,8 +53,8 @@ public abstract class Characters_Global : MonoBehaviour
 		this.animator = this.GetComponent<Animator>();
 		this.extractProvenance = this.GetComponent<ExtractProvenance>();
 		this.scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-		this.extractProvenance.influenceContainer = provenanceObj.GetComponent<InfluenceController>();
-		this.extractProvenance.provenance = provenanceObj.GetComponent<ProvenanceController>();
+		//this.extractProvenance.influenceContainer = provenanceObj.GetComponent<InfluenceController>();
+		//this.extractProvenance.provenance = provenanceObj.GetComponent<ProvenanceController>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
 		ProjectilesLoad();
     acessPython = FindObjectOfType<AccessPython>();

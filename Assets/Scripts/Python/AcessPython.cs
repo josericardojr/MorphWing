@@ -8,8 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class AcessPython : MonoBehaviour
 {
-    public static AcessPython Instance { get; private set; }
 
+    private static AcessPython instance = null;
+
+    public static AcessPython Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new AcessPython();
+
+            return instance;
+        }
+    }
+        
     private ProcessorManager processorManager;
 
     public static string KEYPATHPYTHON = "KEYPATHPYTHON", KEYFILEXML = "KEYFILEXML";
@@ -32,7 +44,6 @@ public class AcessPython : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             processorManager = new ProcessorManager(PlayerPrefs.GetString(AcessPython.KEYPATHPYTHON));
-            Instance = this;
             run = false;
             contVertx = 0;
         }
